@@ -1,0 +1,31 @@
+name: Supabase Migrations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/**'
+
+jobs:
+  migration:
+    name: Run Migrations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start Supabase
+        run: supabase start
+      - name: Run Migrations
+        run: supabase db push
+      - name: Verify Schema
+        run: |
+          supabase db diff --schema public
+      - name: Stop Supabase
+        if: always()
+        run: supabase stop

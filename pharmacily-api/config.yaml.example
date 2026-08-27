@@ -1,0 +1,37 @@
+# Example configuration for Pharmacily API
+# Copy to config.yaml and modify, or use environment variables (prefix: PHARMACILY_)
+
+environment: "development"
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  read_timeout: "15s"
+  write_timeout: "15s"
+  idle_timeout: "60s"
+
+database:
+  host: "localhost"
+  port: 54322
+  user: "postgres"
+  password: "postgres"
+  name: "postgres"
+  max_conns: 25
+  min_conns: 5
+  max_conn_lifetime: "30m"
+  max_conn_idle_time: "5m"
+
+supabase:
+  url: "http://127.0.0.1:54321"
+  anon_key: "your-anon-key"
+  service_role_key: "your-service-role-key"
+  jwt_secret: "your-jwt-secret"
+
+worker:
+  sync_cron_schedule: "0 2 * * *"
+  retry_base_delay: "30s"
+  max_retries: 5
+
+adapter:
+  default_rate_limit: 60
+  request_timeout: "30s"
