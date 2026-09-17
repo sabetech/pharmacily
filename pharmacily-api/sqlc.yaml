@@ -17,5 +17,3 @@ sql:
             go_type: "github.com/google/uuid.UUID"
           - db_type: "timestamptz"
             go_type: "time.Time"
-          - db_type: "jsonb"
-            go_type: "map[string]interface{}"

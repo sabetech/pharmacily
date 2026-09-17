@@ -8,11 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Settings, Database, RefreshCw, AlertCircle, CheckCircle, Clock, Save } from 'lucide-react'
 import { useToast } from '@/hooks/useToast'
 
 export function PharmacyDashboard() {
-  const { user, session } = useAuth()
+  const { session } = useAuth()
   const { toast } = useToast()
 
   // Get pharmacy ID from JWT claims
@@ -35,9 +34,9 @@ export function PharmacyDashboard() {
   const handleSave = async () => {
     try {
       await upsertConfig.mutateAsync({ pharmacyId: pharmacyId!, config: formData })
-      toast({ title: 'Saved', description: 'API configuration updated' })
-    } catch (error) {
-      toast({ title: 'Error', description: 'Failed to save configuration', variant: 'destructive' })
+      toast({ title: 'Saved', description: 'API configuration updated.' })
+    } catch {
+      toast({ title: 'Error', description: 'Could not save configuration.', variant: 'destructive' })
     }
   }
 
@@ -45,31 +44,31 @@ export function PharmacyDashboard() {
     setSyncStatus('syncing')
     setSyncError(null)
     try {
-      // In a real app, this would call the Go API sync endpoint
-      // For now, simulate
       await new Promise(resolve => setTimeout(resolve, 2000))
       setSyncStatus('success')
       setLastSync(new Date())
-      toast({ title: 'Sync completed', description: 'Inventory updated successfully' })
-    } catch (error) {
+      toast({ title: 'Sync completed', description: 'Inventory updated successfully.' })
+    } catch {
       setSyncStatus('error')
       setSyncError('Sync failed. Check configuration.')
-      toast({ title: 'Sync failed', description: 'Check your API configuration', variant: 'destructive' })
+      toast({ title: 'Sync failed', description: 'Check your API configuration.', variant: 'destructive' })
     }
   }
 
   const handleTestWebhook = async () => {
-    toast({ title: 'Test webhook sent', description: 'Check your sync status' })
+    toast({ title: 'Test webhook sent', description: 'Check your sync status.' })
   }
 
   if (!pharmacyId) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card>
+      <div className="flex min-h-screen items-center justify-center bg-ground p-4">
+        <Card className="w-full max-w-md">
           <CardContent className="pt-6 text-center">
-            <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
-            <h2 className="text-xl font-semibold mb-2">No pharmacy assigned</h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <span className="icon-circle mx-auto mb-4 h-12 w-12 bg-expiry-bg text-expiry-ink">
+              <i className="ph ph-warning-circle text-[22px]" aria-hidden="true" />
+            </span>
+            <h2 className="mb-2 font-display text-xl font-semibold text-ink">No pharmacy assigned</h2>
+            <p className="text-sm text-muted">
               Your account is not linked to a pharmacy. Contact your administrator.
             </p>
           </CardContent>
@@ -78,172 +77,158 @@ export function PharmacyDashboard() {
     )
   }
 
+  const statusMeta = {
+    idle: { icon: 'ph-clock', label: 'Ready', pill: 'otc' as const },
+    syncing: { icon: 'ph-arrows-clockwise', label: 'Syncing...', pill: 'otc' as const },
+    success: { icon: 'ph-check-circle', label: `Last sync ${lastSync?.toLocaleString() ?? ''}`, pill: 'instock' as const },
+    error: { icon: 'ph-warning-circle', label: 'Sync failed', pill: 'expiry' as const },
+  }[syncStatus]
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-900 border-b sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => window.history.back()}>
-              ←
-            </Button>
-            <div>
-              <h1 className="font-bold text-xl">Pharmacy Dashboard</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Pharmacy ID: {pharmacyId}</p>
-            </div>
-          </div>
-          <Button variant="outline" onClick={() => useAuth().signOut()}>
-            Sign Out
-          </Button>
-        </div>
-      </header>
-
-      {/* Status Bar */}
-      <div className="bg-primary/5 dark:bg-primary/10 border-b px-4 py-3">
-        <div className="container mx-auto flex flex-wrap items-center gap-6 text-sm">
-          <div className="flex items-center gap-2">
-            {syncStatus === 'syncing' && <RefreshCw className="h-4 w-4 animate-spin text-primary" />}
-            {syncStatus === 'success' && <CheckCircle className="h-4 w-4 text-green-600" />}
-            {syncStatus === 'error' && <AlertCircle className="h-4 w-4 text-red-600" />}
-            {syncStatus === 'idle' && <Clock className="h-4 w-4 text-gray-400" />}
-            <span>
-              {syncStatus === 'syncing' ? 'Syncing...' :
-               syncStatus === 'success' ? `Last sync: ${lastSync?.toLocaleString()}` :
-               syncStatus === 'error' ? 'Sync failed' : 'Ready'}
-            </span>
-          </div>
-          {syncError && (
-            <div className="flex items-center gap-2 text-red-600">
-              <AlertCircle className="h-4 w-4" />
-              <span>{syncError}</span>
-            </div>
-          )}
-          <div className="flex-1" />
-          <Badge variant={config?.is_enabled ? 'success' : 'secondary'}>
-            {config?.is_enabled ? 'API Enabled' : 'API Disabled'}
-          </Badge>
-        </div>
+    <div>
+      {/* Status pills */}
+      <div className="flex flex-wrap items-center gap-3">
+        <Badge variant={statusMeta.pill}>
+          <i className={`ph ${statusMeta.icon} mr-1`} aria-hidden="true" />
+          {statusMeta.label}
+        </Badge>
+        <Badge variant={config?.is_enabled ? 'instock' : 'otc'}>
+          {config?.is_enabled ? 'API enabled' : 'API disabled'}
+        </Badge>
       </div>
+      {syncError && (
+        <div className="mt-3 flex items-center gap-2 rounded-row bg-expiry-bg p-3 text-sm text-expiry-ink">
+          <i className="ph ph-warning-circle text-base" aria-hidden="true" />
+          <span>{syncError}</span>
+        </div>
+      )}
 
-      <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="inventory" className="space-y-6">
+      <div className="mt-5">
+        <Tabs defaultValue="inventory" className="space-y-5">
           <TabsList>
             <TabsTrigger value="inventory">Inventory</TabsTrigger>
-            <TabsTrigger value="sync">Sync Status</TabsTrigger>
+            <TabsTrigger value="sync">Sync status</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
 
-          {/* Inventory Tab */}
+          {/* Inventory tab */}
           <TabsContent value="inventory">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <Database className="h-5 w-5" />
-                  Inventory Management
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <span className="icon-circle h-9 w-9 bg-stock-bg text-stock-label">
+                    <i className="ph ph-database text-[18px]" aria-hidden="true" />
+                  </span>
+                  Inventory
                 </CardTitle>
-                <Button onClick={handleSyncNow} disabled={syncStatus === 'syncing'}>
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Sync Now
+                <Button size="sm" onClick={handleSyncNow} disabled={syncStatus === 'syncing'}>
+                  <i className={`ph ph-arrows-clockwise mr-1.5 ${syncStatus === 'syncing' ? 'animate-spin' : ''}`} aria-hidden="true" />
+                  Sync now
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Drug</TableHead>
-                        <TableHead>NDC</TableHead>
-                        <TableHead className="text-right">Quantity</TableHead>
-                        <TableHead className="text-right">Price</TableHead>
-                        <TableHead>Last Updated</TableHead>
-                        <TableHead>Source</TableHead>
-                        <TableHead>Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {/* In a real app, this would fetch from the API */}
-                      <TableRow>
-                        <TableCell colSpan={7} className="text-center py-8 text-gray-500">
-                          Inventory editor coming soon. Connect to Go API to fetch pharmacy inventory.
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </div>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Drug</TableHead>
+                      <TableHead>NDC</TableHead>
+                      <TableHead className="text-right">Quantity</TableHead>
+                      <TableHead className="text-right">Price</TableHead>
+                      <TableHead>Last updated</TableHead>
+                      <TableHead>Source</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell colSpan={7} className="py-8 text-center text-sm text-muted">
+                        Inventory editor coming soon. Connect to the Go API to fetch pharmacy inventory.
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Sync Status Tab */}
+          {/* Sync status tab */}
           <TabsContent value="sync">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
-                  <RefreshCw className="h-5 w-5" />
-                  Sync Status & History
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <span className="icon-circle h-9 w-9 bg-sales-bg text-sales-label">
+                    <i className="ph ph-arrows-clockwise text-[18px]" aria-hidden="true" />
+                  </span>
+                  Sync status
                 </CardTitle>
-                <Button variant="outline" onClick={handleTestWebhook}>
-                  Test Webhook
+                <Button variant="outline" size="sm" onClick={handleTestWebhook}>
+                  Test webhook
                 </Button>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Last Sync</p>
-                    <p className="text-2xl font-bold">{lastSync ? lastSync.toLocaleString() : 'Never'}</p>
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+                  <div className="rounded-card bg-sales-bg p-5">
+                    <p className="label-micro text-sales-label">Last sync</p>
+                    <p className="tnum mt-1.5 font-display text-[22px] font-semibold text-sales-ink">
+                      {lastSync ? lastSync.toLocaleDateString() : 'Never'}
+                    </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Status</p>
-                    <p className="text-2xl font-bold capitalize">{syncStatus}</p>
+                  <div className="rounded-card bg-stock-bg p-5">
+                    <p className="label-micro text-stock-label">Status</p>
+                    <p className="mt-1.5 font-display text-[22px] font-semibold capitalize text-stock-ink">{syncStatus}</p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">API Type</p>
-                    <p className="text-2xl font-bold">{config?.api_type || 'Not configured'}</p>
+                  <div className="rounded-card bg-people-bg p-5">
+                    <p className="label-micro text-people-label">API type</p>
+                    <p className="mt-1.5 font-display text-[22px] font-semibold text-people-ink">
+                      {config?.api_type || 'Not set'}
+                    </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Schedule</p>
-                    <p className="text-2xl font-bold text-xs">{config?.sync_schedule || 'Not set'}</p>
+                  <div className="rounded-card bg-expiry-bg p-5">
+                    <p className="label-micro text-expiry-label">Schedule</p>
+                    <p className="tnum mt-1.5 font-display text-[18px] font-semibold text-expiry-ink">
+                      {config?.sync_schedule || 'Not set'}
+                    </p>
                   </div>
                 </div>
 
-                <div className="border-t pt-4">
-                  <h4 className="font-medium mb-3">Recent Sync History</h4>
-                  <div className="space-y-2">
-                    <p className="text-gray-500 text-center py-8">Sync history will appear here after first sync</p>
-                  </div>
+                <div className="border-t border-[rgba(16,50,40,0.1)] pt-4">
+                  <h4 className="mb-3 font-display font-semibold text-ink">Recent sync history</h4>
+                  <p className="py-8 text-center text-sm text-muted">Sync history will appear here after the first sync.</p>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Settings Tab */}
+          {/* Settings tab */}
           <TabsContent value="settings">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Settings className="h-5 w-5" />
-                  API Configuration
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <span className="icon-circle h-9 w-9 bg-people-bg text-people-label">
+                    <i className="ph ph-gear text-[18px]" aria-hidden="true" />
+                  </span>
+                  API configuration
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="api_type">API Type</Label>
+                    <Label htmlFor="api_type">API type</Label>
                     <select
                       id="api_type"
                       value={formData.api_type}
                       onChange={(e) => setFormData({ ...formData, api_type: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800"
+                      className="w-full rounded-field border border-[rgba(16,50,40,0.1)] bg-field px-3 py-2.5 text-sm text-ink focus:border-live focus:outline-none"
                     >
                       <option value="custom">Custom REST API</option>
                       <option value="ncpdpp">NCPDP SCRIPT</option>
                       <option value="surescripts">Surescripts</option>
-                      <option value="csv">CSV/SFTP Import</option>
+                      <option value="csv">CSV/SFTP import</option>
                     </select>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="endpoint">API Endpoint</Label>
+                    <Label htmlFor="endpoint">API endpoint</Label>
                     <Input
                       id="endpoint"
                       type="url"
@@ -254,7 +239,7 @@ export function PharmacyDashboard() {
                   </div>
 
                   <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="credentials_ref">Credentials Reference (Vault Key)</Label>
+                    <Label htmlFor="credentials_ref">Credentials reference (vault key)</Label>
                     <Input
                       id="credentials_ref"
                       type="text"
@@ -262,45 +247,45 @@ export function PharmacyDashboard() {
                       value={formData.credentials_ref}
                       onChange={(e) => setFormData({ ...formData, credentials_ref: e.target.value })}
                     />
-                    <p className="text-sm text-gray-500">Reference to credentials stored in Supabase Vault</p>
+                    <p className="text-[13px] text-muted">Reference to credentials stored in Supabase Vault.</p>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="sync_schedule">Sync Schedule (Cron)</Label>
+                    <Label htmlFor="sync_schedule">Sync schedule (cron)</Label>
                     <Input
                       id="sync_schedule"
                       type="text"
-                      placeholder="0 2 * * *"
+                      placeholder="0 0 2 * * *"
                       value={formData.sync_schedule}
                       onChange={(e) => setFormData({ ...formData, sync_schedule: e.target.value })}
                     />
-                    <p className="text-sm text-gray-500">Runs daily at 2:00 AM UTC by default</p>
+                    <p className="text-[13px] text-muted">Runs daily at 2:00 AM UTC by default.</p>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label className="flex items-center gap-2">
+                  <div className="flex items-end pb-1">
+                    <Label className="flex cursor-pointer items-center gap-2 text-[13.5px]">
                       <input
                         type="checkbox"
                         checked={formData.is_enabled}
                         onChange={(e) => setFormData({ ...formData, is_enabled: e.target.checked })}
-                        className="rounded border-gray-300 text-primary focus:ring-primary"
+                        className="h-4 w-4 rounded accent-[#1d7a5f]"
                       />
                       Enable automatic sync
                     </Label>
                   </div>
                 </div>
 
-                <div className="border-t pt-6 flex justify-end">
+                <div className="flex justify-end border-t border-[rgba(16,50,40,0.1)] pt-6">
                   <Button onClick={handleSave} disabled={isLoading}>
-                    <Save className="h-4 w-4 mr-2" />
-                    Save Configuration
+                    <i className="ph ph-floppy-disk mr-1.5" aria-hidden="true" />
+                    Save configuration
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-      </main>
+      </div>
     </div>
   )
 }

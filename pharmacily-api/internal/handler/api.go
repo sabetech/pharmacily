@@ -9,7 +9,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pharmacily/api/internal/adapter"
 	"github.com/pharmacily/api/internal/config"
 	"github.com/pharmacily/api/internal/db"
@@ -18,13 +21,15 @@ import (
 
 type API struct {
 	queries *db.Queries
+	pool    *pgxpool.Pool
 	cfg     *config.Config
 	adapter *adapter.AdapterRegistry
 }
 
-func NewAPI(queries *db.Queries, cfg *config.Config, adapterRegistry *adapter.AdapterRegistry) *API {
+func NewAPI(queries *db.Queries, pool *pgxpool.Pool, cfg *config.Config, adapterRegistry *adapter.AdapterRegistry) *API {
 	return &API{
 		queries: queries,
+		pool:    pool,
 		cfg:     cfg,
 		adapter: adapterRegistry,
 	}
@@ -38,6 +43,15 @@ func (a *API) Routes() chi.Router {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Timeout(30 * time.Second))
+	// Browsers preflight cross-origin fetches (the web app sends
+	// Content-Type: application/json). Without this, all UI search fails.
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   a.cfg.Server.AllowedOrigins,
+		AllowedMethods:   []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
 
 	r.Get("/health", a.HealthCheck)
 	r.Get("/ready", a.ReadyCheck)
@@ -63,7 +77,7 @@ func (a *API) ReadyCheck(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
 	defer cancel()
 
-	if err := a.queries.Ping(ctx); err != nil {
+	if err := a.pool.Ping(ctx); err != nil {
 		http.Error(w, "database not ready", http.StatusServiceUnavailable)
 		return
 	}
@@ -90,7 +104,7 @@ func (a *API) SearchDrugs(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	drugs, err := a.queries.SearchDrugs(ctx, db.SearchDrugsParams{
-		Column1: q,
+		Column1: pgtype.Text{String: q, Valid: true},
 		Limit:   int32(limit),
 	})
 	if err != nil {
@@ -154,8 +168,9 @@ func (a *API) GetPharmaciesNearby(w http.ResponseWriter, r *http.Request) {
 
 	radiusKm := 25.0
 	if radiusStr != "" {
-		if parsed, err := strconv.ParseFloat(radiusStr, 64); err == nil && parsed > 0 && parsed <= 100 {
-			radiusKm = parsed
+		if parsed, err := strconv.ParseFloat(radiusStr, 64); err == nil && parsed > 0 {
+			// Clamp (not default) so inter-city searches like Accra->Kumasi work
+			radiusKm = min(parsed, 1000)
 		}
 	}
 
@@ -173,10 +188,10 @@ func (a *API) GetPharmaciesNearby(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	pharmacies, err := a.queries.GetPharmaciesNearby(ctx, db.GetPharmaciesNearbyParams{
-		Column1: lat,
-		Column2: lng,
-		Column3: radiusMeters,
-		Limit:   int32(limit),
+		LlToEarth:   lat,
+		LlToEarth_2: lng,
+		EarthBox:    radiusMeters,
+		Limit:       int32(limit),
 	})
 	if err != nil {
 		log.Error().Err(err).Msg("get pharmacies nearby failed")
@@ -316,15 +331,13 @@ func (a *API) SearchInventory(w http.ResponseWriter, r *http.Request) {
 
 	radiusKm := 25.0
 	if rStr := r.URL.Query().Get("radius_km"); rStr != "" {
-		if parsed, err := strconv.ParseFloat(rStr, 64); err == nil && parsed > 0 && parsed <= 100 {
-			radiusKm = parsed
+		if parsed, err := strconv.ParseFloat(rStr, 64); err == nil && parsed > 0 {
+			// Clamp (not default) so inter-city searches like Accra->Kumasi work
+			radiusKm = min(parsed, 1000)
 		}
 	}
 
-	inStockOnly := true
-	if inStockStr := r.URL.Query().Get("in_stock_only"); inStockStr != "" {
-		inStockOnly, _ = strconv.ParseBool(inStockStr)
-	}
+	_ = r.URL.Query().Get("in_stock_only") // inStockOnly - not used in query, handled by quantity > 0
 
 	radiusMeters := radiusKm * 1000
 
@@ -332,11 +345,11 @@ func (a *API) SearchInventory(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	results, err := a.queries.SearchInventoryByDrug(ctx, db.SearchInventoryByDrugParams{
-		Column1: lat,
-		Column2: lng,
-		Column3: drugID,
-		Column4: radiusMeters,
-		Limit:   50,
+		LlToEarth:   lat,
+		LlToEarth_2: lng,
+		DrugID:      drugID,
+		EarthBox:    radiusMeters,
+		Limit:       50,
 	})
 	if err != nil {
 		log.Error().Err(err).Msg("search inventory failed")

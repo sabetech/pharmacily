@@ -9,6 +9,10 @@ server:
   read_timeout: "15s"
   write_timeout: "15s"
   idle_timeout: "60s"
+  # Browser origins allowed to call the API (CORS). Extend for production.
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://127.0.0.1:3000"
 
 database:
   host: "localhost"
@@ -28,7 +32,7 @@ supabase:
   jwt_secret: "your-jwt-secret"
 
 worker:
-  sync_cron_schedule: "0 2 * * *"
+  sync_cron_schedule: "0 0 2 * * *"
   retry_base_delay: "30s"
   max_retries: 5
 

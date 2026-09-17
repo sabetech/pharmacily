@@ -132,9 +132,10 @@ func (m *MockAdapter) GetRateLimit() RateLimitConfig {
 }
 
 func (m *MockAdapter) HealthCheck(ctx context.Context) error {
-	return m.breaker.Execute(func() (interface{}, error) {
+	_, err := m.breaker.Execute(func() (interface{}, error) {
 		return nil, nil
 	})
+	return err
 }
 
 func (m *MockAdapter) GetCircuitBreaker() *gobreaker.CircuitBreaker {

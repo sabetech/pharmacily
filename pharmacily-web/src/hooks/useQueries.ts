@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useState } from 'react'
+import { ACCRA_CENTER } from '@/utils/helpers'
 import type { DrugSearchResult, PharmacyNearbyResult, SearchParams, SearchResult, Pharmacy, InventoryItem, UserFavorite, PharmacyAPIConfig } from '@/types'
 import * as api from '@/lib/api'
 
@@ -146,8 +147,8 @@ export function useGeolocation() {
         const ipPos = await api.getIPGeolocation()
         setPosition({ lat: ipPos.lat, lng: ipPos.lng })
       } catch {
-        // Use default (San Francisco)
-        setPosition({ lat: 37.7749, lng: -122.4194 })
+        // Fall back to Accra
+        setPosition(ACCRA_CENTER)
       }
     } finally {
       setLoading(false)

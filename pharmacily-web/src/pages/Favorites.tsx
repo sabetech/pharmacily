@@ -1,14 +1,16 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useUserFavorites, useDeleteFavorite, useUpdateFavorite } from '@/hooks/useQueries'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Heart, Bell, MapPin, X, Navigation } from 'lucide-react'
-import { formatDistance, formatPrice, formatStock } from '@/utils/helpers'
+import { Label } from '@/components/ui/label'
+import { Logo } from '@/components/Logo'
+import { Link, useNavigate } from 'react-router-dom'
+import { formatDistance } from '@/utils/helpers'
 import { useToast } from '@/hooks/useToast'
-import Link from 'next/link'
 
 export function Favorites() {
+  const navigate = useNavigate()
   const { user } = useAuth()
   const { data: favorites, isLoading } = useUserFavorites(user?.id || '')
   const deleteFavorite = useDeleteFavorite(user?.id || '')
@@ -31,106 +33,115 @@ export function Favorites() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      <div className="flex min-h-screen items-center justify-center bg-ground">
+        <span className="icon-circle h-12 w-12">
+          <i className="ph ph-circle-notch animate-spin text-[22px]" aria-hidden="true" />
+        </span>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <header className="bg-white dark:bg-gray-900 border-b sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-3">
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary">
-            <span className="text-2xl">💊</span>
-            <span>Pharmacily</span>
+    <div className="min-h-screen bg-ground">
+      <header className="sticky top-0 z-40 bg-ground/80 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between px-4 py-4 md:px-10">
+          <Link to="/" aria-label="Pharmacily home">
+            <Logo size={32} />
           </Link>
+          <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+            <i className="ph ph-arrow-left mr-1" aria-hidden="true" /> Back to search
+          </Button>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold flex items-center gap-2">
-              <Heart className="h-8 w-8 text-red-500" />
-              My Favorites
-            </h1>
+      <main className="mx-auto max-w-[1180px] px-4 py-8 md:px-10">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6 flex items-center gap-3">
+            <span className="icon-circle h-11 w-11 bg-expiry-bg text-expiry-ink">
+              <i className="ph-fill ph-heart text-[20px]" aria-hidden="true" />
+            </span>
+            <h1 className="font-display text-2xl font-semibold text-ink">My favorites</h1>
           </div>
 
           {favorites?.length === 0 ? (
             <Card>
-              <CardContent className="pt-6 text-center py-12">
-                <Heart className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No favorites yet</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Save medications and pharmacies to get notified when they're in stock
+              <CardContent className="py-12 text-center">
+                <span className="icon-circle mx-auto mb-4 h-16 w-16">
+                  <i className="ph ph-heart text-[28px]" aria-hidden="true" />
+                </span>
+                <h3 className="mb-2 font-display text-xl font-semibold text-ink">No favorites yet</h3>
+                <p className="mb-6 text-sm text-muted">
+                  Save medications and pharmacies to get notified when they are in stock.
                 </p>
-                <Button asChild>
-                  <Link to="/search">Search for medications</Link>
+                <Button onClick={() => navigate('/')}>
+                  Search for medications
                 </Button>
               </CardContent>
             </Card>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {favorites?.map((fav) => (
                 <Card key={`${fav.drug_id}-${fav.pharmacy_id || 'any'}`}>
                   <CardContent className="pt-6">
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-lg">{fav.drug_name}</h3>
-                          <Badge variant="secondary" className="text-xs">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center">
+                      <span className="icon-circle hidden h-[46px] w-[46px] rounded-field bg-stock-bg text-stock-label md:grid">
+                        <i className="ph ph-pill text-[20px]" aria-hidden="true" />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                          <h3 className="text-[14.5px] font-semibold text-ink">{fav.drug_name}</h3>
+                          <Badge variant="otc" className="text-[11px]">
                             {fav.drug_generic_name} {fav.drug_strength} {fav.drug_form}
                           </Badge>
                         </div>
                         {fav.pharmacy_name ? (
-                          <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                            <span className="flex items-center gap-1">
-                              <MapPin className="h-3.5 w-3.5" />
-                              {fav.pharmacy_name}
-                            </span>
+                          <div className="flex items-center gap-2 text-xs text-muted">
+                            <i className="ph ph-map-pin text-[14px]" aria-hidden="true" />
+                            <span>{fav.pharmacy_name}</span>
                             {fav.pharmacy_latitude && fav.pharmacy_longitude && (
-                              <span>
+                              <span className="tnum">
                                 {formatDistance(
                                   Math.sqrt(
-                                    Math.pow((fav.pharmacy_latitude! - 37.7749) * 111000, 2) +
-                                    Math.pow((fav.pharmacy_longitude! + 122.4194) * 111000, 2)
+                                    Math.pow((fav.pharmacy_latitude! - 5.6037) * 111000, 2) +
+                                    Math.pow((fav.pharmacy_longitude! + 0.1870) * 111000, 2)
                                   )
                                 )}
                               </span>
                             )}
                           </div>
                         ) : (
-                          <p className="text-sm text-gray-500">Any pharmacy</p>
+                          <p className="text-xs text-muted">Any pharmacy</p>
                         )}
                       </div>
 
-                      <div className="flex flex-col items-end md:items-center gap-2 md:w-64">
-                        <Label className="flex items-center gap-2 cursor-pointer">
+                      <div className="flex flex-row flex-wrap items-center gap-2 md:w-auto md:flex-col md:items-end">
+                        <Label className="flex cursor-pointer items-center gap-2 text-[13px]">
                           <input
                             type="checkbox"
                             checked={fav.notify_on_stock}
                             onChange={() => handleToggleNotify(fav)}
-                            className="rounded border-gray-300 text-primary focus:ring-primary"
+                            className="h-4 w-4 rounded accent-[#1d7a5f]"
                           />
-                          <span className="text-sm">Notify when in stock</span>
+                          Notify when in stock
                         </Label>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleRemove(fav.drug_id, fav.pharmacy_id)}
-                        >
-                          <X className="h-4 w-4 mr-1" /> Remove
-                        </Button>
-                        {fav.pharmacy_name && (
+                        <div className="flex gap-2">
                           <Button
-                            variant="link"
+                            variant="outline"
                             size="sm"
-                            onClick={() => window.open(`https://maps.google.com/?q=${encodeURIComponent(fav.pharmacy_address! + ', ' + fav.pharmacy_city! + ', ' + fav.pharmacy_state!)}`, '_blank')}
+                            onClick={() => handleRemove(fav.drug_id, fav.pharmacy_id)}
                           >
-                            <Navigation className="h-4 w-4 mr-1" /> Directions
+                            <i className="ph ph-x mr-1" aria-hidden="true" /> Remove
                           </Button>
-                        )}
+                          {fav.pharmacy_name && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => window.open(`https://maps.google.com/?q=${encodeURIComponent(fav.pharmacy_address! + ', ' + fav.pharmacy_city! + ', ' + fav.pharmacy_state!)}`, '_blank')}
+                            >
+                              <i className="ph ph-navigation-arrow mr-1" aria-hidden="true" /> Directions
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -142,8 +153,4 @@ export function Favorites() {
       </main>
     </div>
   )
-}
-
-function Link({ children, to, className }: { children: React.ReactNode; to: string; className?: string }) {
-  return <a href={to} className={className}>{children}</a>
 }

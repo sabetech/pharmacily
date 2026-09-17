@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <script src="./image-slot.js"></script>
+  <style>
+    body{margin:0;background:#e2eae5;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#16241d}
+    a{color:#0f4034;text-decoration-color:rgba(15,64,52,.3);text-underline-offset:3px}
+    a:hover{color:#1d7a5f}
+    .t{padding:40px 44px 34px;border-bottom:1px solid rgba(16,50,40,.1)}
+    .th{display:flex;align-items:baseline;gap:12px;margin:0 0 20px}
+    .tid{font:600 10px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:999px;background:#0f4034;color:#e9f4e4;text-decoration:none}
+    .tn{font-family:Outfit,sans-serif;font-size:15px;font-weight:600;letter-spacing:-.01em}
+    .opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+    .opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+    .oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:999px;background:#fff;color:#0f4034;text-decoration:none;box-shadow:0 1px 2px rgba(16,50,40,.08)}
+    .ol{display:flex;align-items:baseline;gap:9px;font-size:12.5px;color:#3d5850}
+    .fr{max-width:100%;background:#eef3ef;border-radius:22px;box-shadow:0 18px 46px rgba(16,50,40,.14);overflow:hidden;display:flex}
+    .phone{width:390px;height:844px;flex-direction:column;border-radius:34px;background:#eef3ef}
+    .opt:target .oid{background:#0f4034;color:#e9f4e4}
+    .nx{margin:26px 0 0;font-size:12.5px;line-height:1.6;color:#3d5850}
+    .sb{flex:none;display:flex;align-items:center;justify-content:space-between;padding:16px 26px 4px;font-size:13px;font-weight:600}
+    .sb i{font-size:14px}
+    h4,h5{font-family:Outfit,sans-serif;font-weight:600;letter-spacing:-.02em;margin:0}
+    .kick{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f}
+    .fig{font-family:Outfit,sans-serif;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  </style>
+</helmet>
+
+<section class="t" id="t3">
+  <div class="th"><a class="tid" href="#t3">3</a><span class="tn">Pharmacily — the application</span></div>
+  <p style="max-width:78ch;font-size:14.5px;line-height:1.65;margin:0 0 32px;color:#3d5850">Every screen the pharmacy needs, built on the Pharmacily language: mint ground, white cards at 20px, one deep green for action, and the four pastels holding their subjects — green for sales, teal for stock, rose for expiry, lilac for people. Desktop is 1280×800, mobile 390×844. Drug images are live slots you can drop photos onto.</p>
+
+  <div class="th"><span class="tn">Desktop</span></div>
+  <div class="opts">
+
+    <div class="opt" id="3a">
+      <div class="ol"><a class="oid" href="#3a">3a</a>Sign in with Google</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <div style="width:46%;flex:none;position:relative;overflow:hidden;background:#0f4034;color:#e9f4e4;padding:44px 64px;display:flex;flex-direction:column;justify-content:space-between">
+          <div style="position:absolute;width:520px;height:520px;right:-200px;bottom:-190px;border-radius:999px;background:#12503f"></div>
+          <div style="position:absolute;width:300px;height:300px;left:-120px;top:-110px;border-radius:999px;background:#12503f"></div>
+          <div style="position:relative;display:flex;align-items:center;gap:12px">
+            <svg width="42" height="42" viewBox="0 0 44 44" aria-hidden="true">
+              <rect width="44" height="44" rx="14" fill="#d8ecb4"></rect>
+              <rect x="18.5" y="10" width="7" height="24" rx="3.5" fill="#0f4034"></rect>
+              <rect x="10" y="18.5" width="24" height="7" rx="3.5" fill="#0f4034"></rect>
+            </svg>
+            <span style="font-family:Outfit,sans-serif;font-size:23px;font-weight:600;letter-spacing:-.03em;color:#f4faf1">Pharmacily</span>
+          </div>
+          <div style="position:relative">
+            <h4 style="font-size:44px;line-height:1.06;max-width:17ch;color:#f4faf1">Stock, sales and expiry in one place.</h4>
+            <p style="font-size:15.5px;line-height:1.65;max-width:38ch;margin:20px 0 0;color:rgba(233,244,228,.8)">Dispense at the counter, log every sale, and see what expires before it costs you money.</p>
+          </div>
+          <div style="position:relative;display:flex;gap:12px">
+            <span style="padding:8px 16px;border-radius:999px;background:#12503f;font-size:12.5px;color:#d8ecb4">1,240 items tracked</span>
+            <span style="padding:8px 16px;border-radius:999px;background:#12503f;font-size:12.5px;color:#a8dccf">Adenta · Accra</span>
+          </div>
+        </div>
+        <div style="flex:1;display:grid;place-items:center;padding:44px">
+          <div style="width:408px;display:flex;flex-direction:column;gap:24px">
+            <div>
+              <div class="kick">Access</div>
+              <h4 style="font-size:32px;margin:8px 0 10px">Sign in</h4>
+              <p style="font-size:14.5px;line-height:1.6;margin:0;color:#3d5850">Use the Google account your pharmacist added to this branch.</p>
+            </div>
+            <button style="display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:16px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 15px 'Plus Jakarta Sans',sans-serif;cursor:pointer">
+              <i class="ph ph-google-logo" style="font-size:20px"></i>Continue with Google
+            </button>
+            <div style="display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">
+              <span style="flex:1;height:1px;background:rgba(16,50,40,.12)"></span>no password<span style="flex:1;height:1px;background:rgba(16,50,40,.12)"></span>
+            </div>
+            <div style="padding:22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;gap:12px">
+                <span style="width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:999px;background:#c6e6df;color:#123830"><i class="ph ph-shield-check" style="font-size:18px"></i></span>
+                <span style="font-size:13.5px;line-height:1.55;color:#3d5850">Only accounts on <strong style="font-weight:600;color:#16241d">@bethelpharmacy.com</strong> can sign in. Your role — pharmacist or counter staff — comes with the account.</span>
+              </div>
+              <div style="display:flex;gap:12px">
+                <span style="width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:999px;background:#dff0c2;color:#243312"><i class="ph ph-clock-counter-clockwise" style="font-size:18px"></i></span>
+                <span style="font-size:13.5px;line-height:1.55;color:#3d5850">Every sale is stamped with the account that made it.</span>
+              </div>
+            </div>
+            <p style="font-size:12.5px;margin:0;color:#5d7a6f">No account? Ask the pharmacist on duty to add you from Settings → Staff.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3b">
+      <div class="ol"><a class="oid" href="#3b">3b</a>Dashboard — pharmacist</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Dashboard" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Welcome back, Kwabena" kicker="Monday, 7 September 2026" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;padding:0 32px 32px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+              <div style="padding:22px;border-radius:20px;background:#dff0c2">
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#4a6321">Sales today</span><i class="ph ph-trend-up" style="font-size:17px;color:#4a6321"></i></div>
+                <div class="fig" style="font-size:28px;color:#243312;margin-top:10px">Ghc 4,280.50</div>
+                <div style="font-size:12px;color:#4a6321;margin-top:2px">12% on last Monday</div>
+              </div>
+              <div style="padding:22px;border-radius:20px;background:#c6e6df">
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f5b51">Transactions</span><i class="ph ph-receipt" style="font-size:17px;color:#1f5b51"></i></div>
+                <div class="fig" style="font-size:28px;color:#123830;margin-top:10px">63</div>
+                <div style="font-size:12px;color:#1f5b51;margin-top:2px">Ghc 67.94 average basket</div>
+              </div>
+              <div style="padding:22px;border-radius:20px;background:#f7cdcd">
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#8c3236">Expiring ≤ 30 days</span><i class="ph ph-clock" style="font-size:17px;color:#8c3236"></i></div>
+                <div class="fig" style="font-size:28px;color:#4d1b1e;margin-top:10px">5 items</div>
+                <div style="font-size:12px;color:#8c3236;margin-top:2px">Ghc 1,910 at cost</div>
+              </div>
+              <div style="padding:22px;border-radius:20px;background:#d3d1f4">
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#403a86">Low stock</span><i class="ph ph-package" style="font-size:17px;color:#403a86"></i></div>
+                <div class="fig" style="font-size:28px;color:#241f52;margin-top:10px">9 items</div>
+                <div style="font-size:12px;color:#403a86;margin-top:2px">3 below reorder level</div>
+              </div>
+            </div>
+            <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.4fr 1fr;gap:20px">
+              <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px;min-height:0">
+                <div style="display:flex;align-items:baseline;gap:10px"><h5 style="font-size:18px">Sales this week</h5><span style="font-size:12px;color:#5d7a6f">Ghc 26,940 · 7 days</span></div>
+                <svg viewBox="0 0 560 176" style="width:100%;height:auto;display:block">
+                  <g font-family="Plus Jakarta Sans" font-size="10.5" fill="#5d7a6f">
+                    <text x="0" y="16">6K</text><text x="0" y="64">4K</text><text x="0" y="112">2K</text><text x="0" y="152">0</text>
+                  </g>
+                  <rect x="42" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="42" y="82" width="30" height="68" rx="15" fill="#cfe8ae"></rect>
+                  <rect x="108" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="108" y="64" width="30" height="86" rx="15" fill="#a8dccf"></rect>
+                  <rect x="174" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="174" y="44" width="30" height="106" rx="15" fill="#cfe8ae"></rect>
+                  <rect x="240" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="240" y="72" width="30" height="78" rx="15" fill="#a8dccf"></rect>
+                  <rect x="306" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="306" y="38" width="30" height="112" rx="15" fill="#cfe8ae"></rect>
+                  <rect x="372" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="372" y="92" width="30" height="58" rx="15" fill="#a8dccf"></rect>
+                  <rect x="438" y="30" width="30" height="120" rx="15" fill="#eef3ef"></rect><rect x="438" y="54" width="30" height="96" rx="15" fill="#0f4034"></rect>
+                  <g font-family="Plus Jakarta Sans" font-size="11" fill="#5d7a6f" text-anchor="middle">
+                    <text x="57" y="170">Mon</text><text x="123" y="170">Tue</text><text x="189" y="170">Wed</text><text x="255" y="170">Thu</text><text x="321" y="170">Fri</text><text x="387" y="170">Sat</text><text x="453" y="170" fill="#0f4034" font-weight="600">Today</text>
+                  </g>
+                </svg>
+                <div style="border-top:1px solid rgba(16,50,40,.08);padding-top:16px;display:flex;flex-direction:column;gap:12px">
+                  <div class="kick">Top selling today</div>
+                  <sc-for list="{{ topSellers }}" as="d" hint-placeholder-count="4">
+                    <div style="display:flex;align-items:center;gap:16px">
+                      <span style="width:200px;flex:none;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.name }}</span>
+                      <span style="flex:1;height:10px;border-radius:999px;background:#eef3ef;position:relative;overflow:hidden">
+                        <span style="position:absolute;inset:0 auto 0 0;width: {{ d.pct }};border-radius:999px;background: {{ d.fill }}"></span>
+                      </span>
+                      <span style="width:56px;flex:none;text-align:right;font-size:12px;color:#5d7a6f">{{ d.units }}</span>
+                      <span class="fig" style="width:92px;flex:none;text-align:right;font-size:14px">{{ d.value }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px;min-height:0">
+                <div style="display:flex;align-items:baseline;gap:10px"><h5 style="font-size:18px">Needs attention</h5><span style="font-size:12px;color:#5d7a6f">14 open</span></div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <sc-for list="{{ attention }}" as="a" hint-placeholder-count="5">
+                    <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:16px;background: {{ a.bg }}">
+                      <span style="width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ a.iconBg }};color: {{ a.iconFg }}"><i class="ph {{ a.icon }}" style="font-size:17px"></i></span>
+                      <div style="flex:1;min-width:0">
+                        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ a.name }}</div>
+                        <div style="font-size:11.5px;color:#5d7a6f">{{ a.detail }}</div>
+                      </div>
+                      <span style="padding:4px 11px;border-radius:999px;font-size:11.5px;font-weight:600;flex:none;background: {{ a.tagBg }};color: {{ a.tagFg }}">{{ a.tag }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="flex:1"></div>
+                <button style="display:flex;align-items:center;justify-content:center;gap:7px;padding:13px;border:0;border-radius:999px;background:#eef3ef;color:#0f4034;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Open all alerts <i class="ph ph-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3c">
+      <div class="ol"><a class="oid" href="#3c">3c</a>Sell — search, cart, payment</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Sell" role="Staff" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Sell" kicker="Counter 2 · Ama Boateng" role="Staff" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;gap:20px;padding:0 32px 32px">
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;gap:11px;padding:14px 20px;border-radius:999px;background:#fff;border:1px solid #1d7a5f">
+                <i class="ph ph-magnifying-glass" style="font-size:18px;color:#1d7a5f"></i>
+                <span style="font-size:15px">amox</span><span style="width:1px;height:18px;background:#1d7a5f"></span>
+                <span style="flex:1"></span>
+                <span style="font-size:12px;color:#5d7a6f">4 matches</span>
+              </div>
+              <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ posResults }}" as="r" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background: {{ r.bg }};box-shadow: {{ r.ring }}">
+                    <div style="width:48px;height:48px;flex:none;border-radius:10px;overflow:hidden">
+                      <image-slot id="{{ r.slot }}" shape="rounded" radius="10" placeholder=" " style="width:48px;height:48px"></image-slot>
+                    </div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span><span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;flex:none;background: {{ r.rxBg }};color: {{ r.rxFg }}">{{ r.rx }}</span></div>
+                      <div style="font-size:12px;color:#5d7a6f">{{ r.meta }}</div>
+                    </div>
+                    <div style="text-align:right;flex:none">
+                      <div class="fig" style="font-size:16px">{{ r.price }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ r.stock }}</div>
+                    </div>
+                    <button style="flex:none;padding:9px 18px;border:0;border-radius:999px;background: {{ r.btnBg }};color: {{ r.btnFg }};font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Add</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="width:384px;flex:none;display:flex;flex-direction:column;border-radius:20px;background:#fff;box-shadow:0 4px 14px rgba(16,50,40,.09);overflow:hidden">
+              <div style="display:flex;align-items:baseline;gap:10px;padding:22px 22px 14px">
+                <h5 style="font-size:19px">Current sale</h5><span style="font-size:12px;color:#5d7a6f">#1042 · 3 items</span>
+              </div>
+              <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:0 22px">
+                <sc-for list="{{ cart }}" as="c" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#f6faf6">
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ c.unit }}</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:6px;flex:none">
+                      <span style="width:26px;height:26px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;font-size:14px;color:#0f4034">−</span>
+                      <span style="font-size:13.5px;min-width:16px;text-align:center;font-weight:600">{{ c.qty }}</span>
+                      <span style="width:26px;height:26px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;font-size:14px;color:#0f4034">+</span>
+                    </div>
+                    <span class="fig" style="width:74px;flex:none;text-align:right;font-size:14.5px">{{ c.total }}</span>
+                  </div>
+                </sc-for>
+                <div style="display:flex;gap:10px;padding:12px 14px;border-radius:16px;background:#fdf3f3">
+                  <i class="ph ph-warning-circle" style="font-size:17px;color:#8c3236;flex:none"></i>
+                  <span style="font-size:12px;line-height:1.5;color:#4d1b1e">Amoxicillin is prescription-only — a pharmacist must approve before checkout.</span>
+                </div>
+              </div>
+              <div style="padding:22px;display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(16,50,40,.08)">
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#3d5850"><span>Subtotal</span><span class="fig">Ghc 96.50</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#3d5850"><span>NHIS discount</span><span class="fig">− Ghc 0.00</span></div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;border-top:1px solid rgba(16,50,40,.08)"><span style="font-size:13.5px;font-weight:600">Total</span><span class="fig" style="font-size:28px">Ghc 96.50</span></div>
+                <div style="display:flex;gap:8px;margin-top:4px">
+                  <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:999px;background:#dff0c2;color:#243312;font-size:13px;font-weight:600"><i class="ph ph-money" style="font-size:17px"></i>Cash</div>
+                  <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:999px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);color:#3d5850;font-size:13px"><i class="ph ph-device-mobile" style="font-size:17px"></i>MoMo</div>
+                </div>
+                <button style="padding:16px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Take payment · Ghc 96.50</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3d">
+      <div class="ol"><a class="oid" href="#3d">3d</a>Add drug</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Add drug" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Add drug" kicker="New record · saves to Adenta stock" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;gap:20px;padding:0 32px 32px">
+            <div style="flex:1;min-width:0;padding:22px 26px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px 20px">
+                <div style="grid-column:1/-1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Drug name</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid #1d7a5f;font-size:14.5px">Amoxicillin 500mg capsules</div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Generic name</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">Amoxicillin trihydrate</div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Brand / manufacturer</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">Ernest Chemists</div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Category</div><div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">Antibiotic<i class="ph ph-caret-down" style="font-size:14px;color:#5d7a6f"></i></div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Batch number</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">AMX-2291</div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Expiry date</div><div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">04 / 2027<i class="ph ph-calendar-blank" style="font-size:15px;color:#5d7a6f"></i></div></div>
+                <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Stock quantity</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">240 capsules</div></div>
+                <div style="display:flex;gap:16px">
+                  <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Cost price (Ghc)</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">15.50</div></div>
+                  <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Selling price (Ghc)</div><div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">24.00</div></div>
+                </div>
+                </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="font-size:12px;color:#5d7a6f">Prescription required</div>
+                <div style="display:flex;gap:10px">
+                  <div style="display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:13.5px;font-weight:600"><i class="ph-fill ph-check-circle" style="font-size:17px"></i>Yes — pharmacist approves each sale</div>
+                  <div style="display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:999px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);color:#3d5850;font-size:13.5px"><i class="ph ph-circle" style="font-size:17px"></i>No — over the counter</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:auto">
+                <button style="padding:15px 30px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Save drug</button>
+                <button style="padding:15px 24px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Save and add another</button>
+                <button style="padding:15px 14px;border:0;background:transparent;color:#1d7a5f;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Cancel</button>
+              </div>
+            </div>
+            <div style="width:308px;flex:none;display:flex;flex-direction:column;gap:16px">
+              <div style="padding:20px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+                <div class="kick" style="margin-bottom:12px">Photo</div>
+                <image-slot id="p-add-photo" shape="rounded" radius="10" placeholder="Drop a photo of the pack" style="width:100%;height:220px"></image-slot>
+                <div style="font-size:12px;line-height:1.55;color:#5d7a6f;margin-top:12px">Square, shot on white, cropped tight to the box.</div>
+              </div>
+              <div style="padding:20px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+                <div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Storage notes</div>
+                <div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:13.5px;line-height:1.5">Store below 25°C, dry. Keep out of direct sunlight.</div>
+              </div>
+              <div style="padding:20px;border-radius:20px;background:#dff0c2;display:flex;flex-direction:column;gap:12px">
+                <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#4a6321">Live maths</div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#243312"><span>Margin</span><span class="fig">Ghc 8.50 · 35%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#243312"><span>Stock value at cost</span><span class="fig">Ghc 3,720.00</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#243312"><span>Expiry status</span><span style="padding:3px 10px;border-radius:999px;background:#c6e6df;color:#123830;font-size:11.5px;font-weight:600">7 months out</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3e">
+      <div class="ol"><a class="oid" href="#3e">3e</a>Drug list — rows with price, expiry, photo</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Drugs" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Drugs" kicker="1,240 items · 9 low stock · 5 expiring" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:0 32px 32px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="display:flex;gap:6px">
+                <span style="padding:9px 18px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:13px;font-weight:600">All 1,240</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">Expiring 5</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">Low stock 9</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">Rx only 214</span>
+              </div>
+              <span style="flex:1"></span>
+              <button style="display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-squares-four" style="font-size:16px"></i>Cards</button>
+              <button style="display:flex;align-items:center;gap:7px;padding:10px 20px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-plus" style="font-size:16px"></i>Add drug</button>
+            </div>
+            <div style="flex:1;min-height:0;padding:20px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:8px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:14px;padding:0 16px 6px">
+                <span style="width:48px;flex:none"></span>
+                <span style="flex:1;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Drug</span>
+                <span style="width:104px;flex:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Batch</span>
+                <span style="width:104px;flex:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Expiry</span>
+                <span style="width:92px;flex:none;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Price</span>
+                <span style="width:118px;flex:none;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Status</span>
+              </div>
+              <sc-for list="{{ drugsList }}" as="d" hint-placeholder-count="6">
+                <div style="display:flex;align-items:center;gap:14px;padding:11px 16px;border-radius:16px;background: {{ d.rowBg }}">
+                  <div style="width:48px;height:48px;flex:none;border-radius:10px;overflow:hidden">
+                    <image-slot id="{{ d.pSlot }}" shape="rounded" radius="10" placeholder=" " style="width:48px;height:48px"></image-slot>
+                  </div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.name }}</span><span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;flex:none;background: {{ d.rxBg }};color: {{ d.rxFg }}">{{ d.rx }}</span></div>
+                    <div style="font-size:11.5px;color:#5d7a6f">{{ d.generic }} · {{ d.brand }}</div>
+                  </div>
+                  <span style="width:104px;flex:none;font-size:12.5px;color:#3d5850;font-variant-numeric:tabular-nums">{{ d.batch }}</span>
+                  <span style="width:104px;flex:none;font-size:12.5px;color: {{ d.expColor }}">{{ d.expiry }}</span>
+                  <div style="width:92px;flex:none;text-align:right">
+                    <div class="fig" style="font-size:15px">{{ d.price }}</div>
+                    <div style="font-size:11px;color: {{ d.stockColor }}">{{ d.stock }}</div>
+                  </div>
+                  <span style="width:118px;flex:none;text-align:right"><span style="display:inline-block;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:600;background: {{ d.statusBg }};color: {{ d.statusFg }}">{{ d.status }}</span></span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3f">
+      <div class="ol"><a class="oid" href="#3f">3f</a>Drug list — photo cards</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Drugs" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Drugs" kicker="Card view · sorted by expiry" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:0 32px 32px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="display:flex;gap:6px">
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">All</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:13px;font-weight:600">By expiry</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">By value</span>
+              </div>
+              <span style="flex:1"></span>
+              <button style="display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-rows" style="font-size:16px"></i>Rows</button>
+              <button style="display:flex;align-items:center;gap:7px;padding:10px 20px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-plus" style="font-size:16px"></i>Add drug</button>
+            </div>
+            <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:16px">
+              <sc-for list="{{ drugs }}" as="d" hint-placeholder-count="8">
+                <div style="padding:14px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:12px">
+                  <div style="position:relative;flex:none">
+                    <image-slot id="{{ d.cSlot }}" shape="rounded" radius="10" placeholder=" " style="width:100%;height:104px"></image-slot>
+                    <span style="position:absolute;top:8px;right:8px;padding:4px 11px;border-radius:999px;font-size:11px;font-weight:600;background: {{ d.statusBg }};color: {{ d.statusFg }}">{{ d.status }}</span>
+                  </div>
+                  <div>
+                    <div style="font-family:Outfit,sans-serif;font-size:14.5px;font-weight:600;line-height:1.25;letter-spacing:-.01em">{{ d.name }}</div>
+                    <div style="font-size:11.5px;color:#5d7a6f;margin-top:2px">{{ d.generic }}</div>
+                  </div>
+                  <div style="display:flex;align-items:baseline;justify-content:space-between">
+                    <span class="fig" style="font-size:19px">{{ d.price }}</span>
+                    <span style="font-size:11.5px;color: {{ d.stockColor }}">{{ d.stock }}</span>
+                  </div>
+                  <div style="margin-top:auto;padding-top:10px;border-top:1px solid rgba(16,50,40,.08);display:flex;justify-content:space-between;font-size:11px;color:#5d7a6f"><span>Exp {{ d.expiry }}</span><span style="font-variant-numeric:tabular-nums">{{ d.batch }}</span></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3g">
+      <div class="ol"><a class="oid" href="#3g">3g</a>Drug detail — pharmacist</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Drugs" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Amoxicillin 500mg capsules" kicker="Drugs / Antibiotic / AMX-2291" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;gap:20px;padding:0 32px 32px">
+            <div style="width:340px;flex:none;display:flex;flex-direction:column;gap:16px">
+              <div style="padding:16px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:10px">
+                <image-slot id="p-detail-photo" shape="rounded" radius="12" placeholder="Drop the pack photo" style="width:100%;height:236px"></image-slot>
+                <div style="display:flex;gap:8px">
+                  <image-slot id="p-detail-t1" shape="rounded" radius="8" placeholder="Blister" style="width:32%;height:62px"></image-slot>
+                  <image-slot id="p-detail-t2" shape="rounded" radius="8" placeholder="Label" style="width:32%;height:62px"></image-slot>
+                  <image-slot id="p-detail-t3" shape="rounded" radius="8" placeholder="Insert" style="width:32%;height:62px"></image-slot>
+                </div>
+              </div>
+              <div style="padding:20px;border-radius:20px;background:#c6e6df">
+                <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f5b51">Storage</div>
+                <p style="font-size:13.5px;line-height:1.6;margin:8px 0 0;color:#123830">Store below 25°C, dry. Keep out of direct sunlight. Dispense in the original blister.</p>
+              </div>
+            </div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:18px">
+              <div style="padding:26px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;align-items:flex-start;gap:24px">
+                <div>
+                  <div style="display:flex;gap:7px;margin-bottom:12px">
+                    <span style="padding:5px 12px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:11.5px;font-weight:600">Prescription only</span>
+                    <span style="padding:5px 12px;border-radius:999px;background:#eef3ef;color:#3d5850;font-size:11.5px;font-weight:600">Antibiotic</span>
+                    <span style="padding:5px 12px;border-radius:999px;background:#c6e6df;color:#123830;font-size:11.5px;font-weight:600">In stock</span>
+                  </div>
+                  <h4 style="font-size:28px">Amoxicillin 500mg capsules</h4>
+                  <div style="font-size:13.5px;color:#5d7a6f;margin-top:5px">Amoxicillin trihydrate · Ernest Chemists</div>
+                </div>
+                <div style="margin-left:auto;text-align:right;flex:none">
+                  <div class="fig" style="font-size:36px">Ghc 24.00</div>
+                  <div style="font-size:12.5px;color:#5d7a6f;margin-top:2px">per pack of 10 · cost Ghc 15.50</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+                <sc-for list="{{ detailMeta }}" as="m" hint-placeholder-count="6">
+                  <div style="padding:18px;border-radius:20px;background: {{ m.bg }}">
+                    <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color: {{ m.label }}">{{ m.k }}</div>
+                    <div class="fig" style="font-size:17px;margin-top:6px;color: {{ m.ink }}">{{ m.v }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="flex:1;min-height:0;padding:20px 24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:8px;overflow:hidden">
+                <h5 style="font-size:17px">Recent movement</h5>
+                <sc-for list="{{ movement }}" as="m" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:14px;padding:7px 14px;border-radius:14px;background:#f6faf6">
+                    <span style="width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ m.iconBg }};color: {{ m.iconFg }}"><i class="ph {{ m.icon }}" style="font-size:15px"></i></span>
+                    <span style="width:104px;flex:none;font-size:12.5px;color:#5d7a6f">{{ m.date }}</span>
+                    <span style="flex:1;min-width:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.kind }}</span>
+                    <span style="width:120px;flex:none;font-size:12px;color:#5d7a6f">{{ m.by }}</span>
+                    <span class="fig" style="width:52px;flex:none;text-align:right;font-size:13.5px;color: {{ m.qtyColor }}">{{ m.qty }}</span>
+                    <span class="fig" style="width:54px;flex:none;text-align:right;font-size:12.5px;color:#5d7a6f">{{ m.bal }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <button style="display:flex;align-items:center;gap:8px;padding:14px 24px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-pencil-simple" style="font-size:17px"></i>Edit record</button>
+                <button style="display:flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-package" style="font-size:17px"></i>Adjust stock</button>
+                <button style="display:flex;align-items:center;gap:8px;padding:14px 22px;border:0;border-radius:999px;background:#f7cdcd;color:#4d1b1e;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-trash" style="font-size:17px"></i>Delete</button>
+                <span style="font-size:12px;color:#5d7a6f;margin-left:8px;max-width:20ch;line-height:1.45">Counter staff see this page without these three actions.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3h">
+      <div class="ol"><a class="oid" href="#3h">3h</a>Receipt after payment</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Receipts" role="Staff" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Sale #1042 complete" kicker="Paid by MoMo · 7 September 2026, 11:24" role="Staff" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;gap:24px;padding:0 32px 32px;justify-content:center">
+            <div style="width:400px;flex:none;padding:32px 28px;border-radius:20px;background:#fff;box-shadow:0 4px 14px rgba(16,50,40,.09);display:flex;flex-direction:column;gap:22px;height:min-content">
+              <div style="text-align:center">
+                <svg width="38" height="38" viewBox="0 0 44 44" style="margin:0 auto" aria-hidden="true">
+                  <rect width="44" height="44" rx="14" fill="#0f4034"></rect>
+                  <rect x="18.5" y="10" width="7" height="24" rx="3.5" fill="#d8ecb4"></rect>
+                  <rect x="10" y="18.5" width="24" height="7" rx="3.5" fill="#a8dccf"></rect>
+                </svg>
+                <div style="font-family:Outfit,sans-serif;font-size:19px;font-weight:600;margin-top:10px">Bethel Pharmacy</div>
+                <div style="font-size:11.5px;line-height:1.55;color:#5d7a6f;margin-top:3px">Adenta Barrier, Accra · GA-393-2210<br>0244 118 902 · VAT 0129384</div>
+              </div>
+              <div style="padding:16px;border-radius:16px;background:#f6faf6;display:flex;flex-direction:column;gap:6px;font-size:12px">
+                <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Receipt</span><span style="font-weight:600">#1042</span></div>
+                <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Date</span><span>7 Sep 2026, 11:24</span></div>
+                <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Served by</span><span>Ama Boateng</span></div>
+                <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Approved by</span><span>K. Asare (Pharmacist)</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;gap:12px;font-size:13.5px">
+                    <div style="flex:1"><div style="font-weight:600">{{ r.name }}</div><div style="font-size:11.5px;color:#5d7a6f">{{ r.unit }}</div></div>
+                    <span class="fig" style="width:78px;text-align:right">{{ r.total }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding-top:18px;border-top:1px dashed rgba(16,50,40,.18);display:flex;flex-direction:column;gap:8px;font-size:13px">
+                <div style="display:flex;justify-content:space-between;color:#3d5850"><span>Subtotal</span><span class="fig">Ghc 96.50</span></div>
+                <div style="display:flex;justify-content:space-between;color:#3d5850"><span>Paid — MoMo 024•••902</span><span class="fig">Ghc 100.00</span></div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:4px"><span style="font-weight:600">Change</span><span class="fig" style="font-size:24px">Ghc 3.50</span></div>
+              </div>
+              <div style="text-align:center;font-size:11.5px;line-height:1.6;color:#5d7a6f">Keep this receipt for exchanges within 7 days.<br>Medicines are not returnable once opened.</div>
+            </div>
+            <div style="width:300px;flex:none;display:flex;flex-direction:column;gap:14px">
+              <div style="padding:22px;border-radius:20px;background:#dff0c2;text-align:center">
+                <span style="width:52px;height:52px;margin:0 auto;display:grid;place-items:center;border-radius:999px;background:#fff;color:#4a6321"><i class="ph-fill ph-check" style="font-size:24px"></i></span>
+                <div style="font-family:Outfit,sans-serif;font-size:19px;font-weight:600;color:#243312;margin-top:12px">Payment received</div>
+                <div style="font-size:12.5px;color:#4a6321;margin-top:2px">Stock has been updated</div>
+              </div>
+              <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-printer" style="font-size:18px"></i>Print receipt</button>
+              <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-whatsapp-logo" style="font-size:18px"></i>Send on WhatsApp</button>
+              <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-envelope-simple" style="font-size:18px"></i>Email a copy</button>
+              <div style="padding:20px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:10px">
+                <div class="kick">Stock updated</div>
+                <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;font-size:12.5px;gap:10px"><span style="color:#5d7a6f;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span><span style="flex:none;font-weight:600">{{ r.after }}</span></div>
+                </sc-for>
+              </div>
+              <button style="padding:13px;border:0;background:transparent;color:#1d7a5f;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Start a new sale</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3i">
+      <div class="ol"><a class="oid" href="#3i">3i</a>Alerts — expiry and low stock</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Alerts" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Alerts" kicker="5 expiring · 9 low stock · Ghc 1,910 at risk" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;padding:0 32px 32px">
+            <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px;min-height:0">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:34px;height:34px;display:grid;place-items:center;border-radius:999px;background:#f7cdcd;color:#8c3236"><i class="ph ph-clock" style="font-size:18px"></i></span>
+                  <h5 style="font-size:19px">Expiring stock</h5>
+                </div>
+                <div style="font-size:12.5px;color:#5d7a6f;margin-top:6px">Two tiers: rose from 30 days, teal from 90.</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ expiring }}" as="e" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background: {{ e.bg }}">
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.name }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ e.meta }}</div>
+                    </div>
+                    <span style="padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:600;flex:none;background: {{ e.tagBg }};color: {{ e.tagFg }}">{{ e.days }}</span>
+                    <button style="flex:none;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 12.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">{{ e.action }}</button>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:auto;display:flex;gap:10px;padding:14px 16px;border-radius:16px;background:#f6faf6">
+                <i class="ph ph-info" style="font-size:17px;color:#1d7a5f;flex:none"></i>
+                <span style="font-size:12.5px;line-height:1.55;color:#3d5850">Write-offs need a pharmacist. Counter staff see this list read-only.</span>
+              </div>
+            </div>
+            <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px;min-height:0">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:34px;height:34px;display:grid;place-items:center;border-radius:999px;background:#d3d1f4;color:#403a86"><i class="ph ph-package" style="font-size:18px"></i></span>
+                  <h5 style="font-size:19px">Low stock</h5>
+                </div>
+                <div style="font-size:12.5px;color:#5d7a6f;margin-top:6px">Below reorder level, worst first.</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ lowStock }}" as="l" hint-placeholder-count="6">
+                  <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background:#f6faf6">
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.name }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ l.meta }}</div>
+                    </div>
+                    <div style="width:76px;flex:none">
+                      <div style="height:8px;border-radius:999px;background:#e4ece7;overflow:hidden"><span style="display:block;height:100%;width: {{ l.pct }};border-radius:999px;background:#8ecfae"></span></div>
+                      <div style="font-size:10.5px;color:#5d7a6f;margin-top:4px">{{ l.level }}</div>
+                    </div>
+                    <button style="flex:none;padding:9px 18px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 12.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Reorder</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3j">
+      <div class="ol"><a class="oid" href="#3j">3j</a>Suppliers</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Suppliers" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Suppliers" kicker="7 active · Ghc 12,480 outstanding" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;gap:20px;padding:0 32px 32px">
+            <div style="flex:1;min-width:0;padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <h5 style="font-size:19px">By outstanding balance</h5>
+                <span style="flex:1"></span>
+                <button style="display:flex;align-items:center;gap:7px;padding:10px 20px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-plus" style="font-size:16px"></i>Add supplier</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="6">
+                  <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:16px;background:#f6faf6">
+                    <span style="width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ s.avBg }};color: {{ s.avFg }};font-size:12.5px;font-weight:600">{{ s.initials }}</span>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.name }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ s.city }} · {{ s.contact }}</div>
+                    </div>
+                    <span style="width:100px;flex:none;font-size:12.5px;color:#3d5850">{{ s.last }}</span>
+                    <span style="width:64px;flex:none;text-align:right;font-size:12.5px;color:#5d7a6f">{{ s.items }} items</span>
+                    <span class="fig" style="width:92px;flex:none;text-align:right;font-size:14.5px;color: {{ s.balColor }}">{{ s.balance }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="width:308px;flex:none;display:flex;flex-direction:column;gap:16px">
+              <div style="padding:22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px">
+                <div class="kick">Deliveries this week</div>
+                <sc-for list="{{ deliveries }}" as="d" hint-placeholder-count="4">
+                  <div style="display:flex;gap:11px;align-items:flex-start">
+                    <span style="width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ d.iconBg }};color: {{ d.iconFg }}"><i class="ph ph-truck" style="font-size:16px"></i></span>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13px;font-weight:600">{{ d.name }}</div>
+                      <div style="font-size:11.5px;color:#5d7a6f">{{ d.meta }}</div>
+                    </div>
+                    <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;flex:none;background: {{ d.tagBg }};color: {{ d.tagFg }}">{{ d.tag }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding:22px;border-radius:20px;background:#c6e6df;display:flex;flex-direction:column;gap:10px">
+                <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f5b51">Next order due</div>
+                <div style="font-family:Outfit,sans-serif;font-size:21px;font-weight:600;color:#123830">Ernest Chemists</div>
+                <div style="font-size:12.5px;line-height:1.55;color:#1f5b51">12 items flagged for reorder · Ghc 4,120 estimated</div>
+                <button style="margin-top:6px;padding:13px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Draft purchase order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3k">
+      <div class="ol"><a class="oid" href="#3k">3k</a>Reports</div>
+      <div class="fr" style="width:1280px;height:800px">
+        <dc-import name="PSidebar" active="Reports" role="Pharmacist" hint-size="236px,100%" style="height:100%"></dc-import>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <dc-import name="PTopBar" title="Reports" kicker="25 August – 7 September 2026" role="Pharmacist" hint-size="100%,96px"></dc-import>
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:0 32px 32px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="display:flex;gap:6px">
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">Today</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">7 days</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:13px;font-weight:600">14 days</span>
+                <span style="padding:9px 18px;border-radius:999px;background:#fff;color:#3d5850;font-size:13px">Month</span>
+              </div>
+              <span style="flex:1"></span>
+              <button style="display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-download-simple" style="font-size:16px"></i>Export CSV</button>
+            </div>
+            <div style="padding:26px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:20px">
+              <div style="display:flex;gap:40px;align-items:flex-end">
+                <div><div class="kick">Sales, 14 days</div><div class="fig" style="font-size:38px;line-height:1.1;margin-top:4px">Ghc 52,914.00</div></div>
+                <div><div class="kick">Today</div><div class="fig" style="font-size:22px;margin-top:4px">Ghc 4,280.50</div></div>
+                <div><div class="kick">Daily average</div><div class="fig" style="font-size:22px;margin-top:4px">Ghc 3,779.57</div></div>
+                <div><div class="kick">Busiest day</div><div class="fig" style="font-size:22px;margin-top:4px">Fri 4 Sep</div></div>
+              </div>
+              <svg viewBox="0 0 980 176" style="width:100%;height:auto;display:block">
+                <g font-family="Plus Jakarta Sans" font-size="10.5" fill="#5d7a6f">
+                  <text x="0" y="16">6K</text><text x="0" y="64">4K</text><text x="0" y="112">2K</text><text x="0" y="152">0</text>
+                </g>
+                <sc-for list="{{ reportBars }}" as="b" hint-placeholder-count="14">
+                  <rect x="{{ b.x }}" y="30" width="42" height="120" rx="21" fill="#eef3ef"></rect>
+                </sc-for>
+                <sc-for list="{{ reportBars }}" as="b" hint-placeholder-count="14">
+                  <rect x="{{ b.x }}" y="{{ b.y }}" width="42" height="{{ b.h }}" rx="21" fill="{{ b.fill }}"></rect>
+                </sc-for>
+                <g font-family="Plus Jakarta Sans" font-size="11" fill="#5d7a6f" text-anchor="middle">
+                  <text x="63" y="170">25 Aug</text><text x="399" y="170">30 Aug</text><text x="735" y="170">4 Sep</text><text x="939" y="170" fill="#0f4034" font-weight="600">Today</text>
+                </g>
+              </svg>
+            </div>
+            <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.35fr 1fr;gap:20px">
+              <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden">
+                <h5 style="font-size:18px">Top selling drugs</h5>
+                <div style="display:flex;align-items:center;gap:14px;padding:0 14px">
+                  <span style="flex:1;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Drug</span>
+                  <span style="width:64px;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Packs</span>
+                  <span style="width:88px;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Revenue</span>
+                  <span style="width:56px;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Share</span>
+                </div>
+                <sc-for list="{{ topReportShort }}" as="t" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:center;gap:14px;padding:8px 14px;border-radius:14px;background:#f6faf6">
+                    <span style="flex:1;min-width:0;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span>
+                    <span class="fig" style="width:64px;text-align:right;font-size:13px;color:#3d5850">{{ t.packs }}</span>
+                    <span class="fig" style="width:88px;text-align:right;font-size:13.5px">{{ t.revenue }}</span>
+                    <span style="width:56px;text-align:right"><span style="display:inline-block;padding:3px 10px;border-radius:999px;background:#dff0c2;color:#243312;font-size:11.5px;font-weight:600">{{ t.share }}</span></span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px;min-height:0">
+                <h5 style="font-size:18px">By category</h5>
+                <sc-for list="{{ categories }}" as="c" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:14px">
+                    <span style="width:96px;flex:none;font-size:12.5px">{{ c.name }}</span>
+                    <span style="flex:1;height:10px;border-radius:999px;background:#eef3ef;position:relative;overflow:hidden"><span style="position:absolute;inset:0 auto 0 0;width: {{ c.pct }};border-radius:999px;background: {{ c.fill }}"></span></span>
+                    <span class="fig" style="width:82px;flex:none;text-align:right;font-size:13px">{{ c.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3l">
+      <div class="ol"><a class="oid" href="#3l">3l</a>Prescription approval — pharmacist only</div>
+      <div class="fr" style="width:640px;height:460px;position:relative;border-radius:20px">
+        <div style="position:absolute;inset:0;padding:24px;opacity:.4">
+          <div style="height:42px;border-radius:999px;background:#fff;margin-bottom:14px"></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="height:66px;border-radius:16px;background:#fff"></div>
+            <div style="height:66px;border-radius:16px;background:#fff"></div>
+            <div style="height:66px;border-radius:16px;background:#fff"></div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;display:grid;place-items:center;background:rgba(16,50,40,.34);padding:24px">
+          <div style="width:472px;padding:28px;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(16,50,40,.24);display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:999px;background:#d3d1f4;color:#241f52"><i class="ph ph-shield-check" style="font-size:21px"></i></span>
+              <div>
+                <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Sale #1042</div>
+                <h5 style="font-size:21px;margin-top:2px">Pharmacist approval</h5>
+              </div>
+            </div>
+            <p style="font-size:14px;line-height:1.6;margin:0;color:#3d5850"><strong style="font-weight:600;color:#16241d">Amoxicillin 500mg capsules</strong> is prescription-only. A pharmacist must confirm the prescription before this sale can be completed.</p>
+            <div style="padding:16px;border-radius:16px;background:#f6faf6;display:flex;flex-direction:column;gap:8px;font-size:13px">
+              <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Quantity</span><span style="font-weight:600">2 packs of 10</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#5d7a6f">Counter staff</span><span>Ama Boateng</span></div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Prescriber / prescription number</div>
+              <div style="padding:13px 16px;border-radius:10px;background:#f6faf6;border:1px solid #1d7a5f;font-size:14px">Dr. Mensah · Adenta Clinic · RX-88213</div>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:flex-end">
+              <button style="padding:13px 22px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Decline</button>
+              <button style="padding:13px 24px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Approve and continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="th" style="margin-top:40px"><span class="tn">Mobile</span></div>
+  <div class="opts">
+
+    <div class="opt" id="3m">
+      <div class="ol"><a class="oid" href="#3m">3m</a>Sign in</div>
+      <div class="fr phone" style="background:#0f4034;color:#e9f4e4">
+        <div class="sb" style="color:#e9f4e4"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:36px 26px 44px">
+          <div style="position:absolute;width:340px;height:340px;right:-150px;top:60px;border-radius:999px;background:#12503f"></div>
+          <div style="position:relative;display:flex;align-items:center;gap:11px;margin-top:24px">
+            <svg width="38" height="38" viewBox="0 0 44 44" aria-hidden="true">
+              <rect width="44" height="44" rx="14" fill="#d8ecb4"></rect>
+              <rect x="18.5" y="10" width="7" height="24" rx="3.5" fill="#0f4034"></rect>
+              <rect x="10" y="18.5" width="24" height="7" rx="3.5" fill="#0f4034"></rect>
+            </svg>
+            <span style="font-family:Outfit,sans-serif;font-size:20px;font-weight:600;letter-spacing:-.03em;color:#f4faf1">Pharmacily</span>
+          </div>
+          <div style="position:relative">
+            <h4 style="font-size:34px;line-height:1.08;max-width:15ch;color:#f4faf1">Stock, sales and expiry in one place.</h4>
+            <p style="font-size:14.5px;line-height:1.6;margin:16px 0 0;max-width:30ch;color:rgba(233,244,228,.78)">Sign in with the Google account added to this branch.</p>
+          </div>
+          <div style="position:relative;display:flex;flex-direction:column;gap:16px">
+            <button style="display:flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:18px;border:0;border-radius:999px;background:#d8ecb4;color:#243312;font:600 15px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-google-logo" style="font-size:20px"></i>Continue with Google</button>
+            <p style="font-size:12px;line-height:1.55;margin:0;text-align:center;color:rgba(233,244,228,.7)">Only @bethelpharmacy.com accounts.<br>Your role comes with the account.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt" id="3n">
+      <div class="ol"><a class="oid" href="#3n">3n</a>Dashboard</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:18px;padding:20px 20px 12px;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f">Monday, 7 September</div><h4 style="font-size:24px;margin-top:3px">Morning, Kwabena</h4></div>
+            <div style="position:relative;width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:999px;background:#fff"><i class="ph ph-bell" style="font-size:19px;color:#0f4034"></i><span style="position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:999px;background:#e08c8c;box-shadow:0 0 0 2px #fff"></span></div>
+          </div>
+          <div style="padding:22px;border-radius:20px;background:#0f4034;color:#e9f4e4">
+            <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#a8dccf">Sales today</div>
+            <div class="fig" style="font-size:34px;color:#f4faf1;margin-top:8px">Ghc 4,280.50</div>
+            <div style="font-size:12.5px;color:rgba(233,244,228,.76);margin-top:4px">63 transactions · 12% on last Monday</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="padding:18px;border-radius:20px;background:#f7cdcd"><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8c3236">Expiring ≤30d</div><div class="fig" style="font-size:22px;color:#4d1b1e;margin-top:8px">5 items</div></div>
+            <div style="padding:18px;border-radius:20px;background:#d3d1f4"><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#403a86">Low stock</div><div class="fig" style="font-size:22px;color:#241f52;margin-top:8px">9 items</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+            <div class="kick">Needs attention</div>
+            <sc-for list="{{ attentionMobile }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:16px;background: {{ a.bg }}">
+                <span style="width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ a.iconBg }};color: {{ a.iconFg }}"><i class="ph {{ a.icon }}" style="font-size:16px"></i></span>
+                <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ a.name }}</div><div style="font-size:11px;color:#5d7a6f">{{ a.detail }}</div></div>
+                <span style="padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;flex:none;background: {{ a.tagBg }};color: {{ a.tagFg }}">{{ a.tag }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <button style="margin-top:auto;display:flex;align-items:center;justify-content:center;gap:9px;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 15px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-shopping-cart" style="font-size:19px"></i>Start a sale</button>
+        </div>
+        <dc-import name="PMobileTabs" active="Home" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3o">
+      <div class="ol"><a class="oid" href="#3o">3o</a>Sell</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:baseline;gap:9px"><h4 style="font-size:24px">Sell</h4><span style="font-size:12px;color:#5d7a6f">Counter 2 · Ama</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:#fff;border:1px solid #1d7a5f">
+            <i class="ph ph-magnifying-glass" style="font-size:17px;color:#1d7a5f"></i><span style="font-size:14.5px">amox</span><span style="width:1px;height:17px;background:#1d7a5f"></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-height:0">
+            <sc-for list="{{ posMobile }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:#fff">
+                <image-slot id="{{ r.slot }}" shape="rounded" radius="10" placeholder=" " style="width:44px;height:44px;flex:none"></image-slot>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div>
+                  <div style="font-size:11.5px;color:#5d7a6f">{{ r.price }} · {{ r.stock }}</div>
+                </div>
+                <span style="padding:3px 9px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:10.5px;font-weight:600;flex:none">Rx</span>
+                <span style="width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:999px;background:#dff0c2;color:#243312"><i class="ph ph-plus" style="font-size:16px"></i></span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;margin-bottom:12px;padding:18px;border-radius:20px;background:#fff;box-shadow:0 4px 14px rgba(16,50,40,.09);display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:12.5px;color:#5d7a6f">3 items in cart</span><span class="fig" style="font-size:24px">Ghc 96.50</span></div>
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:999px;background:#dff0c2;color:#243312;font-size:13px;font-weight:600"><i class="ph ph-money" style="font-size:16px"></i>Cash</div>
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:999px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);color:#3d5850;font-size:13px"><i class="ph ph-device-mobile" style="font-size:16px"></i>MoMo</div>
+            </div>
+            <div style="display:flex;gap:9px;padding:11px 13px;border-radius:14px;background:#fdf3f3"><i class="ph ph-warning-circle" style="font-size:15px;color:#8c3236;flex:none"></i><span style="font-size:11.5px;line-height:1.45;color:#4d1b1e">One Rx item needs pharmacist approval</span></div>
+            <button style="padding:16px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Review cart</button>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="Sell" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3p">
+      <div class="ol"><a class="oid" href="#3p">3p</a>Add drug</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:999px;background:#fff"><i class="ph ph-arrow-left" style="font-size:18px;color:#0f4034"></i></span>
+            <h4 style="font-size:24px">Add drug</h4>
+          </div>
+          <image-slot id="pm-add-photo" shape="rounded" radius="14" placeholder="Add a photo of the pack" style="width:100%;height:146px"></image-slot>
+          <div><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Drug name</div><div style="padding:14px 16px;border-radius:10px;background:#fff;border:1px solid #1d7a5f;font-size:14.5px">Amoxicillin 500mg capsules</div></div>
+          <div style="display:flex;gap:10px">
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Batch</div><div style="padding:14px 16px;border-radius:10px;background:#fff;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">AMX-2291</div></div>
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Expiry</div><div style="padding:14px 16px;border-radius:10px;background:#fff;border:1px solid rgba(16,50,40,.1);font-size:14px">04 / 2027</div></div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Cost</div><div style="padding:14px 12px;border-radius:10px;background:#fff;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">15.50</div></div>
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Price</div><div style="padding:14px 12px;border-radius:10px;background:#fff;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">24.00</div></div>
+            <div style="flex:1"><div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Qty</div><div style="padding:14px 12px;border-radius:10px;background:#fff;border:1px solid rgba(16,50,40,.1);font-size:14px;font-variant-numeric:tabular-nums">240</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px;color:#5d7a6f">Prescription required</div>
+            <div style="display:flex;padding:4px;border-radius:999px;background:#fff">
+              <span style="flex:1;text-align:center;padding:10px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:13px;font-weight:600">Yes — Rx</span>
+              <span style="flex:1;text-align:center;padding:10px;border-radius:999px;color:#3d5850;font-size:13px">No — OTC</span>
+            </div>
+          </div>
+          <div style="margin-top:auto;margin-bottom:12px;display:flex;gap:10px">
+            <button style="flex:1;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Save drug</button>
+            <button style="width:56px;display:grid;place-items:center;border-radius:999px;background:#dff0c2;border:0;color:#243312;cursor:pointer"><i class="ph ph-plus" style="font-size:20px"></i></button>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="Drugs" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3q">
+      <div class="ol"><a class="oid" href="#3q">3q</a>Drug list</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:baseline;gap:9px"><h4 style="font-size:24px">Drugs</h4><span style="font-size:12px;color:#5d7a6f">1,240 items</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.1)">
+            <i class="ph ph-magnifying-glass" style="font-size:16px;color:#5d7a6f"></i><span style="font-size:13.5px;color:#5d7a6f">Search name or batch</span>
+          </div>
+          <div style="display:flex;gap:6px">
+            <span style="padding:7px 14px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:12px;font-weight:600">All</span>
+            <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#3d5850;font-size:12px">Expiring 5</span>
+            <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#3d5850;font-size:12px">Low 9</span>
+            <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#3d5850;font-size:12px">Rx 214</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-height:0">
+            <sc-for list="{{ drugsMobile }}" as="d" hint-placeholder-count="6">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background: {{ d.mRowBg }}">
+                <image-slot id="{{ d.mSlot }}" shape="rounded" radius="10" placeholder=" " style="width:48px;height:48px;flex:none"></image-slot>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.name }}</div>
+                  <div style="font-size:11px;color:#5d7a6f">Exp {{ d.expiry }} · {{ d.stock }}</div>
+                </div>
+                <div style="text-align:right;flex:none">
+                  <div class="fig" style="font-size:14px">{{ d.price }}</div>
+                  <span style="display:inline-block;margin-top:3px;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;background: {{ d.statusBg }};color: {{ d.statusFg }}">{{ d.status }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="Drugs" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3r">
+      <div class="ol"><a class="oid" href="#3r">3r</a>Drug detail — counter staff</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden">
+          <div style="position:relative;flex:none;padding:8px 16px 0">
+            <image-slot id="pm-detail-photo" shape="rounded" radius="18" placeholder="Pack photo" style="width:100%;height:208px"></image-slot>
+            <span style="position:absolute;top:20px;left:28px;width:38px;height:38px;display:grid;place-items:center;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(16,50,40,.14);pointer-events:none"><i class="ph ph-arrow-left" style="font-size:18px;color:#0f4034"></i></span>
+          </div>
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:18px 20px 12px">
+            <div>
+              <div style="display:flex;gap:6px;margin-bottom:10px">
+                <span style="padding:4px 11px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:11px;font-weight:600">Prescription only</span>
+                <span style="padding:4px 11px;border-radius:999px;background:#eef3ef;color:#3d5850;font-size:11px;font-weight:600">Antibiotic</span>
+              </div>
+              <h4 style="font-size:22px;line-height:1.15">Amoxicillin 500mg capsules</h4>
+              <div style="font-size:12.5px;color:#5d7a6f;margin-top:4px">Amoxicillin trihydrate · Ernest Chemists</div>
+            </div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;padding:18px;border-radius:20px;background:#dff0c2">
+              <div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#4a6321">Selling price</div><div class="fig" style="font-size:28px;color:#243312;margin-top:4px">Ghc 24.00</div></div>
+              <div style="text-align:right;font-size:12px;line-height:1.5;color:#4a6321">240 packs<br>in stock</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <sc-for list="{{ detailMetaMobile }}" as="m" hint-placeholder-count="4">
+                <div style="padding:14px;border-radius:16px;background:#fff">
+                  <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">{{ m.k }}</div>
+                  <div class="fig" style="font-size:15px;margin-top:4px">{{ m.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <p style="font-size:12.5px;line-height:1.55;margin:0;color:#3d5850">Store below 25°C, dry. Dispense in the original blister.</p>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+              <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 15px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-shopping-cart" style="font-size:19px"></i>Add to sale</button>
+              <p style="font-size:11.5px;line-height:1.45;margin:0;text-align:center;color:#5d7a6f">Edit, adjust stock and delete appear here for pharmacists only.</p>
+            </div>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="Drugs" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3s">
+      <div class="ol"><a class="oid" href="#3s">3s</a>Receipt</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:18px;padding:28px 20px 12px;overflow:hidden">
+          <div style="text-align:center">
+            <span style="width:64px;height:64px;margin:0 auto;display:grid;place-items:center;border-radius:999px;background:#dff0c2;color:#243312"><i class="ph-fill ph-check" style="font-size:30px"></i></span>
+            <h4 style="font-size:24px;margin-top:16px">Payment received</h4>
+            <div style="font-size:12.5px;color:#5d7a6f;margin-top:4px">MoMo 024•••902 · receipt #1042</div>
+          </div>
+          <div style="padding:22px 20px;border-radius:20px;background:#fff;display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="3">
+              <div style="display:flex;gap:12px;font-size:13.5px">
+                <div style="flex:1;min-width:0"><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div><div style="font-size:11.5px;color:#5d7a6f">{{ r.unit }}</div></div>
+                <span class="fig" style="flex:none">{{ r.total }}</span>
+              </div>
+            </sc-for>
+            <div style="padding-top:14px;border-top:1px dashed rgba(16,50,40,.18);display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;color:#3d5850"><span>Paid</span><span class="fig">Ghc 100.00</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:13.5px;font-weight:600">Change</span><span class="fig" style="font-size:24px">Ghc 3.50</span></div>
+            </div>
+          </div>
+          <div style="margin-top:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:9px">
+            <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-whatsapp-logo" style="font-size:19px"></i>Send on WhatsApp</button>
+            <button style="display:flex;align-items:center;justify-content:center;gap:9px;padding:17px;border-radius:999px;background:#fff;border:1px solid rgba(16,50,40,.16);color:#0f4034;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-printer" style="font-size:19px"></i>Print</button>
+            <button style="padding:12px;border:0;background:transparent;color:#1d7a5f;font:600 13.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Start a new sale</button>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="Sell" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3t">
+      <div class="ol"><a class="oid" href="#3t">3t</a>Alerts</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:baseline;gap:9px"><h4 style="font-size:24px">Alerts</h4><span style="font-size:12px;color:#5d7a6f">Ghc 1,910 at risk</span></div>
+          <div style="display:flex;padding:4px;border-radius:999px;background:#fff">
+            <span style="flex:1;text-align:center;padding:10px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:13px;font-weight:600">Expiring 5</span>
+            <span style="flex:1;text-align:center;padding:10px;border-radius:999px;color:#3d5850;font-size:13px">Low stock 9</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-height:0">
+            <sc-for list="{{ expiring }}" as="e" hint-placeholder-count="5">
+              <div style="padding:14px;border-radius:16px;background: {{ e.mBg }};display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:baseline;gap:10px">
+                  <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.name }}</div><div style="font-size:11px;color:#5d7a6f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.meta }}</div></div>
+                  <span style="padding:4px 11px;border-radius:999px;font-size:11px;font-weight:600;flex:none;background: {{ e.tagBg }};color: {{ e.tagFg }}">{{ e.days }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;margin-bottom:12px"><button style="width:100%;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Draft a write-off list</button></div>
+        </div>
+        <dc-import name="PMobileTabs" active="Alerts" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3u">
+      <div class="ol"><a class="oid" href="#3u">3u</a>Suppliers</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:baseline;gap:9px"><h4 style="font-size:24px">Suppliers</h4><span style="font-size:12px;color:#5d7a6f">7 active</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-height:0">
+            <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="6">
+              <div style="padding:14px;border-radius:16px;background:#fff;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:11px">
+                  <span style="width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:999px;background: {{ s.avBg }};color: {{ s.avFg }};font-size:11.5px;font-weight:600">{{ s.initials }}</span>
+                  <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.name }}</div><div style="font-size:11px;color:#5d7a6f">{{ s.city }} · {{ s.contact }}</div></div>
+                  <span class="fig" style="flex:none;font-size:14px;color: {{ s.balColor }}">{{ s.balance }}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:#5d7a6f;padding-top:8px;border-top:1px solid rgba(16,50,40,.08)"><span>Last delivery {{ s.last }}</span><span>{{ s.items }} items</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:auto;margin-bottom:12px"><button style="display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:17px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14.5px 'Plus Jakarta Sans',sans-serif;cursor:pointer"><i class="ph ph-plus" style="font-size:19px"></i>Add supplier</button></div>
+        </div>
+        <dc-import name="PMobileTabs" active="More" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+    <div class="opt" id="3v">
+      <div class="ol"><a class="oid" href="#3v">3v</a>Reports</div>
+      <div class="fr phone">
+        <div class="sb"><span>9:41</span><span style="display:flex;gap:7px"><i class="ph ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph ph-battery-full"></i></span></div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:20px 20px 0;overflow:hidden">
+          <div style="display:flex;align-items:baseline;gap:9px"><h4 style="font-size:24px">Reports</h4><span style="font-size:12px;color:#5d7a6f">14 days</span></div>
+          <div style="display:flex;padding:4px;border-radius:999px;background:#fff">
+            <span style="flex:1;text-align:center;padding:9px;border-radius:999px;color:#3d5850;font-size:12.5px">Today</span>
+            <span style="flex:1;text-align:center;padding:9px;border-radius:999px;color:#3d5850;font-size:12.5px">7d</span>
+            <span style="flex:1;text-align:center;padding:9px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:12.5px;font-weight:600">14d</span>
+            <span style="flex:1;text-align:center;padding:9px;border-radius:999px;color:#3d5850;font-size:12.5px">Month</span>
+          </div>
+          <div style="padding:22px;border-radius:20px;background:#0f4034;color:#e9f4e4">
+            <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#a8dccf">Sales, 14 days</div>
+            <div class="fig" style="font-size:30px;color:#f4faf1;margin-top:8px">Ghc 52,914.00</div>
+            <div style="font-size:12px;color:rgba(233,244,228,.76);margin-top:4px">Ghc 3,779.57 daily average</div>
+          </div>
+          <svg viewBox="0 0 350 128" style="width:100%;height:auto;display:block">
+            <sc-for list="{{ mobileBars }}" as="b" hint-placeholder-count="14">
+              <rect x="{{ b.x }}" y="8" width="16" height="100" rx="8" fill="#e4ece7"></rect>
+            </sc-for>
+            <sc-for list="{{ mobileBars }}" as="b" hint-placeholder-count="14">
+              <rect x="{{ b.x }}" y="{{ b.y }}" width="16" height="{{ b.h }}" rx="8" fill="{{ b.fill }}"></rect>
+            </sc-for>
+            <g font-family="Plus Jakarta Sans" font-size="10" fill="#5d7a6f">
+              <text x="0" y="124">25 Aug</text><text x="306" y="124" fill="#0f4034" font-weight="600">Today</text>
+            </g>
+          </svg>
+          <div style="display:flex;flex-direction:column;gap:9px;min-height:0">
+            <div class="kick">Top selling</div>
+            <sc-for list="{{ topReport }}" as="t" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:14px;background:#fff">
+                <span style="flex:1;min-width:0;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span>
+                <span style="flex:none;font-size:11.5px;color:#5d7a6f">{{ t.packs }}</span>
+                <span class="fig" style="width:78px;flex:none;text-align:right;font-size:13px">{{ t.revenue }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <dc-import name="PMobileTabs" active="More" hint-size="100%,96px"></dc-import>
+      </div>
+    </div>
+
+  </div>
+  <p class="nx">Try next: "add a barcode-scan step to <a class="oid" href="#3c">3c</a>" · "make these clickable" · "add a staff and permissions screen"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const fmt = (n) => "Ghc " + n.toFixed(2);
+const GREEN = ["#dff0c2", "#243312"], TEAL = ["#c6e6df", "#123830"], ROSE = ["#f7cdcd", "#4d1b1e"], LILAC = ["#d3d1f4", "#241f52"], NEUT = ["#eef3ef", "#3d5850"];
+const DRUGS = [
+  { name: "Amlodipine 5mg tabs", generic: "Amlodipine besylate", brand: "Danadams", batch: "AML-7702", expiry: "28 Sep 2026", price: 21, stock: 12, status: "Urgent", rx: "Rx" },
+  { name: "Artemether/Lumefantrine", generic: "Artemether 20/120", brand: "Novartis", batch: "COA-3318", expiry: "14 Oct 2026", price: 38, stock: 64, status: "Urgent", rx: "Rx" },
+  { name: "Paracetamol 500mg tabs", generic: "Paracetamol", brand: "Kinapharma", batch: "PAR-8814", expiry: "30 Nov 2026", price: 6.5, stock: 1120, status: "Expiring", rx: "OTC" },
+  { name: "Metformin 500mg tabs", generic: "Metformin HCl", brand: "Danadams", batch: "MET-4471", expiry: "20 Dec 2026", price: 18, stock: 310, status: "In stock", rx: "Rx" },
+  { name: "Amoxicillin 500mg caps", generic: "Amoxicillin trihydrate", brand: "Ernest Chemists", batch: "AMX-2291", expiry: "09 Apr 2027", price: 24, stock: 240, status: "In stock", rx: "Rx" },
+  { name: "Cetirizine 10mg tabs", generic: "Cetirizine HCl", brand: "Letap", batch: "CET-5590", expiry: "02 Jun 2027", price: 9, stock: 208, status: "In stock", rx: "OTC" },
+  { name: "ORS sachets", generic: "Oral rehydration salts", brand: "Kinapharma", batch: "ORS-1120", expiry: "18 Feb 2028", price: 4, stock: 8, status: "Low stock", rx: "OTC" },
+  { name: "Ibuprofen 400mg tabs", generic: "Ibuprofen", brand: "Ayrton", batch: "IBU-6034", expiry: "11 Mar 2028", price: 11.5, stock: 460, status: "In stock", rx: "OTC" }
+];
+const STATUS = { "Urgent": ROSE, "Expiring": TEAL, "Low stock": LILAC, "In stock": NEUT };
+const BAR_H = [68, 86, 106, 78, 112, 58, 74, 90, 100, 64, 116, 82, 96, 104];
+class Component extends DCLogic {
+  renderVals() {
+    const drugs = DRUGS.map((d, i) => {
+      const st = STATUS[d.status], urgent = d.status === "Urgent", low = d.status === "Low stock";
+      return {
+        ...d,
+        pSlot: "p-row-" + i, cSlot: "p-card-" + i, mSlot: "pm-row-" + i,
+        price: fmt(d.price),
+        stock: d.stock.toLocaleString() + " left",
+        rowBg: urgent ? "#fdf3f3" : "#f6faf6",
+        mRowBg: urgent ? "#fdf3f3" : "#fff",
+        expColor: urgent ? "#8c3236" : "#3d5850",
+        stockColor: low ? "#403a86" : "#5d7a6f",
+        statusBg: st[0], statusFg: st[1],
+        rxBg: d.rx === "Rx" ? LILAC[0] : NEUT[0],
+        rxFg: d.rx === "Rx" ? LILAC[1] : NEUT[1]
+      };
+    });
+    const reportBars = BAR_H.map((h, i) => ({
+      x: 42 + i * 67, y: 150 - h, h,
+      fill: i === 13 ? "#0f4034" : (i % 2 ? "#a8dccf" : "#cfe8ae")
+    }));
+    const mobileBars = BAR_H.map((h, i) => ({
+      x: 4 + i * 25, y: 108 - Math.round(h * 0.82), h: Math.round(h * 0.82),
+      fill: i === 13 ? "#0f4034" : (i % 2 ? "#a8dccf" : "#cfe8ae")
+    }));
+    return {
+      drugs,
+      drugsList: drugs.slice(0, 6),
+      drugsMobile: drugs.slice(0, 6),
+      reportBars, mobileBars,
+      topSellers: [
+        { name: "Paracetamol 500mg tabs", pct: "100%", units: "84 pk", value: "Ghc 546.00", fill: "#cfe8ae" },
+        { name: "ORS sachets", pct: "72%", units: "61 pk", value: "Ghc 244.00", fill: "#a8dccf" },
+        { name: "Amoxicillin 500mg caps", pct: "58%", units: "22 pk", value: "Ghc 528.00", fill: "#cfe8ae" },
+        { name: "Cetirizine 10mg tabs", pct: "41%", units: "19 pk", value: "Ghc 171.00", fill: "#a8dccf" }
+      ],
+      attention: [
+        { name: "Amlodipine 5mg tabs", detail: "Expires 28 Sep · 12 packs on shelf", icon: "ph-clock", bg: "#fdf3f3", iconBg: ROSE[0], iconFg: ROSE[1], tag: "21 days", tagBg: ROSE[0], tagFg: ROSE[1] },
+        { name: "Artemether/Lumefantrine", detail: "Expires 14 Oct · 64 packs", icon: "ph-clock", bg: "#fdf3f3", iconBg: ROSE[0], iconFg: ROSE[1], tag: "37 days", tagBg: ROSE[0], tagFg: ROSE[1] },
+        { name: "ORS sachets", detail: "8 left · reorder level 40", icon: "ph-package", bg: "#f6faf6", iconBg: LILAC[0], iconFg: LILAC[1], tag: "Low", tagBg: LILAC[0], tagFg: LILAC[1] },
+        { name: "Insulin glargine", detail: "6 pens · fridge line 2", icon: "ph-package", bg: "#f6faf6", iconBg: LILAC[0], iconFg: LILAC[1], tag: "Low", tagBg: LILAC[0], tagFg: LILAC[1] },
+        { name: "Paracetamol 500mg tabs", detail: "Expires 30 Nov · 1,120 packs", icon: "ph-clock", bg: "#f6faf6", iconBg: TEAL[0], iconFg: TEAL[1], tag: "84 days", tagBg: TEAL[0], tagFg: TEAL[1] }
+      ],
+      attentionMobile: [
+        { name: "Amlodipine 5mg tabs", detail: "Expires 28 Sep · 12 packs", icon: "ph-clock", bg: "#fdf3f3", iconBg: ROSE[0], iconFg: ROSE[1], tag: "21 days", tagBg: "#fff", tagFg: ROSE[1] },
+        { name: "Artemether/Lumefantrine", detail: "Expires 14 Oct · 64 packs", icon: "ph-clock", bg: "#fdf3f3", iconBg: ROSE[0], iconFg: ROSE[1], tag: "37 days", tagBg: "#fff", tagFg: ROSE[1] },
+        { name: "ORS sachets", detail: "8 left · reorder level 40", icon: "ph-package", bg: "#fff", iconBg: LILAC[0], iconFg: LILAC[1], tag: "Low", tagBg: LILAC[0], tagFg: LILAC[1] },
+        { name: "Insulin glargine", detail: "6 pens · fridge line 2", icon: "ph-package", bg: "#fff", iconBg: LILAC[0], iconFg: LILAC[1], tag: "Low", tagBg: LILAC[0], tagFg: LILAC[1] }
+      ],
+      posResults: [
+        { name: "Amoxicillin 500mg caps", meta: "Ernest Chemists · batch AMX-2291 · exp Apr 2027", price: "Ghc 24.00", stock: "240 left", rx: "Rx", rxBg: LILAC[0], rxFg: LILAC[1], slot: "p-pos-1", bg: "#fff", ring: "0 0 0 1.5px #1d7a5f, 0 1px 3px rgba(16,50,40,.06)", btnBg: "#0f4034", btnFg: "#f4faf1" },
+        { name: "Amoxicillin 250mg caps", meta: "Ernest Chemists · batch AMX-2104 · exp Jan 2027", price: "Ghc 16.00", stock: "88 left", rx: "Rx", rxBg: LILAC[0], rxFg: LILAC[1], slot: "p-pos-2", bg: "#fff", ring: "0 1px 3px rgba(16,50,40,.06)", btnBg: "#eef3ef", btnFg: "#0f4034" },
+        { name: "Amoxicillin syrup 125mg/5ml", meta: "Letap · batch AMS-9930 · exp Nov 2026", price: "Ghc 29.50", stock: "34 left", rx: "Rx", rxBg: LILAC[0], rxFg: LILAC[1], slot: "p-pos-3", bg: "#fff", ring: "0 1px 3px rgba(16,50,40,.06)", btnBg: "#eef3ef", btnFg: "#0f4034" },
+        { name: "Amoxicillin + Clavulanate 625mg", meta: "Ayrton · batch AMC-4417 · exp Aug 2027", price: "Ghc 46.00", stock: "52 left", rx: "Rx", rxBg: LILAC[0], rxFg: LILAC[1], slot: "p-pos-4", bg: "#fff", ring: "0 1px 3px rgba(16,50,40,.06)", btnBg: "#eef3ef", btnFg: "#0f4034" },
+        { name: "Paracetamol 500mg tabs", meta: "Kinapharma · batch PAR-8814 · exp Nov 2026", price: "Ghc 6.50", stock: "1,120 left", rx: "OTC", rxBg: NEUT[0], rxFg: NEUT[1], slot: "p-pos-5", bg: "#fff", ring: "0 1px 3px rgba(16,50,40,.06)", btnBg: "#eef3ef", btnFg: "#0f4034" }
+      ],
+      posMobile: [
+        { name: "Amoxicillin 500mg caps", price: "Ghc 24.00", stock: "240 left", slot: "pm-pos-1" },
+        { name: "Amoxicillin 250mg caps", price: "Ghc 16.00", stock: "88 left", slot: "pm-pos-2" },
+        { name: "Amoxicillin syrup 125mg/5ml", price: "Ghc 29.50", stock: "34 left", slot: "pm-pos-3" },
+        { name: "Amoxicillin + Clavulanate", price: "Ghc 46.00", stock: "52 left", slot: "pm-pos-4" }
+      ],
+      cart: [
+        { name: "Amoxicillin 500mg caps", unit: "Ghc 24.00 × pack of 10", qty: "2", total: "Ghc 48.00" },
+        { name: "Paracetamol 500mg tabs", unit: "Ghc 6.50 × pack", qty: "4", total: "Ghc 26.00" },
+        { name: "ORS sachets", unit: "Ghc 4.00 × sachet", qty: "6", total: "Ghc 24.00" }
+      ],
+      detailMeta: [
+        { k: "Batch", v: "AMX-2291", bg: "#fff", label: "#5d7a6f", ink: "#16241d" },
+        { k: "Expiry", v: "09 Apr 2027", bg: TEAL[0], label: "#1f5b51", ink: TEAL[1] },
+        { k: "In stock", v: "240 packs", bg: "#fff", label: "#5d7a6f", ink: "#16241d" },
+        { k: "Margin", v: "Ghc 8.50 · 35%", bg: GREEN[0], label: "#4a6321", ink: GREEN[1] },
+        { k: "Stock value", v: "Ghc 3,720", bg: "#fff", label: "#5d7a6f", ink: "#16241d" },
+        { k: "Reorder level", v: "60 packs", bg: "#fff", label: "#5d7a6f", ink: "#16241d" }
+      ],
+      detailMetaMobile: [
+        { k: "Batch", v: "AMX-2291" }, { k: "Expiry", v: "09 Apr 2027" },
+        { k: "Pack size", v: "10 capsules" }, { k: "Reorder at", v: "60 packs" }
+      ],
+      movement: [
+        { date: "7 Sep 2026", kind: "Sale · #1042", by: "Ama Boateng", qty: "− 2", bal: "240", icon: "ph-shopping-cart", iconBg: GREEN[0], iconFg: GREEN[1], qtyColor: "#3d5850" },
+        { date: "6 Sep 2026", kind: "Sale · #1038", by: "Ama Boateng", qty: "− 5", bal: "242", icon: "ph-shopping-cart", iconBg: GREEN[0], iconFg: GREEN[1], qtyColor: "#3d5850" },
+        { date: "2 Sep 2026", kind: "Delivery · Ernest Chemists", by: "Kwabena Asare", qty: "+ 120", bal: "247", icon: "ph-truck", iconBg: TEAL[0], iconFg: TEAL[1], qtyColor: "#1f5b51" }
+      ],
+      receipt: [
+        { name: "Amoxicillin 500mg caps", unit: "2 × Ghc 24.00", total: "Ghc 48.00", after: "238 left" },
+        { name: "Paracetamol 500mg tabs", unit: "4 × Ghc 6.50", total: "Ghc 26.00", after: "1,116 left" },
+        { name: "ORS sachets", unit: "6 × Ghc 4.00", total: "Ghc 24.00", after: "2 left" }
+      ],
+      expiring: [
+        { name: "Amlodipine 5mg tabs", meta: "Batch AML-7702 · 12 packs · Ghc 186 at cost", days: "21 days", bg: "#fdf3f3", mBg: "#fdf3f3", tagBg: ROSE[0], tagFg: ROSE[1], action: "Write off" },
+        { name: "Artemether/Lumefantrine", meta: "Batch COA-3318 · 64 packs · Ghc 1,664 at cost", days: "37 days", bg: "#fdf3f3", mBg: "#fdf3f3", tagBg: ROSE[0], tagFg: ROSE[1], action: "Discount" },
+        { name: "Amoxicillin syrup 125mg/5ml", meta: "Batch AMS-9930 · 34 bottles", days: "62 days", bg: "#f6faf6", mBg: "#fff", tagBg: TEAL[0], tagFg: TEAL[1], action: "Discount" },
+        { name: "Paracetamol 500mg tabs", meta: "Batch PAR-8814 · 1,120 packs", days: "84 days", bg: "#f6faf6", mBg: "#fff", tagBg: TEAL[0], tagFg: TEAL[1], action: "Promote" },
+        { name: "Vitamin C 1000mg tabs", meta: "Batch VTC-2277 · 210 packs", days: "88 days", bg: "#f6faf6", mBg: "#fff", tagBg: TEAL[0], tagFg: TEAL[1], action: "Promote" }
+      ],
+      lowStock: [
+        { name: "ORS sachets", meta: "8 left · sells 61 a week", pct: "20%", level: "of 40" },
+        { name: "Insulin glargine pens", meta: "6 left · fridge line 2", pct: "30%", level: "of 20" },
+        { name: "Amlodipine 5mg tabs", meta: "12 left · reorder level 50", pct: "24%", level: "of 50" },
+        { name: "Salbutamol inhaler", meta: "9 left · reorder level 30", pct: "30%", level: "of 30" },
+        { name: "Ceftriaxone 1g vials", meta: "14 left · reorder level 40", pct: "35%", level: "of 40" },
+        { name: "Zinc syrup 20mg/5ml", meta: "18 left · reorder level 45", pct: "40%", level: "of 45" }
+      ],
+      suppliers: [
+        { name: "Ernest Chemists", initials: "EC", city: "Accra", contact: "0302 224 118", last: "2 Sep 2026", items: "312", balance: "Ghc 5,240", balColor: "#8c3236", avBg: GREEN[0], avFg: GREEN[1] },
+        { name: "Kinapharma", initials: "KP", city: "Tema", contact: "0303 205 664", last: "30 Aug 2026", items: "188", balance: "Ghc 3,110", balColor: "#8c3236", avBg: TEAL[0], avFg: TEAL[1] },
+        { name: "Danadams Pharmaceutical", initials: "DP", city: "Accra", contact: "0302 812 900", last: "27 Aug 2026", items: "97", balance: "Ghc 2,480", balColor: "#16241d", avBg: LILAC[0], avFg: LILAC[1] },
+        { name: "Ayrton Drug Manufacturing", initials: "AD", city: "Accra", contact: "0302 228 471", last: "21 Aug 2026", items: "144", balance: "Ghc 1,650", balColor: "#16241d", avBg: GREEN[0], avFg: GREEN[1] },
+        { name: "Letap Pharmaceuticals", initials: "LP", city: "Kumasi", contact: "0322 049 118", last: "14 Aug 2026", items: "61", balance: "Settled", balColor: "#5d7a6f", avBg: TEAL[0], avFg: TEAL[1] },
+        { name: "Tobinco Pharmaceuticals", initials: "TP", city: "Accra", contact: "0302 660 214", last: "9 Aug 2026", items: "38", balance: "Settled", balColor: "#5d7a6f", avBg: LILAC[0], avFg: LILAC[1] }
+      ],
+      deliveries: [
+        { name: "Ernest Chemists", meta: "2 Sep · 12 lines · GRN-0912", tag: "Received", tagBg: TEAL[0], tagFg: TEAL[1], iconBg: TEAL[0], iconFg: TEAL[1] },
+        { name: "Kinapharma", meta: "30 Aug · 8 lines · GRN-0908", tag: "Received", tagBg: TEAL[0], tagFg: TEAL[1], iconBg: TEAL[0], iconFg: TEAL[1] },
+        { name: "Danadams", meta: "Expected 9 Sep · 6 lines", tag: "Due", tagBg: GREEN[0], tagFg: GREEN[1], iconBg: GREEN[0], iconFg: GREEN[1] },
+        { name: "Ayrton", meta: "Expected 11 Sep · 4 lines", tag: "Due", tagBg: GREEN[0], tagFg: GREEN[1], iconBg: GREEN[0], iconFg: GREEN[1] }
+      ],
+      topReport: [
+        { name: "Paracetamol 500mg tabs", packs: "1,062", revenue: "Ghc 6,903", share: "13.0%" },
+        { name: "Amoxicillin 500mg caps", packs: "284", revenue: "Ghc 6,816", share: "12.9%" },
+        { name: "Artemether/Lumefantrine", packs: "141", revenue: "Ghc 5,358", share: "10.1%" },
+        { name: "ORS sachets", packs: "812", revenue: "Ghc 3,248", share: "6.1%" },
+        { name: "Metformin 500mg tabs", packs: "168", revenue: "Ghc 3,024", share: "5.7%" }
+      ],
+      topReportShort: [
+        { name: "Paracetamol 500mg tabs", packs: "1,062", revenue: "Ghc 6,903", share: "13.0%" },
+        { name: "Amoxicillin 500mg caps", packs: "284", revenue: "Ghc 6,816", share: "12.9%" },
+        { name: "Artemether/Lumefantrine", packs: "141", revenue: "Ghc 5,358", share: "10.1%" },
+        { name: "ORS sachets", packs: "812", revenue: "Ghc 3,248", share: "6.1%" }
+      ],
+      categories: [
+        { name: "Antibiotics", pct: "100%", value: "Ghc 14,208", fill: "#cfe8ae" },
+        { name: "Analgesics", pct: "78%", value: "Ghc 11,082", fill: "#a8dccf" },
+        { name: "Antimalarials", pct: "52%", value: "Ghc 7,390", fill: "#f2b8b8" },
+        { name: "Chronic care", pct: "44%", value: "Ghc 6,254", fill: "#c3c1ee" },
+        { name: "Baby & OTC", pct: "31%", value: "Ghc 4,406", fill: "#cfe8ae" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

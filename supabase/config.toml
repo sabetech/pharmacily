@@ -160,7 +160,7 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["https://127.0.0.1:3000"]
+additional_redirect_urls = ["https://127.0.0.1:3000", "http://localhost:3000", "http://127.0.0.1:3000/auth/callback", "http://localhost:3000/auth/callback", "http://192.168.1.99:3000", "http://192.168.1.99:3000/auth/callback"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -195,8 +195,9 @@ password_requirements = ""
 # rp_origins = ["http://127.0.0.1:3000"]
 
 [auth.rate_limit]
-# Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
-email_sent = 2
+  # Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
+  # Raised for local dev so signup-confirm + resend flows are testable.
+  email_sent = 30
 # Number of SMS messages that can be sent per hour. Requires auth.sms to be enabled.
 sms_sent = 30
 # Number of anonymous sign-ins that can be made per hour per IP address. Requires enable_anonymous_sign_ins = true.
@@ -222,8 +223,9 @@ enable_signup = true
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
-# If enabled, users need to confirm their email address before signing in.
-enable_confirmations = false
+  # If enabled, users need to confirm their email address before signing in.
+  # Pharmacy owners must verify email before reaching onboarding.
+  enable_confirmations = true
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
@@ -338,6 +340,16 @@ email_optional = false
 # You can configure "web3" rate limit in the [auth.rate_limit] section and set up [auth.captcha] if self-hosting.
 [auth.web3.solana]
 enabled = false
+
+# Google OAuth for pharmacy sign up / sign in. Credentials come from the
+# environment (never committed); Mailpit still handles email in local tests.
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+# Required for local sign in with Google auth.
+skip_nonce_check = true
+redirect_uri = ""
 
 # Use Firebase Auth as a third-party provider alongside Supabase Auth.
 [auth.third_party.firebase]

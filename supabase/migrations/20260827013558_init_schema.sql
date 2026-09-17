@@ -3,6 +3,21 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
+-- cube + earthdistance power ll_to_earth() used by idx_pharmacies_location.
+CREATE EXTENSION IF NOT EXISTS cube;
+CREATE EXTENSION IF NOT EXISTS earthdistance;
+
+-- Custom roles referenced by RLS policies + grants below.
+-- (No roles.sql in repo defines them, so bootstrap here, idempotently.)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'api_service') THEN
+    CREATE ROLE api_service NOLOGIN;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'web_client') THEN
+    CREATE ROLE web_client NOLOGIN;
+  END IF;
+END $$;
 
 -- Create custom types
 CREATE TYPE sync_status AS ENUM ('success', 'partial', 'failed', 'pending');
@@ -117,7 +132,7 @@ CREATE INDEX idx_drugs_ndc ON drugs (ndc_code);
 CREATE INDEX idx_user_favorites_user ON user_favorites (user_id);
 CREATE INDEX idx_user_favorites_drug ON user_favorites (drug_id);
 CREATE INDEX idx_pharmacy_api_configs_pharmacy ON pharmacy_api_configs (pharmacy_id);
-CREATE INDEX idx_sync_retry_queue_next_retry ON sync_retry_queue (next_retry_at) WHERE next_retry_at <= now();
+CREATE INDEX idx_sync_retry_queue_next_retry ON sync_retry_queue (next_retry_at);
 CREATE INDEX idx_geocode_cache_created ON geocode_cache (created_at);
 
 -- Updated_at trigger function

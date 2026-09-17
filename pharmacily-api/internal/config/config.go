@@ -4,27 +4,29 @@ import (
 	"os"
 	"time"
 
+	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/env"
+	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/providers/structs"
-	"github.com/knadh/koanf/providers/yaml"
 	"github.com/knadh/koanf/v2"
 )
 
 type Config struct {
-	Environment string `koanf:"environment"`
-	Server      ServerConfig
-	Database    DatabaseConfig
-	Supabase    SupabaseConfig
-	Worker      WorkerConfig
-	Adapter     AdapterConfig
+	Environment string         `koanf:"environment"`
+	Server      ServerConfig  `koanf:"server"`
+	Database    DatabaseConfig `koanf:"database"`
+	Supabase    SupabaseConfig `koanf:"supabase"`
+	Worker      WorkerConfig  `koanf:"worker"`
+	Adapter     AdapterConfig `koanf:"adapter"`
 }
 
 type ServerConfig struct {
-	Host         string        `koanf:"host"`
-	Port         int           `koanf:"port"`
-	ReadTimeout  time.Duration `koanf:"read_timeout"`
-	WriteTimeout time.Duration `koanf:"write_timeout"`
-	IdleTimeout  time.Duration `koanf:"idle_timeout"`
+	Host           string        `koanf:"host"`
+	Port           int           `koanf:"port"`
+	ReadTimeout    time.Duration `koanf:"read_timeout"`
+	WriteTimeout   time.Duration `koanf:"write_timeout"`
+	IdleTimeout    time.Duration `koanf:"idle_timeout"`
+	AllowedOrigins []string      `koanf:"allowed_origins"`
 }
 
 type DatabaseConfig struct {
@@ -69,6 +71,11 @@ func Load() (*Config, error) {
 			ReadTimeout:  15 * time.Second,
 			WriteTimeout: 15 * time.Second,
 			IdleTimeout:  60 * time.Second,
+			AllowedOrigins: []string{
+				"http://localhost:3000",
+				"http://127.0.0.1:3000",
+				"http://192.168.1.99:3000",
+			},
 		},
 		Database: DatabaseConfig{
 			Host:            "localhost",
@@ -82,7 +89,7 @@ func Load() (*Config, error) {
 			MaxConnIdleTime: 5 * time.Minute,
 		},
 		Worker: WorkerConfig{
-			SyncCronSchedule: "0 2 * * *",
+			SyncCronSchedule: "0 0 2 * * *",
 			RetryBaseDelay:   30 * time.Second,
 			MaxRetries:       5,
 		},
@@ -98,7 +105,7 @@ func Load() (*Config, error) {
 
 	// Load from YAML file if exists
 	if _, err := os.Stat("config.yaml"); err == nil {
-		if err := k.Load(yaml.File("config.yaml"), nil); err != nil {
+		if err := k.Load(file.Provider("config.yaml"), yaml.Parser()); err != nil {
 			return nil, err
 		}
 	}

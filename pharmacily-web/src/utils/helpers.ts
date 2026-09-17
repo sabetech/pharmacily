@@ -5,6 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/** Default map/search center: Accra, Ghana. */
+export const ACCRA_CENTER = { lat: 5.6037, lng: -0.1870 }
+
 export function formatDistance(meters: number): string {
   if (meters < 1000) {
     return `${Math.round(meters)}m`
@@ -12,27 +15,25 @@ export function formatDistance(meters: number): string {
   return `${(meters / 1000).toFixed(1)}km`
 }
 
-export function formatPrice(cents: number | null | undefined): string {
-  if (cents === null || cents === undefined) {
+export function formatPrice(pesewas: number | null | undefined): string {
+  if (pesewas === null || pesewas === undefined) {
     return 'Price not available'
   }
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(cents / 100)
+  const formatted = new Intl.NumberFormat('en-GH', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(pesewas / 100)
+  return `Gh₵ ${formatted}`
 }
 
 export function formatStock(quantity: number): { label: string; class: string } {
   if (quantity <= 0) {
-    return { label: 'Out of stock', class: 'text-red-600 dark:text-red-400' }
+    return { label: 'Out of stock', class: 'bg-ground text-muted' }
   }
   if (quantity <= 5) {
-    return { label: `Low stock (${quantity})`, class: 'text-yellow-600 dark:text-yellow-400' }
+    return { label: `Low stock (${quantity})`, class: 'bg-sales-bg text-sales-ink' }
   }
-  if (quantity <= 20) {
-    return { label: `In stock (${quantity})`, class: 'text-green-600 dark:text-green-400' }
-  }
-  return { label: `In stock (${quantity}+)`, class: 'text-green-600 dark:text-green-400' }
+  return { label: `In stock (${quantity})`, class: 'bg-stock-bg text-stock-ink' }
 }
 
 export function formatHours(hours: Record<string, string> | null | undefined): string[] {
@@ -54,7 +55,7 @@ export function isOpenNow(hours: Record<string, string> | null | undefined): boo
   if (!openStr || !closeStr) return false
 
   const parseTime = (timeStr: string) => {
-    const [hours, minutes = '0'] = timeStr.split(':').map(Number)
+    const [hours, minutes = 0] = timeStr.split(':').map(Number)
     return hours * 60 + minutes
   }
 

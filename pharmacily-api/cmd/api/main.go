@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/pharmacily/api/internal/adapter"
 	"github.com/pharmacily/api/internal/config"
 	"github.com/pharmacily/api/internal/db"
@@ -64,7 +63,7 @@ func main() {
 	adapterReg.Register("surescripts", adapter.NewMockAdapter)
 
 	// Initialize HTTP handler
-	api := handler.NewAPI(queries, cfg, adapterReg)
+	api := handler.NewAPI(queries, pool, cfg, adapterReg)
 
 	// Initialize sync worker
 	syncWorker := worker.NewSyncWorker(queries, cfg, adapterReg)

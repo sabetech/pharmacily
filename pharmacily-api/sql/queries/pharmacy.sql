@@ -57,9 +57,13 @@ RETURNING *;
 DELETE FROM pharmacies WHERE id = $1;
 
 -- name: SearchDrugs :many
+-- Prefix matches first (still GIN-trigram indexed), then typo-tolerant similarity.
+-- NOTE: $1 repeats; sqlc collapses it to a single Column1 (pgtype.Text) param.
 SELECT * FROM drugs
-WHERE name % $1 OR generic_name % $1
-ORDER BY similarity(name, $1) DESC, similarity(generic_name, $1) DESC
+WHERE name ILIKE $1 || '%' OR generic_name ILIKE $1 || '%'
+   OR name % $1 OR generic_name % $1
+ORDER BY (name ILIKE $1 || '%' OR generic_name ILIKE $1 || '%') DESC,
+         similarity(name, $1) DESC, similarity(generic_name, $1) DESC
 LIMIT $2;
 
 -- name: GetDrugByID :one
@@ -128,7 +132,7 @@ ON CONFLICT (pharmacy_id, drug_id) DO UPDATE SET
     source = EXCLUDED.source
 RETURNING *;
 
--- name: BulkUpsertInventory :copyfrom
+-- name: BulkUpsertInventory :exec
 INSERT INTO inventory (pharmacy_id, drug_id, quantity, price_cents, last_updated, source)
 VALUES ($1, $2, $3, $4, now(), $5)
 ON CONFLICT (pharmacy_id, drug_id) DO UPDATE SET

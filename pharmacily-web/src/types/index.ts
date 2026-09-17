@@ -35,6 +35,14 @@ export interface Drug {
   strength: string | null
   form: string | null
   manufacturer: string | null
+  atc_code?: string | null
+  atc_level1?: string | null
+  atc_group?: string | null
+  therapeutic_category?: string | null
+  shopper_category?: string | null
+  rx_otc?: 'Rx' | 'OTC' | null
+  ghana_eml?: boolean | null
+  nhis_covered?: boolean | null
   created_at: string
 }
 

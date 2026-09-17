@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/pharmacily/api/internal/adapter"
 	"github.com/pharmacily/api/internal/config"
 	"github.com/pharmacily/api/internal/db"
@@ -14,12 +15,10 @@ import (
 )
 
 type SyncWorker struct {
-	queries     *db.Queries
-	cfg         *config.Config
-	adapterReg  *adapter.AdapterRegistry
-	supabaseURL string
-	serviceKey  string
-	cron        *cron.Cron
+	queries    *db.Queries
+	cfg        *config.Config
+	adapterReg *adapter.AdapterRegistry
+	cron       *cron.Cron
 }
 
 func NewSyncWorker(queries *db.Queries, cfg *config.Config, adapterReg *adapter.AdapterRegistry) *SyncWorker {
@@ -32,10 +31,9 @@ func NewSyncWorker(queries *db.Queries, cfg *config.Config, adapterReg *adapter.
 }
 
 func (w *SyncWorker) Start(ctx context.Context) error {
-	// Schedule nightly full sync
 	schedule := w.cfg.Worker.SyncCronSchedule
 	if schedule == "" {
-		schedule = "0 2 * * *" // Default: 2 AM UTC
+		schedule = "0 2 * * *"
 	}
 
 	_, err := w.cron.AddFunc(schedule, func() {
@@ -45,7 +43,6 @@ func (w *SyncWorker) Start(ctx context.Context) error {
 		return err
 	}
 
-	// Schedule retry processor every minute
 	_, err = w.cron.AddFunc("@every 1m", func() {
 		w.processRetryQueue(ctx)
 	})
@@ -90,18 +87,28 @@ func (w *SyncWorker) syncPharmacy(ctx context.Context, pc db.GetEnabledPharmacyA
 		return
 	}
 
+	endpoint := ""
+	if pc.Endpoint.Valid {
+		endpoint = pc.Endpoint.String
+	}
+
+	credentialsRef := ""
+	if pc.CredentialsRef.Valid {
+		credentialsRef = pc.CredentialsRef.String
+	}
+
 	pharmacy := adapter.Pharmacy{
 		ID:             pc.PharmacyID.String(),
 		Name:           pc.PharmacyName,
 		ChainID:        "",
 		APIType:        pc.ApiType,
-		Endpoint:       pc.Endpoint,
-		CredentialsRef: pc.CredentialsRef,
+		Endpoint:       endpoint,
+		CredentialsRef: credentialsRef,
 		RateLimit:      w.cfg.Adapter.DefaultRateLimit,
 		RequestTimeout: w.cfg.Adapter.RequestTimeout,
 	}
 
-	syncAdapter := factory(w.buildAdapterConfig(pc))
+	syncAdapter := factory(w.buildAdapterConfig(endpoint, credentialsRef))
 
 	items, err := syncAdapter.FetchInventory(ctx, pharmacy)
 	if err != nil {
@@ -115,8 +122,8 @@ func (w *SyncWorker) syncPharmacy(ctx context.Context, pc db.GetEnabledPharmacyA
 	}
 
 	// Convert to BulkUpsertInventory params
-	params := make([]db.BulkUpsertInventoryParams, len(items))
-	for i, item := range items {
+	params := make([]db.BulkUpsertInventoryParams, 0, len(items))
+	for _, item := range items {
 		// Look up drug by NDC
 		drug, err := w.queries.GetDrugByNDC(ctx, item.DrugNDC)
 		if err != nil {
@@ -126,29 +133,31 @@ func (w *SyncWorker) syncPharmacy(ctx context.Context, pc db.GetEnabledPharmacyA
 			continue
 		}
 
-		priceCents := int32(0)
+		priceCents := pgtype.Int4{Valid: false}
 		if item.PriceCents != nil {
-			priceCents = int32(*item.PriceCents)
+			priceCents = pgtype.Int4{Int32: int32(*item.PriceCents), Valid: true}
 		}
 
-		params[i] = db.BulkUpsertInventoryParams{
+		params = append(params, db.BulkUpsertInventoryParams{
 			PharmacyID: pc.PharmacyID,
 			DrugID:     drug.ID,
 			Quantity:   int32(item.Quantity),
 			PriceCents: priceCents,
 			Source:     db.InventorySource(item.Source),
-		}
+		})
 	}
 
 	if len(params) > 0 {
-		_, err = w.queries.BulkUpsertInventory(ctx, params)
-		if err != nil {
-			log.Error().
-				Err(err).
-				Str("pharmacy_id", pc.PharmacyID.String()).
-				Msg("Failed to bulk upsert inventory")
-			w.updateSyncStatus(ctx, pc.PharmacyID, db.SyncStatusPartial, err.Error())
-			return
+		for _, param := range params {
+			err = w.queries.BulkUpsertInventory(ctx, param)
+			if err != nil {
+				log.Error().
+					Err(err).
+					Str("pharmacy_id", pc.PharmacyID.String()).
+					Msg("Failed to upsert inventory item")
+				w.updateSyncStatus(ctx, pc.PharmacyID, db.SyncStatusPartial, err.Error())
+				return
+			}
 		}
 	}
 
@@ -167,7 +176,6 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 	}
 
 	for _, item := range items {
-		// Get adapter for this pharmacy
 		pc, err := w.queries.GetPharmacyAPIConfig(ctx, item.PharmacyID)
 		if err != nil {
 			log.Error().
@@ -188,11 +196,20 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 			continue
 		}
 
-		syncAdapter := factory(w.buildAdapterConfig(pc))
+		endpoint := ""
+		if pc.Endpoint.Valid {
+			endpoint = pc.Endpoint.String
+		}
+		credentialsRef := ""
+		if pc.CredentialsRef.Valid {
+			credentialsRef = pc.CredentialsRef.String
+		}
+
+		syncAdapter := factory(w.buildAdapterConfig(endpoint, credentialsRef))
 
 		if item.DrugID.Valid {
 			// Retry specific drug
-			drug, err := w.queries.GetDrugByID(ctx, item.DrugID.UUID)
+			drug, err := w.queries.GetDrugByID(ctx, item.DrugID.Bytes)
 			if err != nil {
 				log.Warn().Err(err).Msg("Drug not found for retry")
 				w.queries.DeleteRetryQueueItem(ctx, item.ID)
@@ -202,8 +219,8 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 			pharmacy := adapter.Pharmacy{
 				ID:             pc.PharmacyID.String(),
 				APIType:        pc.ApiType,
-				Endpoint:       pc.Endpoint,
-				CredentialsRef: pc.CredentialsRef,
+				Endpoint:       endpoint,
+				CredentialsRef: credentialsRef,
 				RateLimit:      w.cfg.Adapter.DefaultRateLimit,
 				RequestTimeout: w.cfg.Adapter.RequestTimeout,
 			}
@@ -218,9 +235,9 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 			// Find the specific drug in results
 			for _, f := range fetched {
 				if f.DrugNDC == drug.NdcCode {
-					priceCents := int32(0)
+					priceCents := pgtype.Int4{Valid: false}
 					if f.PriceCents != nil {
-						priceCents = int32(*f.PriceCents)
+						priceCents = pgtype.Int4{Int32: int32(*f.PriceCents), Valid: true}
 					}
 					_, err = w.queries.UpsertInventory(ctx, db.UpsertInventoryParams{
 						PharmacyID: pc.PharmacyID,
@@ -244,22 +261,30 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 			}
 		} else {
 			// Retry full pharmacy sync
-			w.syncPharmacy(ctx, db.GetEnabledPharmacyAPIConfigsRow{
-				PharmacyID:   pc.PharmacyID,
-				PharmacyName: "",
-				ApiType:      pc.ApiType,
-				Endpoint:     pc.Endpoint,
+			pcRow := db.GetEnabledPharmacyAPIConfigsRow{
+				ID:             pc.ID,
+				PharmacyID:     pc.PharmacyID,
+				ApiType:        pc.ApiType,
+				Endpoint:       pc.Endpoint,
 				CredentialsRef: pc.CredentialsRef,
-			})
+				SyncSchedule:   pc.SyncSchedule,
+				LastSyncAt:     pc.LastSyncAt,
+				LastSyncStatus: pc.LastSyncStatus,
+				IsEnabled:      pc.IsEnabled,
+				PharmacyName:   "",
+				Latitude:       0,
+				Longitude:      0,
+			}
+			w.syncPharmacy(ctx, pcRow)
 			w.queries.DeleteRetryQueueItem(ctx, item.ID)
 		}
 	}
 }
 
-func (w *SyncWorker) buildAdapterConfig(pc db.GetEnabledPharmacyAPIConfigsRow) adapter.Config {
+func (w *SyncWorker) buildAdapterConfig(endpoint, credentialsRef string) adapter.Config {
 	return adapter.Config{
-		Endpoint:        pc.Endpoint,
-		CredentialsRef:  pc.CredentialsRef,
+		Endpoint:        endpoint,
+		CredentialsRef:  credentialsRef,
 		RateLimit:       w.cfg.Adapter.DefaultRateLimit,
 		RequestTimeout:  w.cfg.Adapter.RequestTimeout,
 	}
@@ -268,8 +293,8 @@ func (w *SyncWorker) buildAdapterConfig(pc db.GetEnabledPharmacyAPIConfigsRow) a
 func (w *SyncWorker) updateSyncStatus(ctx context.Context, pharmacyID uuid.UUID, status db.SyncStatus, errorMsg string) {
 	w.queries.UpdatePharmacyAPIConfigSyncStatus(ctx, db.UpdatePharmacyAPIConfigSyncStatusParams{
 		PharmacyID:       pharmacyID,
-		LastSyncAt:       time.Now(),
-		LastSyncStatus:   status,
+		LastSyncAt:       pgtype.Timestamptz{Time: time.Now(), Valid: true},
+		LastSyncStatus:   db.NullSyncStatus{SyncStatus: status, Valid: true},
 	})
 }
 
@@ -277,17 +302,25 @@ func (w *SyncWorker) addToRetryQueue(ctx context.Context, pharmacyID uuid.UUID, 
 	baseDelay := w.cfg.Worker.RetryBaseDelay
 	nextRetry := time.Now().Add(baseDelay)
 
+	var drugIDParam pgtype.UUID
+	if drugID != uuid.Nil {
+		drugIDParam = pgtype.UUID{Bytes: drugID, Valid: true}
+	}
+
 	w.queries.AddToRetryQueue(ctx, db.AddToRetryQueueParams{
 		PharmacyID:   pharmacyID,
-		DrugID:       drugID,
-		AttemptCount: 0,
+		DrugID:       drugIDParam,
+		AttemptCount: pgtype.Int4{Int32: 0, Valid: true},
 		NextRetryAt:  nextRetry,
-		ErrorMessage: errorMsg,
+		ErrorMessage: pgtype.Text{String: errorMsg, Valid: true},
 	})
 }
 
 func (w *SyncWorker) updateRetryAttempt(ctx context.Context, item db.SyncRetryQueue, errorMsg string) {
-	attempt := item.AttemptCount + 1
+	attempt := 1
+	if item.AttemptCount.Valid {
+		attempt = int(item.AttemptCount.Int32) + 1
+	}
 	if attempt >= w.cfg.Worker.MaxRetries {
 		w.queries.DeleteRetryQueueItem(ctx, item.ID)
 		log.Warn().
@@ -296,14 +329,13 @@ func (w *SyncWorker) updateRetryAttempt(ctx context.Context, item db.SyncRetryQu
 		return
 	}
 
-	// Exponential backoff with jitter
 	delay := w.cfg.Worker.RetryBaseDelay * time.Duration(1<<attempt)
 	jitter := time.Duration(float64(delay) * 0.1 * (2*rand.Float64() - 1))
 	nextRetry := time.Now().Add(delay + jitter)
 
+	intervalStr := nextRetry.Sub(time.Now()).String()
 	w.queries.UpdateRetryQueueAttempt(ctx, db.UpdateRetryQueueAttemptParams{
-		ID:            item.ID,
-		AttemptCount:  int32(attempt),
-		NextRetryAt:   nextRetry,
+		ID:       item.ID,
+		Column2:  intervalStr,
 	})
 }

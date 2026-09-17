@@ -1,60 +1,104 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 199 89% 48%;
-    --radius: 0.5rem;
-  }
+@theme {
+  /* Pharmacily design language — normative tokens */
+  --color-ground: #eef3ef;
+  --color-card: #ffffff;
+  --color-deep: #0f4034;
+  --color-live: #1d7a5f;
+  --color-ink: #16241d;
+  --color-muted: #5d7a6f;
+  --color-field: #f6faf6;
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 199 89% 48%;
-  }
+  --color-sales-bg: #dff0c2;
+  --color-sales-ink: #243312;
+  --color-sales-label: #4a6321;
+
+  --color-stock-bg: #c6e6df;
+  --color-stock-ink: #123830;
+  --color-stock-label: #1f5b51;
+
+  --color-expiry-bg: #f7cdcd;
+  --color-expiry-ink: #4d1b1e;
+  --color-expiry-label: #8c3236;
+  --color-expiry-tint: #fdf3f3;
+
+  --color-people-bg: #d3d1f4;
+  --color-people-ink: #241f52;
+  --color-people-label: #403a86;
+
+  --color-peach: #f3cba3;
+  --color-orchid: #eab7e2;
+
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --radius-field: 10px;
+  --radius-nav: 14px;
+  --radius-row: 16px;
+  --radius-card: 20px;
+
+  --shadow-resting: 0 1px 3px rgba(16, 50, 40, 0.06);
+  --shadow-floating: 0 4px 14px rgba(16, 50, 40, 0.09);
+  --shadow-modal: 0 16px 40px rgba(16, 50, 40, 0.16);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: rgba(16, 50, 40, 0.1);
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    color: var(--color-deep);
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(15, 64, 52, 0.35);
+  }
+
+  a:hover {
+    color: var(--color-live);
+  }
+}
+
+@layer utilities {
+  /* Tabular numerals for money, counts and dates */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Uppercase micro-label: 11.5px, .1em, muted */
+  .label-micro {
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Phosphor icon in a soft circle — never bare next to text */
+  .icon-circle {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--color-ground);
+    color: var(--color-deep);
+    flex: none;
   }
 }
 
@@ -63,11 +107,13 @@
   height: 100%;
   width: 100%;
   z-index: 0;
+  background: var(--color-ground);
+  font-family: var(--font-sans);
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 14px;
+  box-shadow: var(--shadow-floating);
 }
 
 .leaflet-popup-content {
@@ -76,25 +122,25 @@
 }
 
 .leaflet-popup-tip {
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  box-shadow: var(--shadow-floating);
 }
 
-/* Custom marker styles */
+/* Pharmacy markers — dots colored by stock status */
 .pharmacy-marker {
   background: transparent;
   border: none;
 }
 
 .pharmacy-marker.in-stock .marker-dot {
-  background-color: #22c55e;
+  background-color: #1d7a5f;
 }
 
 .pharmacy-marker.low-stock .marker-dot {
-  background-color: #eab308;
+  background-color: #4a6321;
 }
 
 .pharmacy-marker.out-of-stock .marker-dot {
-  background-color: #9ca3af;
+  background-color: #5d7a6f;
 }
 
 .marker-dot {
@@ -102,7 +148,7 @@
   height: 16px;
   border-radius: 50%;
   border: 3px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(16, 50, 40, 0.3);
 }
 
 /* Toast customization */
@@ -123,7 +169,7 @@
 .map-container {
   height: 500px;
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -131,4 +177,22 @@
   .map-container {
     height: 400px;
   }
+}
+
+/* Cluster marker styles */
+.marker-cluster {
+  background: transparent !important;
+}
+
+.marker-cluster div {
+  background: var(--color-deep) !important;
+  color: #f4faf1 !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
 }

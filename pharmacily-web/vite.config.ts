@@ -11,10 +11,13 @@ export default defineConfig({
     },
   },
   server: {
+    // Listen on IPv4 too: Supabase redirects to 127.0.0.1:3000, which
+    // refused connections when Vite bound IPv6 localhost only.
+    host: true,
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8081',
         changeOrigin: true,
       },
     },

@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+*.local
+
+# Environment files
+.env
+.env.local
+.env.*.local
+pharmacily-api/config.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# Secrets (OAuth client JSON, credentials — never commit)
+secrets/
+
+# Go
+pharmacily-api/bin/
+pharmacily-api/vendor/
+
+# Docker
+*.dockerfile
+docker-compose.override.yml

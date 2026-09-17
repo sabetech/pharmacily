@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <style>
+    body{margin:0;background:#eef3ef;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#16241d;-webkit-font-smoothing:antialiased}
+    a{color:#0f4034;text-decoration-color:rgba(15,64,52,.35);text-underline-offset:3px}
+    a:hover{color:#1d7a5f}
+    h1,h2,h3,h4{font-family:Outfit,system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;margin:0}
+  </style>
+</helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:56px 40px 96px;display:flex;flex-direction:column;gap:72px">
+
+  <header style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="0" y="0" width="44" height="44" rx="14" fill="#0f4034"></rect>
+        <rect x="18.5" y="10" width="7" height="24" rx="3.5" fill="#d8ecb4"></rect>
+        <rect x="10" y="18.5" width="24" height="7" rx="3.5" fill="#a8dccf"></rect>
+      </svg>
+      <div>
+        <div style="font-family:Outfit,sans-serif;font-size:27px;font-weight:600;letter-spacing:-.03em">Pharmacily</div>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5d7a6f">Design language · v1</div>
+      </div>
+    </div>
+    <h1 style="font-size:46px;line-height:1.05;max-width:22ch">A calm, pastel counter for people who work fast.</h1>
+    <p style="font-size:16px;line-height:1.65;max-width:62ch;margin:0;color:#3d5850">Pharmacily runs on a pale mint ground with soft white cards, one deep green for action, and a four-colour pastel set that carries meaning — sales, stock, expiry, people. Corners are generous, shadows are barely there, and colour is a tint behind information rather than a fill over it.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <span style="padding:7px 14px;border-radius:999px;background:#0f4034;color:#e9f4e4;font-size:12.5px">Pale mint ground</span>
+      <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#28453b;font-size:12.5px;box-shadow:0 1px 2px rgba(16,50,40,.07)">20px card radius</span>
+      <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#28453b;font-size:12.5px;box-shadow:0 1px 2px rgba(16,50,40,.07)">Outfit + Plus Jakarta Sans</span>
+      <span style="padding:7px 14px;border-radius:999px;background:#fff;color:#28453b;font-size:12.5px;box-shadow:0 1px 2px rgba(16,50,40,.07)">Phosphor icons, fill for active</span>
+    </div>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">01 · Logo sketches</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">Five directions — vector sketches, not finished artwork</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px">
+
+      <div style="display:flex;flex-direction:column;gap:16px;padding:26px 22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <svg width="100%" height="76" viewBox="0 0 190 76" aria-label="Capsule cross lockup">
+          <rect x="4" y="18" width="40" height="40" rx="13" fill="#0f4034"></rect>
+          <rect x="20.5" y="26" width="7" height="24" rx="3.5" fill="#d8ecb4"></rect>
+          <rect x="12" y="34.5" width="24" height="7" rx="3.5" fill="#a8dccf"></rect>
+          <text x="56" y="47" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#16241d">Pharmacily</text>
+        </svg>
+        <div>
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Capsule cross</div>
+          <p style="font-size:12.5px;line-height:1.55;margin:4px 0 0;color:#5d7a6f">Two capsules crossing make the care mark. Reads at 16px, works as a favicon, and the two pastels carry the palette.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;padding:26px 22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <svg width="100%" height="76" viewBox="0 0 190 76" aria-label="Leaf counter lockup">
+          <circle cx="24" cy="38" r="20" fill="none" stroke="#0f4034" stroke-width="3.2"></circle>
+          <path d="M24 27c8 3 11 9 8 17-8 0-12-5-8-17z" fill="#8ecfae"></path>
+          <circle cx="24" cy="38" r="3.4" fill="#0f4034"></circle>
+          <text x="56" y="47" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#16241d">Pharmacily</text>
+        </svg>
+        <div>
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Leaf in the ring</div>
+          <p style="font-size:12.5px;line-height:1.55;margin:4px 0 0;color:#5d7a6f">Herbal and human rather than clinical. The ring gives it a stamp quality for receipts and door glass.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;padding:26px 22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <svg width="100%" height="76" viewBox="0 0 190 76" aria-label="P monogram lockup">
+          <rect x="4" y="18" width="40" height="40" rx="13" fill="#d8ecb4"></rect>
+          <path d="M17 50V26h9a7.5 7.5 0 010 15h-9" fill="none" stroke="#0f4034" stroke-width="3.4" stroke-linecap="round"></path>
+          <text x="56" y="47" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#16241d">Pharmacily</text>
+        </svg>
+        <div>
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">P monogram tile</div>
+          <p style="font-size:12.5px;line-height:1.55;margin:4px 0 0;color:#5d7a6f">The quietest option and the most app-like. Tile colour can shift per branch without touching the letter.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;padding:26px 22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <svg width="100%" height="76" viewBox="0 0 190 76" aria-label="Mortar lockup">
+          <path d="M8 32h32a16 16 0 01-16 16 16 16 0 01-16-16z" fill="#a8dccf"></path>
+          <rect x="6" y="26" width="36" height="6" rx="3" fill="#0f4034"></rect>
+          <rect x="30" y="10" width="5.5" height="18" rx="2.75" fill="#0f4034" transform="rotate(18 32.75 19)"></rect>
+          <rect x="21" y="48" width="6" height="8" rx="2" fill="#0f4034"></rect>
+          <text x="56" y="47" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#16241d">Pharmacily</text>
+        </svg>
+        <div>
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Mortar and pestle</div>
+          <p style="font-size:12.5px;line-height:1.55;margin:4px 0 0;color:#5d7a6f">The most literally pharmacy of the set. Warmest for signage; needs the most care at small sizes.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;padding:26px 22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <svg width="100%" height="76" viewBox="0 0 190 76" aria-label="Dose arc lockup">
+          <path d="M6 44a18 18 0 0136 0" fill="none" stroke="#0f4034" stroke-width="3.2" stroke-linecap="round"></path>
+          <circle cx="10" cy="50" r="4" fill="#f2b8b8"></circle>
+          <circle cx="24" cy="50" r="4" fill="#d8ecb4"></circle>
+          <circle cx="38" cy="50" r="4" fill="#c3c1ee"></circle>
+          <text x="56" y="47" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#16241d">Pharmacily</text>
+        </svg>
+        <div>
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Dose arc</div>
+          <p style="font-size:12.5px;line-height:1.55;margin:4px 0 0;color:#5d7a6f">Three doses under a shelter arc. The one that shows all four palette colours, so it sets the tone fastest.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;padding:26px 22px;border-radius:20px;background:#0f4034;color:#e9f4e4">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">On the dark ground</div>
+        <svg width="100%" height="54" viewBox="0 0 190 54" aria-label="Reversed lockup">
+          <rect x="4" y="7" width="40" height="40" rx="13" fill="#d8ecb4"></rect>
+          <rect x="20.5" y="15" width="7" height="24" rx="3.5" fill="#0f4034"></rect>
+          <rect x="12" y="23.5" width="24" height="7" rx="3.5" fill="#0f4034"></rect>
+          <text x="56" y="36" font-family="Outfit" font-size="25" font-weight="600" letter-spacing="-0.7" fill="#f4faf1">Pharmacily</text>
+        </svg>
+        <p style="font-size:12.5px;line-height:1.55;margin:0;color:rgba(233,244,228,.72)">Reverse the mark rather than recolouring the wordmark. Minimum mark size 20px; clear space equals half the tile.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">02 · Colour</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">One action green, four meaning pastels, everything else neutral</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px">
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#0f4034"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Deep green</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#0F4034</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Primary buttons, active nav, ink</div></div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#1d7a5f"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Live green</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#1D7A5F</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Hover, links, positive deltas</div></div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#eef3ef"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Mint ground</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#EEF3EF</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Page behind every card</div></div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#fff;box-shadow:inset 0 0 0 1px rgba(16,50,40,.08)"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Card white</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#FFFFFF</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Every surface that holds data</div></div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#16241d"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Ink</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#16241D</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Headings and figures</div></div>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+        <div style="height:76px;background:#5d7a6f"></div>
+        <div style="padding:12px 14px"><div style="font-size:13.5px;font-weight:600">Muted</div><div style="font-size:11.5px;color:#5d7a6f;font-family:ui-monospace,Menlo,monospace">#5D7A6F</div><div style="font-size:11.5px;color:#5d7a6f;margin-top:4px">Labels, secondary rows</div></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+      <div style="padding:20px;border-radius:20px;background:#dff0c2">
+        <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#4a6321">Sales · green</div>
+        <div style="font-family:Outfit,sans-serif;font-size:26px;font-weight:600;margin-top:6px;color:#243312">Ghc 4,280</div>
+        <div style="font-size:11.5px;color:#4a6321;margin-top:2px;font-family:ui-monospace,Menlo,monospace">#DFF0C2 · ink #243312</div>
+      </div>
+      <div style="padding:20px;border-radius:20px;background:#c6e6df">
+        <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f5b51">Stock · teal</div>
+        <div style="font-family:Outfit,sans-serif;font-size:26px;font-weight:600;margin-top:6px;color:#123830">1,240 items</div>
+        <div style="font-size:11.5px;color:#1f5b51;margin-top:2px;font-family:ui-monospace,Menlo,monospace">#C6E6DF · ink #123830</div>
+      </div>
+      <div style="padding:20px;border-radius:20px;background:#f7cdcd">
+        <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#8c3236">Expiry · rose</div>
+        <div style="font-family:Outfit,sans-serif;font-size:26px;font-weight:600;margin-top:6px;color:#4d1b1e">5 urgent</div>
+        <div style="font-size:11.5px;color:#8c3236;margin-top:2px;font-family:ui-monospace,Menlo,monospace">#F7CDCD · ink #4D1B1E</div>
+      </div>
+      <div style="padding:20px;border-radius:20px;background:#d3d1f4">
+        <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#403a86">People · lilac</div>
+        <div style="font-family:Outfit,sans-serif;font-size:26px;font-weight:600;margin-top:6px;color:#241f52">6 staff</div>
+        <div style="font-size:11.5px;color:#403a86;margin-top:2px;font-family:ui-monospace,Menlo,monospace">#D3D1F4 · ink #241F52</div>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;line-height:1.6;margin:0;max-width:74ch;color:#3d5850">Each pastel owns one subject and never drifts: green is money in, teal is what's on the shelf, rose is time running out, lilac is people and accounts. Tinted cards carry their own dark ink from the same hue — never grey text on a pastel, and never a pastel as body copy.</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">03 · Type</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">Outfit for headings and figures, Plus Jakarta Sans for everything read</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:26px;align-items:start">
+      <div style="padding:30px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">Display · Outfit 600 · 46/1.05</div><div style="font-family:Outfit,sans-serif;font-size:46px;font-weight:600;letter-spacing:-.03em;line-height:1.05">Welcome back, Kwabena</div></div>
+        <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">Section · Outfit 600 · 24</div><div style="font-family:Outfit,sans-serif;font-size:24px;font-weight:600;letter-spacing:-.02em">Pharmacy sales results</div></div>
+        <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">Figure · Outfit 600 · 30, tabular</div><div style="font-family:Outfit,sans-serif;font-size:30px;font-weight:600;font-variant-numeric:tabular-nums">Ghc 4,280.50</div></div>
+        <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">Body · Plus Jakarta Sans 400 · 15/1.65</div><p style="font-size:15px;line-height:1.65;margin:4px 0 0;max-width:52ch">Amoxicillin 500mg capsules is prescription-only. A pharmacist must confirm the prescription before this sale can be completed.</p></div>
+        <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5d7a6f">Label · 11.5 · .1em · uppercase</div><div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#5d7a6f">Expiring within 30 days</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="padding:22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600;margin-bottom:8px">Rules</div>
+          <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.7;color:#3d5850">
+            <li>Never bolder than 600 — hierarchy is size and space.</li>
+            <li>Money, counts and dates use tabular numerals.</li>
+            <li>Body copy 15px minimum; table rows 13.5px minimum.</li>
+            <li>Sentence case everywhere except the .1em uppercase label.</li>
+          </ul>
+        </div>
+        <div style="padding:22px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)">
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600;margin-bottom:8px">Voice</div>
+          <p style="font-size:13.5px;line-height:1.65;margin:0;color:#3d5850">Plain and specific. "5 items expire within 30 days" beats "Attention required". Name the drug, the number and the date; skip the exclamation mark.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">04 · Shape, space and elevation</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">Soft corners, an 8px rhythm, almost no shadow</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px">
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Radius</div>
+        <div style="display:flex;align-items:flex-end;gap:12px">
+          <div style="width:52px;height:52px;border-radius:10px;background:#c6e6df"></div>
+          <div style="width:52px;height:52px;border-radius:14px;background:#c6e6df"></div>
+          <div style="width:52px;height:52px;border-radius:20px;background:#c6e6df"></div>
+          <div style="width:52px;height:52px;border-radius:999px;background:#c6e6df"></div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">10 inputs and thumbnails · 14 nav items and tiles · 20 cards and panels · full round for pills, chips and avatars.</div>
+      </div>
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Space</div>
+        <div style="display:flex;align-items:flex-end;gap:8px;height:52px">
+          <div style="width:4px;height:16px;background:#dff0c2"></div>
+          <div style="width:8px;height:24px;background:#cfe8ae"></div>
+          <div style="width:12px;height:32px;background:#c6e6df"></div>
+          <div style="width:16px;height:40px;background:#a8dccf"></div>
+          <div style="width:24px;height:52px;background:#8ecfae"></div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">4 · 8 · 12 · 16 · 24 · 32 · 48. Card padding 24, gap between cards 20, page gutter 40.</div>
+      </div>
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Elevation</div>
+        <div style="display:flex;gap:14px">
+          <div style="width:64px;height:52px;border-radius:14px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06)"></div>
+          <div style="width:64px;height:52px;border-radius:14px;background:#fff;box-shadow:0 4px 14px rgba(16,50,40,.09)"></div>
+          <div style="width:64px;height:52px;border-radius:14px;background:#fff;box-shadow:0 16px 40px rgba(16,50,40,.16)"></div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Resting cards, floating menus, modals. Green-tinted shadow, never grey or black. No borders on white cards.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">05 · Components</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">The pieces every Pharmacily screen is built from</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Buttons</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <button style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:0;border-radius:999px;background:#0f4034;color:#f4faf1;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Take payment</button>
+          <button style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:#fff;color:#0f4034;font:600 14px 'Plus Jakarta Sans',sans-serif;border:1px solid rgba(16,50,40,.16);cursor:pointer">Save draft</button>
+          <button style="display:inline-flex;align-items:center;gap:6px;padding:11px 12px;border:0;background:transparent;color:#1d7a5f;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer">View all <i class="ph ph-arrow-right"></i></button>
+          <button style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#dff0c2;color:#243312;border:0;cursor:pointer"><i class="ph ph-plus" style="font-size:18px"></i></button>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Fully rounded, 40–44px tall. One deep-green primary per view; secondary is white with a hairline; tertiary is green text only.</div>
+      </div>
+
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Status pills</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="padding:5px 12px;border-radius:999px;background:#c6e6df;color:#123830;font-size:12px;font-weight:500">In stock</span>
+          <span style="padding:5px 12px;border-radius:999px;background:#dff0c2;color:#243312;font-size:12px;font-weight:500">Low stock</span>
+          <span style="padding:5px 12px;border-radius:999px;background:#f7cdcd;color:#4d1b1e;font-size:12px;font-weight:500">Expires in 21 days</span>
+          <span style="padding:5px 12px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:12px;font-weight:500">Rx only</span>
+          <span style="padding:5px 12px;border-radius:999px;background:#eef3ef;color:#3d5850;font-size:12px;font-weight:500">OTC</span>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">A pill states a fact, never a warning colour for its own sake. Rose is reserved for expiry and refunds.</div>
+      </div>
+
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Fields</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div>
+            <div style="font-size:12px;color:#5d7a6f;margin-bottom:6px">Drug name</div>
+            <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:10px;background:#f6faf6;border:1px solid rgba(16,50,40,.1);font-size:14px">Amoxicillin 500mg capsules</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:999px;background:#f6faf6;border:1px solid #1d7a5f">
+            <i class="ph ph-magnifying-glass" style="font-size:16px;color:#1d7a5f"></i>
+            <span style="font-size:14px">amox</span>
+          </div>
+          <div style="display:flex;padding:3px;border-radius:999px;background:#eef3ef;width:min-content">
+            <span style="padding:7px 16px;border-radius:999px;background:#0f4034;color:#f4faf1;font-size:12.5px;font-weight:600">Rx</span>
+            <span style="padding:7px 16px;border-radius:999px;color:#3d5850;font-size:12.5px">OTC</span>
+          </div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Fields sit on a barely-tinted fill, not white — so a card stays the brightest thing on screen. Focus is a 1px live-green edge.</div>
+      </div>
+
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Navigation</div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:14px;background:#0f4034;color:#f4faf1;font-size:13.5px;font-weight:600"><i class="ph-fill ph-house" style="font-size:17px"></i>Dashboard</div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:14px;color:#3d5850;font-size:13.5px"><span style="width:26px;height:26px;display:grid;place-items:center;border-radius:999px;background:#eef3ef"><i class="ph ph-pill" style="font-size:15px"></i></span>Drugs</div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:14px;color:#3d5850;font-size:13.5px"><span style="width:26px;height:26px;display:grid;place-items:center;border-radius:999px;background:#eef3ef"><i class="ph ph-warning" style="font-size:15px"></i></span>Alerts<span style="margin-left:auto;padding:2px 9px;border-radius:999px;background:#f7cdcd;color:#4d1b1e;font-size:11px;font-weight:600">9</span></div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Active item is a filled deep-green tile with a fill-weight icon. Idle icons sit in soft mint circles at regular weight.</div>
+      </div>
+
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px;grid-column:1/-1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:12px">
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Drug row</div>
+          <span style="font-size:12.5px;color:#5d7a6f">the system's most repeated object</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:16px;background:#f6faf6">
+            <div style="width:46px;height:46px;flex:none;border-radius:10px;background:#dff0c2;display:grid;place-items:center;color:#4a6321"><i class="ph ph-pill" style="font-size:20px"></i></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px">Amoxicillin 500mg capsules<span style="padding:3px 10px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:11px;font-weight:600">Rx</span></div>
+              <div style="font-size:12px;color:#5d7a6f">Ernest Chemists · batch AMX-2291 · expires 09 Apr 2027</div>
+            </div>
+            <div style="text-align:right;flex:none">
+              <div style="font-family:Outfit,sans-serif;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums">Ghc 24.00</div>
+              <div style="font-size:11.5px;color:#5d7a6f">240 left</div>
+            </div>
+            <span style="padding:5px 12px;border-radius:999px;background:#c6e6df;color:#123830;font-size:12px;font-weight:500;flex:none">In stock</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:16px;background:#fdf3f3">
+            <div style="width:46px;height:46px;flex:none;border-radius:10px;background:#f7cdcd;display:grid;place-items:center;color:#8c3236"><i class="ph ph-pill" style="font-size:20px"></i></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px">Amlodipine 5mg tablets<span style="padding:3px 10px;border-radius:999px;background:#d3d1f4;color:#241f52;font-size:11px;font-weight:600">Rx</span></div>
+              <div style="font-size:12px;color:#5d7a6f">Danadams · batch AML-7702 · expires 28 Sep 2026</div>
+            </div>
+            <div style="text-align:right;flex:none">
+              <div style="font-family:Outfit,sans-serif;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums">Ghc 21.00</div>
+              <div style="font-size:11.5px;color:#8c3236">12 left</div>
+            </div>
+            <span style="padding:5px 12px;border-radius:999px;background:#f7cdcd;color:#4d1b1e;font-size:12px;font-weight:500;flex:none">21 days</span>
+          </div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Rows are floating 16px tiles on a barely-tinted fill, not ruled table lines. A row in trouble tints its whole ground and its thumbnail, so the list scans by colour before anyone reads a date.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <h2 style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5d7a6f;font-weight:600">06 · Data, icons and photography</h2>
+      <span style="font-size:12.5px;color:#5d7a6f">How numbers and pack shots behave</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:20px;align-items:start">
+      <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:18px">
+        <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Charts</div>
+        <svg viewBox="0 0 560 170" style="width:100%;height:auto;display:block">
+          <g font-family="Plus Jakarta Sans" font-size="10.5" fill="#5d7a6f">
+            <text x="0" y="18">45K</text><text x="0" y="66">30K</text><text x="0" y="114">15K</text><text x="0" y="152">0K</text>
+          </g>
+          <rect x="42" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="42" y="84" width="30" height="66" rx="15" fill="#f3cba3"></rect>
+          <rect x="108" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="108" y="66" width="30" height="84" rx="15" fill="#eab7e2"></rect>
+          <rect x="174" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="174" y="44" width="30" height="106" rx="15" fill="#cfe8ae"></rect>
+          <rect x="240" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="240" y="74" width="30" height="76" rx="15" fill="#a8dccf"></rect>
+          <rect x="306" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="306" y="58" width="30" height="92" rx="15" fill="#f2b8b8"></rect>
+          <rect x="372" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="372" y="94" width="30" height="56" rx="15" fill="#c3c1ee"></rect>
+          <rect x="438" y="34" width="30" height="116" rx="15" fill="#eef3ef"></rect><rect x="438" y="50" width="30" height="100" rx="15" fill="#0f4034"></rect>
+          <g font-family="Plus Jakarta Sans" font-size="11" fill="#5d7a6f" text-anchor="middle">
+            <text x="57" y="166">Mon</text><text x="123" y="166">Tue</text><text x="189" y="166">Wed</text><text x="255" y="166">Thu</text><text x="321" y="166">Fri</text><text x="387" y="166">Sat</text><text x="453" y="166">Sun</text>
+          </g>
+        </svg>
+        <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Bars are fully rounded and always sit in a pale mint track, so an empty day still has a shape. Today is the one deep-green bar. Series colours come from the pastel set, ordered green, teal, rose, lilac, then peach and orchid for a sixth and seventh.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Icons</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;color:#0f4034"><i class="ph ph-pill" style="font-size:19px"></i></span>
+            <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;color:#0f4034"><i class="ph ph-shopping-cart" style="font-size:19px"></i></span>
+            <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;color:#0f4034"><i class="ph ph-receipt" style="font-size:19px"></i></span>
+            <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#eef3ef;color:#0f4034"><i class="ph ph-truck" style="font-size:19px"></i></span>
+            <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:999px;background:#0f4034;color:#f4faf1"><i class="ph-fill ph-house" style="font-size:19px"></i></span>
+          </div>
+          <div style="font-size:12.5px;line-height:1.6;color:#5d7a6f">Phosphor regular at 16–20px, fill weight only for the active nav item. Icons live in soft circles, never bare next to text.</div>
+        </div>
+        <div style="padding:24px;border-radius:20px;background:#fff;box-shadow:0 1px 3px rgba(16,50,40,.06);display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:Outfit,sans-serif;font-size:16px;font-weight:600">Pack photography</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <div style="width:88px;height:88px;border-radius:10px;background:#f6faf6;display:grid;place-items:center;color:#5d7a6f;font-size:11px;text-align:center;line-height:1.4">Pack<br>photo</div>
+            <div style="width:88px;height:88px;border-radius:10px;background:#dff0c2;display:grid;place-items:center;color:#4a6321"><i class="ph ph-pill" style="font-size:26px"></i></div>
+            <div style="flex:1;min-width:190px;font-size:12.5px;line-height:1.6;color:#5d7a6f">Square, 10px radius, shot on white and cropped tight to the box. When there's no photo the fallback is a pastel tile with the category icon — tinted by the drug's status, so a list never looks broken.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:32px;border-radius:24px;background:#0f4034;color:#e9f4e4;display:flex;flex-direction:column;gap:16px">
+    <div style="font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8ecfae">A note on fit</div>
+    <h3 style="font-size:26px;max-width:34ch;color:#f4faf1">This language and the Industry system want different things.</h3>
+    <p style="font-size:14.5px;line-height:1.7;max-width:78ch;margin:0;color:rgba(233,244,228,.82)">Your reference is soft, pastel and fully rounded; Industry is a square steel wireframe on paper. I followed the reference, since that's the look you handed me — so Pharmacily is its own system, not a variant of Industry. Tell me which one wins and I'll rebuild the twenty-two screens on it.</p>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}"></script>
+</body>
+</html>
