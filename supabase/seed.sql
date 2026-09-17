@@ -1,0 +1,9 @@
+-- Pharmacily local seed data.
+--
+-- Applied by `supabase db reset` after all migrations (see [db.seed] in
+-- config.toml). Keep this file idempotent with INSERT ... ON CONFLICT
+-- guards so resets are repeatable.
+--
+-- Quality-gate fixtures: Ernest Chemists, Danadams and a handful of
+-- catalogue drugs so the locator reflects pharmacy edits within seconds.
+-- TODO: add seed rows for Ernest Chemists / Danadams (see AGENTS.md §9).

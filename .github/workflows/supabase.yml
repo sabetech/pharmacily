@@ -12,7 +12,7 @@ on:
 
 jobs:
   migration:
-    name: Run Migrations
+    name: Validate Migrations
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,11 +21,23 @@ jobs:
           version: latest
       - name: Start Supabase
         run: supabase start
-      - name: Run Migrations
-        run: supabase db push
-      - name: Verify Schema
+      # Validate migrations against a local stack only. `supabase db push`
+      # targets the linked remote project and fails in CI with
+      # "Cannot find project ref. Have you run supabase link?".
+      # `db reset --local` replays every migration from scratch instead.
+      - name: Replay Migrations
+        run: supabase db reset --local
+      - name: Lint Schema
+        run: supabase db lint --local --schema public
+      - name: Verify No Drift
         run: |
-          supabase db diff --schema public
+          diff_output=$(supabase db diff --local --schema public)
+          if [ -n "$diff_output" ]; then
+            echo "$diff_output"
+            echo "Drift detected: local database differs from supabase/migrations."
+            exit 1
+          fi
+          echo "No drift: migrations match the local database."
       - name: Stop Supabase
         if: always()
         run: supabase stop
