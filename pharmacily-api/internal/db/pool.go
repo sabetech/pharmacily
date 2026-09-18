@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"time"
 
 	"github.com/jackc/pgx/v5"
@@ -11,14 +12,22 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-func NewPool(ctx context.Context, cfg *config.DatabaseConfig) (*pgxpool.Pool, error) {
-	dsn := fmt.Sprintf(
-		"postgres://%s:%s@%s:%d/%s?pool_max_conns=%d&pool_min_conns=%d&pool_max_conn_lifetime=%s&pool_max_conn_idle_time=%s",
-		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Name,
+// buildDSN renders the pgxpool connection string. Credentials are
+// URL-encoded: a raw password containing URL metacharacters (#, @, /, ?…)
+// would otherwise truncate or corrupt the DSN and fail ParseConfig.
+func buildDSN(cfg *config.DatabaseConfig) string {
+	credentials := url.UserPassword(cfg.User, cfg.Password).String()
+	return fmt.Sprintf(
+		"postgres://%s@%s:%d/%s?pool_max_conns=%d&pool_min_conns=%d&pool_max_conn_lifetime=%s&pool_max_conn_idle_time=%s",
+		credentials, cfg.Host, cfg.Port, cfg.Name,
 		cfg.MaxConns, cfg.MinConns,
 		cfg.MaxConnLifetime.String(),
 		cfg.MaxConnIdleTime.String(),
 	)
+}
+
+func NewPool(ctx context.Context, cfg *config.DatabaseConfig) (*pgxpool.Pool, error) {
+	dsn := buildDSN(cfg)
 
 	poolConfig, err := pgxpool.ParseConfig(dsn)
 	if err != nil {
