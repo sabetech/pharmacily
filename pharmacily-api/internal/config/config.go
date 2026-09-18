@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/knadh/koanf/parsers/yaml"
@@ -122,9 +123,17 @@ func Load() (*Config, error) {
 		return nil, err
 	}
 
+	// Railway (and most PaaS hosts) inject the listen port as bare PORT.
+	// Honor it when set so the service binds where the platform routes.
+	if p := os.Getenv("PORT"); p != "" {
+		if n, err := strconv.Atoi(p); err == nil && n > 0 {
+			cfg.Server.Port = n
+		}
+	}
+
 	return &cfg, nil
 }
 
 func (c *Config) DatabaseURL() string {
-	return "postgres://" + c.Database.User + ":" + c.Database.Password + "@" + c.Database.Host + ":" + string(rune(c.Database.Port)) + "/" + c.Database.Name
+	return "postgres://" + c.Database.User + ":" + c.Database.Password + "@" + c.Database.Host + ":" + strconv.Itoa(c.Database.Port) + "/" + c.Database.Name
 }

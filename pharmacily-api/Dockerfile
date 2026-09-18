@@ -1,5 +1,5 @@
-# Build stage
-FROM golang:1.22-alpine AS builder
+# Build stage — must match go.mod toolchain (go 1.25)
+FROM golang:1.25-alpine AS builder
 
 WORKDIR /app
 

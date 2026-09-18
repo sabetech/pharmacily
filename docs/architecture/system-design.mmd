@@ -1,0 +1,37 @@
+%% Pharmacily staging — system design diagram.
+%% Source of truth: verified against repo 2026-09-17 (vercel.json, railway.toml,
+%% Dockerfile, internal/config/config.go, supabase/migrations, AGENTS.md).
+%% Rendered with the Mermaid toolchain via archy-mcp; content curated from the
+%% codebase (archy's built-in templates ignore input and return canned samples,
+%% so boxes below were authored from verified facts).
+flowchart TB
+    patient(["Patient / Tester<br/>Finds medicine stock"]) ~~~ staff(["Pharmacy staff<br/>Sells, adjusts, counts"]) ~~~ owner(["Pharmacy owner<br/>Onboards shops"])
+
+    subgraph vercel["Vercel"]
+        spa["Pharmacily Web<br/>React 19, Vite, TS<br/>Locator + pharmacy dashboard"]
+    end
+    subgraph railway["Railway"]
+        goapi["Pharmacily API<br/>Go, Chi, pgx<br/>REST /api/v1 + expiry cron"]
+    end
+
+    patient -->|"Searches stock"| spa
+    staff -->|"Manages stock"| spa
+    owner -->|"Onboards shops"| spa
+    spa -->|"REST /api/v1<br/>HTTPS"| goapi
+
+    subgraph supabase["Hosted Supabase"]
+        direction TB
+        db[("Postgres + PostGIS<br/>pharmacies, drugs, inventory<br/>RLS-gated access")]
+        auth["Auth + Realtime<br/>Magic-link auth<br/>Live inventory channel"]
+    end
+
+    spa -->|"Login + live updates<br/>HTTPS / WS"| auth
+    spa -->|"Favorites, alerts<br/>PostgREST"| db
+    goapi -->|"Reads + writes<br/>service_role"| db
+    goapi -->|"Verify JWTs"| auth
+
+    osm["OpenStreetMap<br/>Map tiles"] ~~~ wa["WhatsApp<br/>Chat links"] ~~~ google["Google OAuth<br/>Sign-in"] ~~~ smtp["SMTP<br/>Magic-link mail"]
+    spa -->|"Tiles"| osm
+    spa -->|"Chat links"| wa
+    auth -->|"OAuth"| google
+    auth -->|"Magic links"| smtp

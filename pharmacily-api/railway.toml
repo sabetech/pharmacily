@@ -2,22 +2,11 @@
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
-[deploy]
+ [deploy]
 healthcheckPath = "/health"
 healthcheckTimeout = 10
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3
-
-[[services]]
-name = "api"
-# Web service - handles HTTP requests
-startCommand = "/api"
-
-[[services]]
-name = "worker"
-# Background worker - handles sync jobs
-startCommand = "/api"
-# Worker mode - only runs background jobs, no HTTP server
-# This would need a flag to run in worker-only mode
-# For now, we'll run both in the same service on Railway free tier
-# In production, separate into different services
+# Single service: Dockerfile ENTRYPOINT ["/api"] runs the HTTP server and the
+# in-process cron worker together. Split into a worker-only service only once
+# a worker mode flag exists.

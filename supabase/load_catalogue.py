@@ -10,7 +10,12 @@ Usage:
   python3 load_catalogue.py --apply          # validate + write to local DB
   python3 load_catalogue.py --apply --no-inventory   # catalogue only
 
-Requires the local Supabase stack (docker exec supabase_db_pharmacily psql).
+  python3 load_catalogue.py --apply --no-inventory --db-url "$STAGING_DB_URL"
+      # catalogue only, direct to hosted staging DB (no pharmacies seeded).
+
+Target defaults to the local Supabase stack
+(docker exec supabase_db_pharmacily psql); --db-url uses `psql` directly
+against the given Postgres connection string instead.
 """
 import argparse
 import json
@@ -136,11 +141,14 @@ def build_inventory_sql(by_code):
     return "\n".join(lines), plan
 
 
-def psql(sql):
+def psql(sql, db_url=None):
+    if db_url:
+        cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1"]
+    else:
+        cmd = ["docker", "exec", "-i", "supabase_db_pharmacily",
+               "psql", "-U", "postgres", "-v", "ON_ERROR_STOP=1"]
     p = subprocess.run(
-        ["docker", "exec", "-i", "supabase_db_pharmacily",
-         "psql", "-U", "postgres", "-v", "ON_ERROR_STOP=1"],
-        input=sql.encode(), capture_output=True, cwd=REPO,
+        cmd, input=sql.encode(), capture_output=True, cwd=REPO,
     )
     return p.returncode, p.stdout.decode()[-500:], p.stderr.decode()[-500:]
 
@@ -150,9 +158,17 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--no-inventory", action="store_true")
+    ap.add_argument("--db-url", default=None,
+                    help="Postgres connection string; when set, write via psql "
+                         "directly instead of the local docker container.")
+    ap.add_argument("--out", default=None,
+                    help="Write the generated SQL to FILE instead of applying "
+                         "it (combine with --no-inventory for catalogue-only "
+                         "dumps; apply later with: supabase db query "
+                         "--linked -f FILE).")
     args = ap.parse_args()
-    if not args.dry_run and not args.apply:
-        ap.error("pass --dry-run or --apply")
+    if not args.dry_run and not args.apply and not args.out:
+        ap.error("pass --dry-run, --apply, or --out FILE")
 
     seed = json.loads(SEED_JSON.read_text())
     drugs = seed["drugs"]
@@ -179,13 +195,24 @@ def main():
         print("dry run — nothing written.")
         return
 
-    rc, out, err = psql(cat_sql)
+    if args.out:
+        with open(args.out, "w") as f:
+            f.write(cat_sql + "\n")
+            if inv_sql:
+                f.write(inv_sql + "\n")
+        print(f"SQL written to {args.out} — nothing applied.")
+        return
+
+    if args.db_url and not args.no_inventory:
+        ap.error("--db-url staging loads must pass --no-inventory "
+                 "(no pharmacy rows are seeded on staging)")
+    rc, out, err = psql(cat_sql, args.db_url)
     if rc != 0:
         print("CATALOGUE APPLY FAILED:", out, err)
         sys.exit(1)
     print("catalogue applied.")
     if inv_sql:
-        rc, out, err = psql(inv_sql)
+        rc, out, err = psql(inv_sql, args.db_url)
         if rc != 0:
             print("INVENTORY APPLY FAILED:", out, err)
             sys.exit(1)
