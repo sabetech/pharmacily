@@ -34,6 +34,11 @@ func NewPool(ctx context.Context, cfg *config.DatabaseConfig) (*pgxpool.Pool, er
 		return nil, fmt.Errorf("parse config: %w", err)
 	}
 
+	// Supabase Supavisor runs in transaction mode, which does not support
+	// prepared statements across checkouts. Simple protocol keeps every
+	// query (including sqlc-generated ones) compatible with the pooler.
+	poolConfig.ConnConfig.DefaultQueryExecMode = pgx.QueryExecModeSimpleProtocol
+
 	poolConfig.AfterConnect = func(ctx context.Context, conn *pgx.Conn) error {
 		// Set search path
 		_, err := conn.Exec(ctx, "SET search_path TO public")
