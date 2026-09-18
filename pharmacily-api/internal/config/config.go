@@ -3,10 +3,10 @@ package config
 import (
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/knadh/koanf/parsers/yaml"
-	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/providers/structs"
 	"github.com/knadh/koanf/v2"
@@ -111,28 +111,127 @@ func Load() (*Config, error) {
 		}
 	}
 
-	// Load from environment variables (prefix: PHARMACILY_)
-	if err := k.Load(env.Provider("PHARMACILY_", ".", func(s string) string {
-		return s
-	}), nil); err != nil {
-		return nil, err
-	}
-
 	var cfg Config
 	if err := k.Unmarshal("", &cfg); err != nil {
 		return nil, err
 	}
 
-	// Railway (and most PaaS hosts) inject the listen port as bare PORT.
-	// Honor it when set so the service binds where the platform routes.
-	if p := os.Getenv("PORT"); p != "" {
-		if n, err := strconv.Atoi(p); err == nil && n > 0 {
-			cfg.Server.Port = n
-		}
-	}
+	// Explicit PHARMACILY_* overlay. (koanf's env provider was dropped: its
+	// callback returned keys unchanged, so nested keys never mapped and env
+	// was silently ignored in favor of config.yaml. Explicit parsing here
+	// keeps the .env.example contract working on Railway/Vercel.)
+	overlayFromEnv(&cfg)
 
 	return &cfg, nil
 }
+
+// overlayFromEnv applies PHARMACILY_* environment variables on top of the
+// loaded config. Unset or unparsable values leave the current value alone.
+func overlayFromEnv(cfg *Config) {
+	if v := os.Getenv("PHARMACILY_ENVIRONMENT"); v != "" {
+		cfg.Environment = v
+	}
+	if v := os.Getenv("PHARMACILY_SERVER_HOST"); v != "" {
+		cfg.Server.Host = v
+	}
+	if n, ok := envInt("PHARMACILY_SERVER_PORT"); ok {
+		cfg.Server.Port = n
+	}
+	if v := os.Getenv("PHARMACILY_SERVER_ALLOWED_ORIGINS"); v != "" {
+		origins := splitList(v)
+		if len(origins) > 0 {
+			cfg.Server.AllowedOrigins = origins
+		}
+	}
+	if v := os.Getenv("PHARMACILY_DATABASE_HOST"); v != "" {
+		cfg.Database.Host = v
+	}
+	if n, ok := envInt("PHARMACILY_DATABASE_PORT"); ok {
+		cfg.Database.Port = n
+	}
+	if v := os.Getenv("PHARMACILY_DATABASE_USER"); v != "" {
+		cfg.Database.User = v
+	}
+	if v := os.Getenv("PHARMACILY_DATABASE_PASSWORD"); v != "" {
+		cfg.Database.Password = v
+	}
+	if v := os.Getenv("PHARMACILY_DATABASE_NAME"); v != "" {
+		cfg.Database.Name = v
+	}
+	if n, ok := envInt("PHARMACILY_DATABASE_MAX_CONNS"); ok {
+		cfg.Database.MaxConns = n
+	}
+	if v := os.Getenv("PHARMACILY_SUPABASE_URL"); v != "" {
+		cfg.Supabase.URL = v
+	}
+	if v := os.Getenv("PHARMACILY_SUPABASE_ANON_KEY"); v != "" {
+		cfg.Supabase.AnonKey = v
+	}
+	if v := os.Getenv("PHARMACILY_SUPABASE_SERVICE_ROLE_KEY"); v != "" {
+		cfg.Supabase.ServiceRoleKey = v
+	}
+	if v := os.Getenv("PHARMACILY_SUPABASE_JWT_SECRET"); v != "" {
+		cfg.Supabase.JWTSecret = v
+	}
+	if v := os.Getenv("PHARMACILY_WORKER_SYNC_CRON_SCHEDULE"); v != "" {
+		cfg.Worker.SyncCronSchedule = v
+	}
+	if d, ok := envDuration("PHARMACILY_WORKER_RETRY_BASE_DELAY"); ok {
+		cfg.Worker.RetryBaseDelay = d
+	}
+	if n, ok := envInt("PHARMACILY_WORKER_MAX_RETRIES"); ok {
+		cfg.Worker.MaxRetries = n
+	}
+	if n, ok := envInt("PHARMACILY_ADAPTER_DEFAULT_RATE_LIMIT"); ok {
+		cfg.Adapter.DefaultRateLimit = n
+	}
+	if d, ok := envDuration("PHARMACILY_ADAPTER_REQUEST_TIMEOUT"); ok {
+		cfg.Adapter.RequestTimeout = d
+	}
+
+	// Railway (and most PaaS hosts) inject the listen port as bare PORT.
+	// Honor it when set so the service binds where the platform routes.
+	if n, ok := envInt("PORT"); ok {
+		cfg.Server.Port = n
+	}
+}
+
+func envInt(key string) (int, bool) {
+	v := os.Getenv(key)
+	if v == "" {
+		return 0, false
+	}
+	n, err := strconv.Atoi(strings.TrimSpace(v))
+	if err != nil || n <= 0 {
+		return 0, false
+	}
+	return n, true
+}
+
+func envDuration(key string) (time.Duration, bool) {
+	v := os.Getenv(key)
+	if v == "" {
+		return 0, false
+	}
+	d, err := time.ParseDuration(strings.TrimSpace(v))
+	if err != nil || d <= 0 {
+		return 0, false
+	}
+	return d, true
+}
+
+// splitList parses comma- or space-separated lists (CORS origins etc.).
+func splitList(v string) []string {
+	v = strings.ReplaceAll(v, ",", " ")
+	var out []string
+	for _, s := range strings.Fields(v) {
+		if s != "" {
+			out = append(out, s)
+		}
+	}
+	return out
+}
+
 
 func (c *Config) DatabaseURL() string {
 	return "postgres://" + c.Database.User + ":" + c.Database.Password + "@" + c.Database.Host + ":" + strconv.Itoa(c.Database.Port) + "/" + c.Database.Name
