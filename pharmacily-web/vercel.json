@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://pharmacily-api.railway.app/api/$1"
+      "destination": "https://pharmacily-production.up.railway.app/api/$1"
     }
   ],
   "headers": [
