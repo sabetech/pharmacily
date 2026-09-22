@@ -73,7 +73,7 @@ openapi:
 setup:
 	go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 	go install github.com/air-verse/air@latest
-	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.13.2
 	go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
 	go mod tidy
 	sqlc generate

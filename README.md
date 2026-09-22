@@ -5,7 +5,7 @@ A web application that helps users locate pharmacies with specific medications i
 ## Tech Stack
 
 - **Frontend**: React 18 + TypeScript + Vite + Tailwind CSS + TanStack Query
-- **Backend**: Go 1.22 + Chi + SQLC + PGX
+- **Backend**: Go 1.25 + Chi + SQLC + PGX
 - **Database**: PostgreSQL (Supabase) with PostGIS
 - **Auth**: Supabase Auth (magic links)
 - **Realtime**: Supabase Realtime
@@ -28,7 +28,7 @@ pharmacily/
 ### Prerequisites
 
 - Node.js 20+
-- Go 1.22+
+- Go 1.25+
 - Docker Desktop
 - Supabase CLI (`brew install supabase/tap/supabase`)
 
