@@ -7,7 +7,7 @@ import { SearchResults } from '@/pages/SearchResults'
 import { Favorites } from '@/pages/Favorites'
 import { PharmacyLogin } from '@/pages/PharmacyLogin'
 import { PharmacyOnboarding } from '@/pages/PharmacyOnboarding'
-import { CaptureCoordinates } from '@/pages/CaptureCoordinates'
+import { PharmacyOnboard } from '@/pages/PharmacyOnboard'
 import { ForgotPassword } from '@/pages/ForgotPassword'
 import { PharmacyDashboard } from '@/pages/PharmacyDashboard'
 import { Sell } from '@/pages/Sell'
@@ -139,11 +139,11 @@ export function App() {
             <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
             <Route path="/auth/login" element={<PharmacyLogin mode="signin" />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
-            <Route path="/capture/:token" element={<CaptureCoordinates />} />
             <Route path="/pharmacy/login" element={<PharmacyLogin mode="signin" />} />
             <Route path="/pharmacy/signup" element={<PharmacyLogin mode="signup" />} />
             <Route path="/pharmacy/verify" element={<PharmacyVerify />} />
             <Route path="/pharmacy/forgot-password" element={<ForgotPassword />} />
+            <Route path="/pharmacy/onboard" element={<PharmacyOnboard />} />
             <Route path="/pharmacy/onboarding" element={<ProtectedRoute><EmailConfirmedRoute><PharmacyOnboarding /></EmailConfirmedRoute></ProtectedRoute>} />
             <Route
               path="/pharmacy"
