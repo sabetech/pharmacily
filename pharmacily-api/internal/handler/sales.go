@@ -77,14 +77,22 @@ type receiptResponse struct {
 }
 
 // httpError writes the {error, details} shape AGENTS §7 requires.
-func httpError(w http.ResponseWriter, status int, err, details string) {
+// encodeJSON writes v as the response body and reports encode failures so
+// errcheck stays satisfied without ignoring every call site.
+func encodeJSON(w http.ResponseWriter, status int, v any) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
+	return json.NewEncoder(w).Encode(v)
+}
+
+func httpError(w http.ResponseWriter, status int, err, details string) {
 	body := map[string]string{"error": err}
 	if details != "" {
 		body["details"] = details
 	}
-	json.NewEncoder(w).Encode(body)
+	if encodeErr := encodeJSON(w, status, body); encodeErr != nil {
+		log.Error().Err(encodeErr).Msg("encode error response failed")
+	}
 }
 
 func textPtr(t pgtype.Text) *string {
@@ -173,7 +181,11 @@ func (a *API) CreateSale(w http.ResponseWriter, r *http.Request) {
 		httpError(w, http.StatusInternalServerError, "internal error", "")
 		return
 	}
-	defer tx.Rollback(ctx)
+	defer func() {
+		if rbErr := tx.Rollback(ctx); rbErr != nil && !errors.Is(rbErr, pgx.ErrTxClosed) {
+			log.Error().Err(rbErr).Msg("rollback sale tx failed")
+		}
+	}()
 	qtx := a.queries.WithTx(tx)
 
 	for _, line := range req.Lines {
@@ -355,13 +367,13 @@ func (a *API) CreateSale(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(createSaleResponse{
+	if err := encodeJSON(w, http.StatusCreated, createSaleResponse{
 		Sale:           saleToResponse(sale),
 		Lines:          lineResponses,
 		InventoryAfter: after,
-	})
+	}); err != nil {
+		log.Error().Err(err).Msg("encode sale response failed")
+	}
 }
 
 // GetSale returns one of the caller's sales with receipt context.
@@ -422,8 +434,7 @@ func (a *API) GetSale(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(receiptResponse{
+	if err := encodeJSON(w, http.StatusOK, receiptResponse{
 		Sale: saleResponse{
 			ID:                    sale.ID.String(),
 			PharmacyID:            sale.PharmacyID.String(),
@@ -443,7 +454,9 @@ func (a *API) GetSale(w http.ResponseWriter, r *http.Request) {
 		PharmacyPhone:   textPtr(sale.PharmacyPhone),
 		ServedByEmail:   textPtr(sale.ServedByEmail),
 		ApprovedByEmail: textPtr(sale.ApprovedByEmail),
-	})
+	}); err != nil {
+		log.Error().Err(err).Msg("encode receipt response failed")
+	}
 }
 
 type salesSummaryResponse struct {
@@ -470,9 +483,10 @@ func (a *API) GetSalesSummary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(salesSummaryResponse{
+	if err := encodeJSON(w, http.StatusOK, salesSummaryResponse{
 		TotalPesewas: int(summary.TotalPesewas),
 		Transactions: int(summary.Transactions),
-	})
+	}); err != nil {
+		log.Error().Err(err).Msg("encode sales summary failed")
+	}
 }

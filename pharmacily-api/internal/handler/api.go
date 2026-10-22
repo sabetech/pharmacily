@@ -79,8 +79,9 @@ func (a *API) Routes() chi.Router {
 }
 
 func (a *API) HealthCheck(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+	if err := encodeJSON(w, http.StatusOK, map[string]string{"status": "ok"}); err != nil {
+		log.Error().Err(err).Msg("encode health response failed")
+	}
 }
 
 func (a *API) ReadyCheck(w http.ResponseWriter, r *http.Request) {
@@ -92,8 +93,9 @@ func (a *API) ReadyCheck(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "ready"})
+	if err := encodeJSON(w, http.StatusOK, map[string]string{"status": "ready"}); err != nil {
+		log.Error().Err(err).Msg("encode ready response failed")
+	}
 }
 
 func (a *API) SearchDrugs(w http.ResponseWriter, r *http.Request) {
