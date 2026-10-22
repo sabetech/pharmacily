@@ -1,47 +1,29 @@
-import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent } from '@/components/ui/card'
 import { LOW_STOCK_AT } from '@/components/pharmacy/PharmacyLayout'
 import { usePharmacyId } from '@/hooks/usePharmacyRole'
 import { usePharmacyInventory } from '@/hooks/useQueries'
+import { getSalesSummary } from '@/lib/api'
 import { formatPrice } from '@/utils/helpers'
-import { cn } from '@/utils/helpers'
-
-type Range = 'today' | '7d' | '14d' | 'month'
-
-const RANGES: { key: Range; label: string }[] = [
-  { key: 'today', label: 'Today' },
-  { key: '7d', label: '7 days' },
-  { key: '14d', label: '14 days' },
-  { key: 'month', label: 'Month' },
-]
 
 export function Reports() {
   const pharmacyId = usePharmacyId()
-  const [range, setRange] = useState<Range>('14d')
   const { data: inventory } = usePharmacyInventory(pharmacyId || '')
+  const { data: summary, isLoading: summaryLoading } = useQuery({
+    queryKey: ['sales-summary', pharmacyId],
+    queryFn: () => getSalesSummary('today'),
+    enabled: !!pharmacyId,
+  })
 
   const items = inventory || []
   const units = items.reduce((s, i) => s + i.quantity, 0)
   const stockValue = items.reduce((s, i) => s + i.quantity * (i.price_cents ?? 0), 0)
   const low = items.filter((i) => i.quantity > 0 && i.quantity <= LOW_STOCK_AT).length
+  const salesToday = summary?.total_pesewas ?? 0
+  const txToday = summary?.transactions ?? 0
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex rounded-full bg-ground p-[3px] shadow-resting md:w-max">
-        {RANGES.map((r) => (
-          <button
-            key={r.key}
-            onClick={() => setRange(r.key)}
-            className={cn(
-              'flex-1 rounded-full px-4 py-[7px] text-[12.5px] md:flex-none md:px-5',
-              range === r.key ? 'bg-deep font-semibold text-[#f4faf1]' : 'text-[#3d5850]'
-            )}
-          >
-            {r.label}
-          </button>
-        ))}
-      </div>
-
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         <div className="rounded-card bg-sales-bg p-[22px]">
           <p className="label-micro text-sales-label">Stock value</p>
@@ -63,9 +45,15 @@ export function Reports() {
           <p className="mt-0.5 text-xs text-people-label">below {LOW_STOCK_AT} units</p>
         </div>
         <div className="rounded-card bg-expiry-bg p-[22px]">
-          <p className="label-micro text-expiry-label">Sales · {RANGES.find((r) => r.key === range)?.label}</p>
-          <p className="tnum mt-2.5 font-display text-[28px] font-semibold text-expiry-ink">—</p>
-          <p className="mt-0.5 text-xs text-expiry-label">no sales recorded yet</p>
+          <p className="label-micro text-expiry-label">Sales · today</p>
+          <p className="tnum mt-2.5 font-display text-[28px] font-semibold text-expiry-ink">
+            {summaryLoading ? '…' : formatPrice(salesToday)}
+          </p>
+          <p className="tnum mt-0.5 text-xs text-expiry-label">
+            {txToday === 0
+              ? 'no sales recorded yet'
+              : `${txToday} transaction${txToday === 1 ? '' : 's'} today`}
+          </p>
         </div>
       </div>
 

@@ -448,7 +448,7 @@ func (q *Queries) GetGeocodeCache(ctx context.Context, addressHash string) (Geoc
 }
 
 const getInventoryByPharmacyAndDrug = `-- name: GetInventoryByPharmacyAndDrug :one
-SELECT i.id, i.pharmacy_id, i.drug_id, i.quantity, i.price_cents, i.last_updated, i.source, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form
+SELECT i.id, i.pharmacy_id, i.drug_id, i.quantity, i.price_cents, i.last_updated, i.source, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form, d.rx_otc, d.nhis_covered
 FROM inventory i
 JOIN drugs d ON i.drug_id = d.id
 WHERE i.pharmacy_id = $1 AND i.drug_id = $2
@@ -472,6 +472,8 @@ type GetInventoryByPharmacyAndDrugRow struct {
 	NdcCode     string          `json:"ndc_code"`
 	Strength    pgtype.Text     `json:"strength"`
 	Form        pgtype.Text     `json:"form"`
+	RxOtc       pgtype.Text     `json:"rx_otc"`
+	NhisCovered pgtype.Bool     `json:"nhis_covered"`
 }
 
 func (q *Queries) GetInventoryByPharmacyAndDrug(ctx context.Context, arg GetInventoryByPharmacyAndDrugParams) (GetInventoryByPharmacyAndDrugRow, error) {
@@ -490,6 +492,8 @@ func (q *Queries) GetInventoryByPharmacyAndDrug(ctx context.Context, arg GetInve
 		&i.NdcCode,
 		&i.Strength,
 		&i.Form,
+		&i.RxOtc,
+		&i.NhisCovered,
 	)
 	return i, err
 }
@@ -704,7 +708,7 @@ func (q *Queries) GetPharmacyChains(ctx context.Context) ([]PharmacyChain, error
 }
 
 const getPharmacyInventory = `-- name: GetPharmacyInventory :many
-SELECT i.id, i.pharmacy_id, i.drug_id, i.quantity, i.price_cents, i.last_updated, i.source, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form
+SELECT i.id, i.pharmacy_id, i.drug_id, i.quantity, i.price_cents, i.last_updated, i.source, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form, d.rx_otc, d.nhis_covered
 FROM inventory i
 JOIN drugs d ON i.drug_id = d.id
 WHERE i.pharmacy_id = $1
@@ -731,6 +735,8 @@ type GetPharmacyInventoryRow struct {
 	NdcCode     string          `json:"ndc_code"`
 	Strength    pgtype.Text     `json:"strength"`
 	Form        pgtype.Text     `json:"form"`
+	RxOtc       pgtype.Text     `json:"rx_otc"`
+	NhisCovered pgtype.Bool     `json:"nhis_covered"`
 }
 
 func (q *Queries) GetPharmacyInventory(ctx context.Context, arg GetPharmacyInventoryParams) ([]GetPharmacyInventoryRow, error) {
@@ -755,6 +761,8 @@ func (q *Queries) GetPharmacyInventory(ctx context.Context, arg GetPharmacyInven
 			&i.NdcCode,
 			&i.Strength,
 			&i.Form,
+			&i.RxOtc,
+			&i.NhisCovered,
 		); err != nil {
 			return nil, err
 		}

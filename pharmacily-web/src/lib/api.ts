@@ -1,21 +1,25 @@
-import { supabase } from '@/lib/supabase'
-import type { DrugSearchResult, PharmacyNearbyResult, SearchParams, SearchResult, Pharmacy, InventoryItem, UserFavorite, PharmacyAPIConfig } from '@/types'
+import { supabase, getSession } from '@/lib/supabase'
+import type { DrugSearchResult, PharmacyNearbyResult, SearchParams, SearchResult, Pharmacy, InventoryItem, UserFavorite, PharmacyAPIConfig, CreateSaleResult, SaleReceipt, SalesSummary } from '@/types'
 
 const API_BASE = import.meta.env.VITE_API_BASE || '/api/v1'
 
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`
+  const session = await getSession()
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...(options?.headers as Record<string, string>),
+  }
+  if (session) headers['Authorization'] = `Bearer ${session.access_token}`
+
   const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
     ...options,
+    headers,
   })
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: 'Request failed' }))
-    throw new Error(error.message || `HTTP ${response.status}`)
+    const body = await response.json().catch(() => ({ error: 'Request failed', details: '' }))
+    throw new ApiError(response.status, body.error || `HTTP ${response.status}`, body.details)
   }
 
   if (response.status === 204) {
@@ -23,6 +27,17 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
   }
 
   return response.json()
+}
+
+export class ApiError extends Error {
+  status: number
+  details: string
+  constructor(status: number, message: string, details?: string) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.details = details || ''
+  }
 }
 
 // Drug endpoints
@@ -224,4 +239,28 @@ export async function getIPGeolocation(): Promise<{ lat: number; lng: number; ci
   const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/geocode-ip`)
   if (!response.ok) throw new Error('Failed to get IP geolocation')
   return response.json()
+}
+
+// Sales (authenticated)
+export interface CreateSalePayload {
+  lines: { inventory_id: string; quantity: number }[]
+  method: 'cash' | 'momo'
+  amount_tendered_pesewas?: number
+  rx_confirmed?: boolean
+  rx_prescriber?: string
+}
+
+export async function createSale(payload: CreateSalePayload): Promise<CreateSaleResult> {
+  return fetchAPI<CreateSaleResult>('/pharmacy/sales', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function getSale(id: string): Promise<SaleReceipt> {
+  return fetchAPI<SaleReceipt>(`/pharmacy/sales/${id}`)
+}
+
+export async function getSalesSummary(range: 'today' | 'week' = 'today'): Promise<SalesSummary> {
+  return fetchAPI<SalesSummary>(`/pharmacy/sales/summary?range=${range}`)
 }

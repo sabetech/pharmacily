@@ -59,6 +59,8 @@ export interface InventoryItem {
   drug_ndc_code?: string
   drug_strength?: string
   drug_form?: string
+  rx_otc?: 'Rx' | 'OTC' | null
+  nhis_covered?: boolean | null
   pharmacy_name?: string
   pharmacy_address?: string
   pharmacy_city?: string
@@ -143,4 +145,51 @@ export interface PharmacyNearbyResult {
   chain_api_type: string | null
   is_active: boolean
   distance_meters: number
+}
+
+export interface SaleLine {
+  id: string
+  inventory_id: string
+  drug_id: string
+  drug_name: string
+  strength: string | null
+  form: string | null
+  quantity: number
+  unit_price_pesewas: number
+  line_total_pesewas: number
+  is_rx: boolean
+}
+
+export interface Sale {
+  id: string
+  pharmacy_id: string
+  served_by: string
+  approved_by: string | null
+  total_pesewas: number
+  amount_tendered_pesewas: number | null
+  method: 'cash' | 'momo'
+  rx_confirmed: boolean
+  rx_prescriber: string | null
+  created_at: string
+}
+
+export interface CreateSaleResult {
+  sale: Sale
+  lines: SaleLine[]
+  inventory_after: { inventory_id: string; quantity: number }[]
+}
+
+export interface SaleReceipt extends Sale {
+  lines: SaleLine[]
+  pharmacy_name: string
+  pharmacy_address: string
+  pharmacy_city: string
+  pharmacy_phone: string | null
+  served_by_email: string | null
+  approved_by_email: string | null
+}
+
+export interface SalesSummary {
+  total_pesewas: number
+  transactions: number
 }

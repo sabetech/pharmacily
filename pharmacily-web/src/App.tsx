@@ -11,6 +11,7 @@ import { PharmacyOnboard } from '@/pages/PharmacyOnboard'
 import { ForgotPassword } from '@/pages/ForgotPassword'
 import { PharmacyDashboard } from '@/pages/PharmacyDashboard'
 import { Sell } from '@/pages/Sell'
+import { Receipt } from '@/pages/Receipt'
 import { ManageDrugs } from '@/pages/ManageDrugs'
 import { StockTakeList } from '@/pages/StockTakeList'
 import { StockTakeSheet } from '@/pages/StockTakeSheet'
@@ -164,6 +165,14 @@ export function App() {
               <Route path="suppliers" element={<Suppliers />} />
               <Route path="reports" element={<Reports />} />
             </Route>
+            <Route
+              path="/pharmacy/receipt/:saleId"
+              element={
+                <PharmacyProtectedRoute>
+                  <Receipt />
+                </PharmacyProtectedRoute>
+              }
+            />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

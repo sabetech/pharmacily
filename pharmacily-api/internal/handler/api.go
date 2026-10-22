@@ -16,6 +16,7 @@ import (
 	"github.com/pharmacily/api/internal/adapter"
 	"github.com/pharmacily/api/internal/config"
 	"github.com/pharmacily/api/internal/db"
+	apiddleware "github.com/pharmacily/api/internal/middleware"
 	"github.com/rs/zerolog/log"
 )
 
@@ -63,6 +64,15 @@ func (a *API) Routes() chi.Router {
 		r.Get("/pharmacies/{id}", a.GetPharmacy)
 		r.Get("/pharmacies/{id}/inventory", a.GetPharmacyInventory)
 		r.Get("/search", a.SearchInventory)
+
+		// Authenticated manager endpoints. RequireAuth verifies the Supabase
+		// access token; handlers enforce pharmacy binding + role themselves.
+		r.Group(func(r chi.Router) {
+			r.Use(apiddleware.RequireAuth(a.cfg.Supabase.JWTSecret))
+			r.Post("/pharmacy/sales", a.CreateSale)
+			r.Get("/pharmacy/sales/summary", a.GetSalesSummary)
+			r.Get("/pharmacy/sales/{id}", a.GetSale)
+		})
 	})
 
 	return r

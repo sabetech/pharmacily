@@ -87,7 +87,7 @@ RETURNING *;
 DELETE FROM drugs WHERE id = $1;
 
 -- name: GetInventoryByPharmacyAndDrug :one
-SELECT i.*, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form
+SELECT i.*, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form, d.rx_otc, d.nhis_covered
 FROM inventory i
 JOIN drugs d ON i.drug_id = d.id
 WHERE i.pharmacy_id = $1 AND i.drug_id = $2;
@@ -142,7 +142,7 @@ ON CONFLICT (pharmacy_id, drug_id) DO UPDATE SET
     source = EXCLUDED.source;
 
 -- name: GetPharmacyInventory :many
-SELECT i.*, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form
+SELECT i.*, d.name as drug_name, d.generic_name, d.ndc_code, d.strength, d.form, d.rx_otc, d.nhis_covered
 FROM inventory i
 JOIN drugs d ON i.drug_id = d.id
 WHERE i.pharmacy_id = $1

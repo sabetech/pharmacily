@@ -101,6 +101,11 @@ func (ns NullSyncStatus) Value() (driver.Value, error) {
 	return string(ns.SyncStatus), nil
 }
 
+type AuthUser struct {
+	ID    uuid.UUID   `json:"id"`
+	Email pgtype.Text `json:"email"`
+}
+
 type Drug struct {
 	ID                  uuid.UUID          `json:"id"`
 	Name                string             `json:"name"`
@@ -172,6 +177,40 @@ type PharmacyChain struct {
 	ApiType      string             `json:"api_type"`
 	BaseEndpoint pgtype.Text        `json:"base_endpoint"`
 	CreatedAt    pgtype.Timestamptz `json:"created_at"`
+}
+
+type Sale struct {
+	ID                    uuid.UUID   `json:"id"`
+	PharmacyID            uuid.UUID   `json:"pharmacy_id"`
+	ServedBy              uuid.UUID   `json:"served_by"`
+	ApprovedBy            pgtype.UUID `json:"approved_by"`
+	TotalPesewas          int32       `json:"total_pesewas"`
+	AmountTenderedPesewas pgtype.Int4 `json:"amount_tendered_pesewas"`
+	Method                string      `json:"method"`
+	RxConfirmed           bool        `json:"rx_confirmed"`
+	RxPrescriber          pgtype.Text `json:"rx_prescriber"`
+	CreatedAt             time.Time   `json:"created_at"`
+}
+
+type SaleLine struct {
+	ID               uuid.UUID `json:"id"`
+	SaleID           uuid.UUID `json:"sale_id"`
+	InventoryID      uuid.UUID `json:"inventory_id"`
+	DrugID           uuid.UUID `json:"drug_id"`
+	Quantity         int32     `json:"quantity"`
+	UnitPricePesewas int32     `json:"unit_price_pesewas"`
+	LineTotalPesewas int32     `json:"line_total_pesewas"`
+	IsRx             bool      `json:"is_rx"`
+}
+
+type StockLedger struct {
+	ID          uuid.UUID   `json:"id"`
+	InventoryID uuid.UUID   `json:"inventory_id"`
+	Delta       int32       `json:"delta"`
+	Reason      string      `json:"reason"`
+	SaleID      pgtype.UUID `json:"sale_id"`
+	Actor       uuid.UUID   `json:"actor"`
+	CreatedAt   time.Time   `json:"created_at"`
 }
 
 type StockTakeLine struct {

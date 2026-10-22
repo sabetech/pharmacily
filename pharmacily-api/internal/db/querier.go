@@ -16,7 +16,13 @@ type Querier interface {
 	CreateDrug(ctx context.Context, arg CreateDrugParams) (Drug, error)
 	CreatePharmacy(ctx context.Context, arg CreatePharmacyParams) (Pharmacy, error)
 	CreatePharmacyChain(ctx context.Context, arg CreatePharmacyChainParams) (PharmacyChain, error)
+	CreateSale(ctx context.Context, arg CreateSaleParams) (Sale, error)
+	CreateSaleLine(ctx context.Context, arg CreateSaleLineParams) (SaleLine, error)
+	CreateStockLedgerRow(ctx context.Context, arg CreateStockLedgerRowParams) (StockLedger, error)
 	CreateUserFavorite(ctx context.Context, arg CreateUserFavoriteParams) (UserFavorite, error)
+	// Guard quantity >= requested so a lost race returns no rows (handler maps
+	// to 409 sold-out) instead of going negative.
+	DecrementInventoryForSale(ctx context.Context, arg DecrementInventoryForSaleParams) (Inventory, error)
 	DeleteDrug(ctx context.Context, id uuid.UUID) error
 	DeletePharmacy(ctx context.Context, id uuid.UUID) error
 	DeletePharmacyChain(ctx context.Context, id uuid.UUID) error
@@ -27,6 +33,8 @@ type Querier interface {
 	GetDueRetryQueue(ctx context.Context, limit int32) ([]SyncRetryQueue, error)
 	GetEnabledPharmacyAPIConfigs(ctx context.Context) ([]GetEnabledPharmacyAPIConfigsRow, error)
 	GetGeocodeCache(ctx context.Context, addressHash string) (GeocodeCache, error)
+	// SELECT ... FOR UPDATE: caller must already be inside a transaction.
+	GetInventoryByIDForUpdate(ctx context.Context, id uuid.UUID) (GetInventoryByIDForUpdateRow, error)
 	GetInventoryByPharmacyAndDrug(ctx context.Context, arg GetInventoryByPharmacyAndDrugParams) (GetInventoryByPharmacyAndDrugRow, error)
 	GetPharmaciesNearby(ctx context.Context, arg GetPharmaciesNearbyParams) ([]GetPharmaciesNearbyRow, error)
 	GetPharmacyAPIConfig(ctx context.Context, pharmacyID uuid.UUID) (PharmacyApiConfig, error)
@@ -34,6 +42,10 @@ type Querier interface {
 	GetPharmacyChainByID(ctx context.Context, id uuid.UUID) (PharmacyChain, error)
 	GetPharmacyChains(ctx context.Context) ([]PharmacyChain, error)
 	GetPharmacyInventory(ctx context.Context, arg GetPharmacyInventoryParams) ([]GetPharmacyInventoryRow, error)
+	GetSaleByID(ctx context.Context, id uuid.UUID) (Sale, error)
+	GetSaleForReceipt(ctx context.Context, id uuid.UUID) (GetSaleForReceiptRow, error)
+	GetSaleLinesBySaleID(ctx context.Context, saleID uuid.UUID) ([]GetSaleLinesBySaleIDRow, error)
+	GetSalesToday(ctx context.Context, pharmacyID uuid.UUID) (GetSalesTodayRow, error)
 	GetUserFavorites(ctx context.Context, userID uuid.UUID) ([]GetUserFavoritesRow, error)
 	// Prefix matches first (still GIN-trigram indexed), then typo-tolerant similarity.
 	// NOTE: $1 repeats; sqlc collapses it to a single Column1 (pgtype.Text) param.
