@@ -30,6 +30,13 @@ func NewSyncWorker(queries *db.Queries, cfg *config.Config, adapterReg *adapter.
 	}
 }
 
+// logIfErr records a non-fatal maintenance error from a background sync task.
+func logIfErr(err error, msg string) {
+	if err != nil {
+		log.Error().Err(err).Msg(msg)
+	}
+}
+
 func (w *SyncWorker) Start(ctx context.Context) error {
 	schedule := w.cfg.Worker.SyncCronSchedule
 	if schedule == "" {
@@ -182,7 +189,7 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 				Err(err).
 				Str("pharmacy_id", item.PharmacyID.String()).
 				Msg("Failed to get pharmacy config for retry")
-			w.queries.DeleteRetryQueueItem(ctx, item.ID)
+			logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 			continue
 		}
 
@@ -192,7 +199,7 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 				Str("pharmacy_id", item.PharmacyID.String()).
 				Str("api_type", pc.ApiType).
 				Msg("No adapter for retry")
-			w.queries.DeleteRetryQueueItem(ctx, item.ID)
+			logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 			continue
 		}
 
@@ -212,7 +219,7 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 			drug, err := w.queries.GetDrugByID(ctx, item.DrugID.Bytes)
 			if err != nil {
 				log.Warn().Err(err).Msg("Drug not found for retry")
-				w.queries.DeleteRetryQueueItem(ctx, item.ID)
+				logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 				continue
 			}
 
@@ -251,7 +258,7 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 						w.updateRetryAttempt(ctx, item, err.Error())
 						continue
 					}
-					w.queries.DeleteRetryQueueItem(ctx, item.ID)
+					logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 					log.Info().
 						Str("pharmacy_id", pc.PharmacyID.String()).
 						Str("drug_id", drug.ID.String()).
@@ -276,7 +283,7 @@ func (w *SyncWorker) processRetryQueue(ctx context.Context) {
 				Longitude:      0,
 			}
 			w.syncPharmacy(ctx, pcRow)
-			w.queries.DeleteRetryQueueItem(ctx, item.ID)
+			logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 		}
 	}
 }
@@ -291,11 +298,11 @@ func (w *SyncWorker) buildAdapterConfig(endpoint, credentialsRef string) adapter
 }
 
 func (w *SyncWorker) updateSyncStatus(ctx context.Context, pharmacyID uuid.UUID, status db.SyncStatus, errorMsg string) {
-	w.queries.UpdatePharmacyAPIConfigSyncStatus(ctx, db.UpdatePharmacyAPIConfigSyncStatusParams{
+	logIfErr(w.queries.UpdatePharmacyAPIConfigSyncStatus(ctx, db.UpdatePharmacyAPIConfigSyncStatusParams{
 		PharmacyID:       pharmacyID,
 		LastSyncAt:       pgtype.Timestamptz{Time: time.Now(), Valid: true},
 		LastSyncStatus:   db.NullSyncStatus{SyncStatus: status, Valid: true},
-	})
+	}), "update sync status")
 }
 
 func (w *SyncWorker) addToRetryQueue(ctx context.Context, pharmacyID uuid.UUID, drugID uuid.UUID, errorMsg string) {
@@ -307,13 +314,15 @@ func (w *SyncWorker) addToRetryQueue(ctx context.Context, pharmacyID uuid.UUID, 
 		drugIDParam = pgtype.UUID{Bytes: drugID, Valid: true}
 	}
 
-	w.queries.AddToRetryQueue(ctx, db.AddToRetryQueueParams{
+	if _, err := w.queries.AddToRetryQueue(ctx, db.AddToRetryQueueParams{
 		PharmacyID:   pharmacyID,
 		DrugID:       drugIDParam,
 		AttemptCount: pgtype.Int4{Int32: 0, Valid: true},
 		NextRetryAt:  nextRetry,
 		ErrorMessage: pgtype.Text{String: errorMsg, Valid: true},
-	})
+	}); err != nil {
+		log.Error().Err(err).Msg("add to retry queue")
+	}
 }
 
 func (w *SyncWorker) updateRetryAttempt(ctx context.Context, item db.SyncRetryQueue, errorMsg string) {
@@ -322,7 +331,7 @@ func (w *SyncWorker) updateRetryAttempt(ctx context.Context, item db.SyncRetryQu
 		attempt = int(item.AttemptCount.Int32) + 1
 	}
 	if attempt >= w.cfg.Worker.MaxRetries {
-		w.queries.DeleteRetryQueueItem(ctx, item.ID)
+		logIfErr(w.queries.DeleteRetryQueueItem(ctx, item.ID), "delete retry queue item")
 		log.Warn().
 			Str("id", item.ID.String()).
 			Msg("Max retries exceeded, removing from queue")
@@ -333,9 +342,9 @@ func (w *SyncWorker) updateRetryAttempt(ctx context.Context, item db.SyncRetryQu
 	jitter := time.Duration(float64(delay) * 0.1 * (2*rand.Float64() - 1))
 	nextRetry := time.Now().Add(delay + jitter)
 
-	intervalStr := nextRetry.Sub(time.Now()).String()
-	w.queries.UpdateRetryQueueAttempt(ctx, db.UpdateRetryQueueAttemptParams{
+	intervalStr := time.Until(nextRetry).String()
+	logIfErr(w.queries.UpdateRetryQueueAttempt(ctx, db.UpdateRetryQueueAttemptParams{
 		ID:       item.ID,
 		Column2:  intervalStr,
-	})
+	}), "update retry attempt")
 }

@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 	"strconv"
 	"time"
@@ -125,8 +124,9 @@ func (a *API) SearchDrugs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(drugs)
+	if err := encodeJSON(w, http.StatusOK, drugs); err != nil {
+		log.Error().Err(err).Msg("encode drugs response failed")
+	}
 }
 
 func (a *API) GetDrug(w http.ResponseWriter, r *http.Request) {
@@ -151,8 +151,9 @@ func (a *API) GetDrug(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(drug)
+	if err := encodeJSON(w, http.StatusOK, drug); err != nil {
+		log.Error().Err(err).Msg("encode drug response failed")
+	}
 }
 
 func (a *API) GetPharmaciesNearby(w http.ResponseWriter, r *http.Request) {
@@ -211,8 +212,9 @@ func (a *API) GetPharmaciesNearby(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(pharmacies)
+	if err := encodeJSON(w, http.StatusOK, pharmacies); err != nil {
+		log.Error().Err(err).Msg("encode pharmacies response failed")
+	}
 }
 
 func (a *API) GetPharmacy(w http.ResponseWriter, r *http.Request) {
@@ -237,8 +239,9 @@ func (a *API) GetPharmacy(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(pharmacy)
+	if err := encodeJSON(w, http.StatusOK, pharmacy); err != nil {
+		log.Error().Err(err).Msg("encode pharmacy response failed")
+	}
 }
 
 func (a *API) GetPharmacyInventory(w http.ResponseWriter, r *http.Request) {
@@ -276,8 +279,9 @@ func (a *API) GetPharmacyInventory(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "internal error", http.StatusInternalServerError)
 			return
 		}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(inventory)
+		if err := encodeJSON(w, http.StatusOK, inventory); err != nil {
+			log.Error().Err(err).Msg("encode inventory response failed")
+		}
 		return
 	}
 
@@ -305,8 +309,9 @@ func (a *API) GetPharmacyInventory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(inventory)
+	if err := encodeJSON(w, http.StatusOK, inventory); err != nil {
+		log.Error().Err(err).Msg("encode inventory response failed")
+	}
 }
 
 func (a *API) SearchInventory(w http.ResponseWriter, r *http.Request) {
@@ -369,6 +374,7 @@ func (a *API) SearchInventory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(results)
+	if err := encodeJSON(w, http.StatusOK, results); err != nil {
+		log.Error().Err(err).Msg("encode search response failed")
+	}
 }
