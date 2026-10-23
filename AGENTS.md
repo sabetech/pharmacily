@@ -46,7 +46,6 @@ pharmacily/
 npm run dev:web                    # vite dev :3000
 npm run build:web
 npm run lint:web                   # oxlint --workspace=pharmacily-web
-npm run test:web
 # api
 npm run dev:api                    # cd pharmacily-api && go run ./cmd/api :8081 (local config.yaml; :8080 is Apache on some machines)
 npm run build:api
@@ -129,9 +128,9 @@ Pastels never drift: green = money in, teal = on shelf, rose = time running out 
 ## 9. Quality gates
 
 ```bash
-npm run lint:web && npm run test:web      # oxlint + vitest (web)
+npm run lint:web                   # oxlint (web) — web has no test suite yet
 npm run lint:api && npm run test:api      # golangci-lint + go test (api)
-# tsc -b in pharmacily-web before every PR
+cd pharmacily-web && npx tsc -b   # typecheck before every PR
 ```
 
 Contrast AA (dark ink on pastels only), keyboard-only run, 360px + 1280px pass, 3G throttle with skeletons + pastel fallbacks, seed Ernest Chemists/Danadams and verify locator reflects pharmacy edit <5s.

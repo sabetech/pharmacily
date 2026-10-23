@@ -58,6 +58,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: sqlc-dev/sqlc-generate@v1
+      - uses: actions/setup-go@v5
         with:
-          working-directory: ./pharmacily-api
+          go-version: ${{ env.GO_VERSION }}
+      - name: Install sqlc
+        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.29.0
+      - name: Generate sqlc
+        working-directory: ./pharmacily-api
+        run: sqlc generate
+      - name: Check for drift
+        run: git diff --exit-code
