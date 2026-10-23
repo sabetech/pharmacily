@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - 'pharmacily-api/**'
+  workflow_dispatch:
 
 env:
   GO_VERSION: '1.25'

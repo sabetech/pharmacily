@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - 'pharmacily-web/**'
+  workflow_dispatch:
 
 jobs:
   lint:
