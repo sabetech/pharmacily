@@ -29,7 +29,7 @@ jobs:
       # so Linux CI must install the native binding explicitly.
       - name: Install oxlint Linux binding
         working-directory: ./pharmacily-web
-        run: npm install --no-save --no-package-lock --include=optional @oxlint/binding-linux-x64-gnu@1.80.0
+        run: npm install --no-save --include=optional @oxlint/binding-linux-x64-gnu@1.80.0
       - name: Run lint
         working-directory: ./pharmacily-web
         run: npm run lint
